@@ -1,32 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   output_utils.c                                     :+:      :+:    :+:   */
+/*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cjettie <cjettie@21-school.ru>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/01/10 17:07:39 by cjettie           #+#    #+#             */
-/*   Updated: 2021/01/21 16:22:50 by cjettie          ###   ########.fr       */
+/*   Created: 2021/01/12 18:49:28 by cjettie           #+#    #+#             */
+/*   Updated: 2021/01/21 16:32:23 by cjettie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#ifndef FLAG_UTILS_H
+# define FLAG_UTILS_H
 
-int		ft_put_char_c_fd(char c, int fd)
-{
-	ft_putchar_fd(c, fd);
-	return (1);
-}
+# ifndef FLAG_STORE
+#  define FLAG_STORE int
+# endif
 
-int		put_fillers(int amt, char filler)
-{
-	int		counter;
+void	set_f(FLAG_STORE *f_store, FLAG_STORE flag, int value);
+int		is_f(FLAG_STORE *f_store, FLAG_STORE flag);
 
-	counter = 0;
-	while (amt > 0)
-	{
-		counter += ft_put_char_c_fd(filler, 1);
-		--amt;
-	}
-	return (counter);
-}
+#endif

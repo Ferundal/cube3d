@@ -10,48 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "flag_utils.h"
 
-void	set_f(t_arg_par *par, FLAG_STORE flag, char value)
+void	set_f(FLAG_STORE *f_store, FLAG_STORE flag, int value)
 {
 	if (value == 0)
-		par->f = par->f & (~flag);
+		*f_store = *f_store & (~flag);
 	else
-		par->f = par->f | flag;
+		*f_store = *f_store | flag;
 }
 
-int		is_f(t_arg_par *par, FLAG_STORE flag)
+int		is_f(FLAG_STORE *f_store, FLAG_STORE flag)
 {
-	if ((par->f & flag) == 0)
+	if ((*f_store & flag) == 0)
 		return (0);
 	return (1);
-}
-
-int		read_flags(const char **str, t_arg_par *par)
-{
-	if (**str == '0')
-	{
-		set_f(par, F_ZEROFILL, 1);
-		*str += 1;
-		return (1);
-	}
-	if (**str == '-')
-	{
-		set_f(par, F_JUSTIFY, 1);
-		*str += 1;
-		return (1);
-	}
-	if (**str == '+')
-	{
-		set_f(par, F_SHOW_PLUS, 1);
-		*str += 1;
-		return (1);
-	}
-	if (**str == ' ')
-	{
-		set_f(par, F_SHOW_SPC, 1);
-		*str += 1;
-		return (1);
-	}
-	return (0);
 }
