@@ -6,27 +6,47 @@
 #    By: cjettie <cjettie@21-school.ru>             +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/05 14:46:25 by cjettie           #+#    #+#              #
-#    Updated: 2020/11/16 17:00:42 by cjettie          ###   ########.fr        #
+#    Updated: 2021/01/21 17:00:10 by cjettie          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-HEADER			= cub3d.h
+HEADER			= ft_printf.h src/utils.h
 
-HEADERDIR		= ./headers/
+HEADER_B		=
 
-SRCS			= cub3d.c \
-				src/cub3d_errors.c \
-				src/cub3d_parcer.c \
-				src/cub3d_read_par.c \
-				src/cub3d_screen.c
+SRC_DIS			= src
 
-TURNIN			= ${HEADER} ${SRCS}
+CODE			= src/flag_utils.c \
+				  src/put_type_pointer.c \
+				  src/ft_printf.c src/put_type_sign.c \
+				  src/output_utils.c src/put_type_str.c \
+				  src/parser.c src/put_type_uns.c \
+				  src/put_nbr_all_signed_int.c src/put_type_utils.c \
+				  src/put_nbr_all_unsigned_int.c src/read_precision.c \
+				  src/read_size.c src/put_type_char.c \
+				  src/read_width.c src/type_switch.c src/put_type_hexad.c
+
+CODE_B			= 
+
+TURNINHEADER	= ${HEADER} ${HEADER_B}
+
+TURNINCODE		= ${CODE} ${CODE_B}
+
+HEAD			= ${TURNINHEADER}
+
+TURNIN			= ${TURNINHEADER} ${TURNINCODE}
+
+SRCS			= ${CODE}
+
+SRCS_B			= ${CODE_B}
 
 NORMO			= ${TURNIN}
 
 OBJS			= ${SRCS:.c=.o}
 
-NAME			= cub3d
+OBJS_B			= ${SRCS_B:.c=.o}
+
+NAME			= libftprintf.a
 
 CC				= cc
 RM				= rm -f
@@ -37,17 +57,31 @@ CFLAGS			= -Wall -Wextra -Werror -g
 NORM			= norminette
 
 .c.o:
-				${CC} ${CFLAGS} -I ${HEADERDIR} -c $< -o ${<:.c=.o}
-
+				${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
+ifndef COMPILE_BONUS
 ${NAME}:		${OBJS}
-				${CC} -o ${NAME} -I ${HEADERDIR} ${OBJS}
+				${MAKE} -C libft
+				mv libft/libft.a ./libftprintf.a
+				${AR} ${NAME} ${OBJS}
+else
+${NAME}:		${OBJS}
+				${MAKE} -C libft
+				mv libft/libft.a ./libftprintf.a
+				${AR} ${NAME} ${OBJS}
+endif
+
+bonus:			
+				${MAKE} COMPILE_BONUS=1 all	
 
 all:			${NAME}
 
-clean:
-				${RM} ${OBJS_B}
+clean:			
+				${MAKE} -C libft clean
+				${RM} ${OBJS} ${OBJS_B}
 
-fclean:			clean
+fclean:			
+				${MAKE} -C libft fclean
+				${RM} ${OBJS} ${OBJS_B}
 				${RM} ${NAME}
 
 norm:		
@@ -55,4 +89,4 @@ norm:
 
 re:				fclean ${NAME}
 
-.PHONY:			all clean fclean re bonus
+.PHONY:			all clean fclean re bonus norm

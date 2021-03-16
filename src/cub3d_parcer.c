@@ -1,5 +1,3 @@
-#include "cub3d.h"
-
 #include "cub3d_parcer.h"
 
 int		read_map_file(t_par *par, char *file)
