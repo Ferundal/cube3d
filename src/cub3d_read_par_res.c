@@ -20,3 +20,8 @@ int		read_res(char *str, t_par *par)
 		return (0);
 	return (ERROR_WRONG_PAR_REZ);
 }
+
+int     read_par_res(char *str, t_par *par, FLAG_STORE *p)
+{
+
+}

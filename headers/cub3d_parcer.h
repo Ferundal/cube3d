@@ -11,6 +11,7 @@ int 	read_par_so(char *str, t_par *par);
 int 	read_par_we(char *str, t_par *par);
 int 	read_par_ea(char *str, t_par *par);
 int 	read_par_spr(char *str, t_par *par);
+int     read_par_colors (char *str, t_par *par);
 
 # define FLAG_STORE int
 

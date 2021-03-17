@@ -13,6 +13,8 @@
 # define ERROR_TEX_SPR_NOT_FOUND 7
 # define ERROR_WRONG_PAR_FLOOR 8
 # define ERROR_WRONG_PAR_CEIL 9
+# define ERROR_NOT_A_PAR 10
+# define ERROR_NOT_ALL_INFO 11
 
 
 #endif

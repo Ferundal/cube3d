@@ -49,3 +49,17 @@ int 	read_color_ceil (char *str, t_par *par)
 		return (ERROR_WRONG_PAR_CEIL);
 	return (0);
 }
+
+int    read_par_colors (char *str, t_par *par, FLAG_STORE *p)
+{
+    int     read_status;
+
+    read_status = -1;
+    if (is_f(p, FLAG_FLOOR) == 0)
+        if ((read_status = read_color_floor(str, par)) == 0)
+            set_f(p, FLAG_FLOOR, 1);
+    if ((read_status < 0) && (is_f(p, FLAG_CEIL) == 0))
+        if ((read_status = read_color_ceil(str, par)) == 0)
+            set_f(p, FLAG)_CELL, 1);
+    return (read_status);
+}
