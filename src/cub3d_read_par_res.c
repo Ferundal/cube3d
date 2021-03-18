@@ -1,5 +1,6 @@
 #include "cub3d.h"
 #include "cub3d_atoi.h"
+#include "cub3d_parcer.h"
 
 int		read_res(char *str, t_par *par)
 {
@@ -23,5 +24,14 @@ int		read_res(char *str, t_par *par)
 
 int     read_par_res(char *str, t_par *par, FLAG_STORE *p)
 {
+	int		read_status;
 
+	read_status = -1;
+	if (is_f(p, FLAG_REZ) == 0)
+	{
+		read_status = read_res(str, par);
+		if (read_status == 0)
+			set_f(p, FLAG_REZ, 1);
+	}
+	return (read_status);
 }

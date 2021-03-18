@@ -29,7 +29,7 @@ int		main(int argc, char **argv)
 	init_par(&par);
 	if ((is_error = read_map_file(&par, *(argv + 1))) != 0)
 		return (catch_error(is_error));
-	if (argc == 3) && ((is_error = screen(&par)) != 0))
+	if ((argc == 3) && ((is_error = screen(&par)) != 0))
 		return (catch_error(is_error));
 	if ((is_error = draw(&par)) != 0)
 		return (catch_error(is_error));

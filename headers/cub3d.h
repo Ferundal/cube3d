@@ -44,5 +44,6 @@ typedef struct	s_par
 int		catch_error(int err_code);
 int		read_map_file(t_par *par, char *file);
 int		screen(t_par *par);
+int		draw(t_par *par);
 
 #endif

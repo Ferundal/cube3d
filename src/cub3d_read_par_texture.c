@@ -5,8 +5,8 @@ int 	read_par_no(char *str, t_par *par)
 	if (ft_strncmp("NO", str, 2) != 0)
 		return (-1);
 	str += 2;
-	while (str* == ' ')
-		str++;
+	while (*str == ' ')
+		++str;
 	if (*str != '\0') {
 		par->tex_no = open(str, O_RDONLY);
 		if (par->tex_no == -1)
@@ -21,8 +21,8 @@ int 	read_par_so(char *str, t_par *par)
 	if (ft_strncmp("SO", str, 2) != 0)
 		return (-1);
 	str += 2;
-	while (str* == ' ')
-		str++;
+	while (*str == ' ')
+		++str;
 	if (*str != '\0') {
 		par->tex_so = open(str, O_RDONLY);
 		if (par->tex_so == -1)
@@ -37,8 +37,8 @@ int 	read_par_we(char *str, t_par *par)
 	if (ft_strncmp("WE", str, 2) != 0)
 		return (-1);
 	str += 2;
-	while (str* == ' ')
-		str++;
+	while (*str == ' ')
+		++str;
 	if (*str != '\0') {
 		par->tex_we = open(str, O_RDONLY);
 		if (par->tex_we == -1)
@@ -53,8 +53,8 @@ int 	read_par_ea(char *str, t_par *par)
 	if (ft_strncmp("EA", str, 2) != 0)
 		return (-1);
 	str += 2;
-	while (str* == ' ')
-		str++;
+	while (*str == ' ')
+		++str;
 	if (*str != '\0') {
 		par->tex_ea = open(str, O_RDONLY);
 		if (par->tex_ea == -1)
@@ -69,8 +69,8 @@ int 	read_par_spr(char *str, t_par *par)
 	if (ft_strncmp("S", str, 2) != 0)
 		return (-1);
 	str += 2;
-	while (str* == ' ')
-		str++;
+	while (*str == ' ')
+		++str;
 	if (*str != '\0') {
 		par->tex_spr = open(str, O_RDONLY);
 		if (par->tex_spr == -1)

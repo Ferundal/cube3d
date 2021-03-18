@@ -17,10 +17,16 @@ HEADERDIR		= ./headers/
 SRCS			= src/cub3d.c \
 				src/cub3d_errors.c \
 				src/cub3d_parcer.c \
+				src/cub3d_atoi.c \
+				src/flag_utils.c \
+				src/get_next_line.c \
+				src/get_next_line_utils.c \
 				src/cub3d_read_par.c \
 				src/cub3d_read_par_res.c \
 				src/cub3d_read_par_texture.c \
 				src/cub3d_read_par_color.c \
+				src/cud3d_read_map.c \
+				src/cub3d_draw.c \
 				src/cub3d_screen.c
 
 TURNIN			= ${HEADER} ${SRCS}
@@ -37,20 +43,35 @@ AR				= ar -r
 
 CFLAGS			= -Wall -Wextra -Werror -g
 
+LIBFT			=
+
 NORM			= norminette
 
 .c.o:
 				${CC} ${CFLAGS} -I ${HEADERDIR} -c $< -o ${<:.c=.o}
 
+ifndef COMPILE_BONUS
 ${NAME}:		${OBJS}
+				${MAKE} -C libft
 				${CC} -o ${NAME} -I ${HEADERDIR} ${OBJS}
+else
+${NAME}:		${OBJS}
+				${MAKE} -C libft
+				${CC} -o ${NAME} -I ${HEADERDIR} ${OBJS}
+endif
+
+bonus:
+				${MAKE} COMPILE_BONUS=1 all
 
 all:			${NAME}
 
 clean:
-				${RM} ${OBJS_B}
+				${MAKE} -C libft clean
+				${RM} ${OBJS} ${OBJS_B}
 
-fclean:			clean
+fclean:
+				${MAKE} -C libft fclean
+				${RM} ${OBJS} ${OBJS_B}
 				${RM} ${NAME}
 
 norm:		

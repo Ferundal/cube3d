@@ -1,5 +1,6 @@
 #include "cub3d.h"
 #include "cub3d_atoi.h"
+#include "cub3d_parcer.h"
 
 int 	read_color (char **str, t_color *color)
 {
@@ -23,7 +24,7 @@ int 	read_color (char **str, t_color *color)
 		*str += 1;
 	if ((color->b = cub3d_atoi_l(str, 256)) < 0)
 		return (1);
-	return (0)
+	return (0);
 }
 
 int 	read_color_floor (char *str, t_par *par)
@@ -60,6 +61,6 @@ int    read_par_colors (char *str, t_par *par, FLAG_STORE *p)
             set_f(p, FLAG_FLOOR, 1);
     if ((read_status < 0) && (is_f(p, FLAG_CEIL) == 0))
         if ((read_status = read_color_ceil(str, par)) == 0)
-            set_f(p, FLAG)_CELL, 1);
+            set_f(p, FLAG_CEIL, 1);
     return (read_status);
 }
