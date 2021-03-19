@@ -1,8 +1,9 @@
 #include "cub3d.h"
 #include "cub3d_atoi.h"
 #include "cub3d_parcer.h"
+#include "cub3d_read_par.h"
 
-int 	read_color (char **str, t_color *color)
+ERROR_CODE 	read_color (char **str, t_color *color)
 {
 	if ((color->r = cub3d_atoi_l(str, 256)) < 0)
 		return (1);
@@ -27,7 +28,7 @@ int 	read_color (char **str, t_color *color)
 	return (0);
 }
 
-int 	read_color_floor (char *str, t_par *par)
+ERROR_CODE	read_color_floor (char *str, t_par *par)
 {
 	if (*str != 'F')
 		return (-1);
@@ -39,7 +40,7 @@ int 	read_color_floor (char *str, t_par *par)
 	return (0);
 }
 
-int 	read_color_ceil (char *str, t_par *par)
+ERROR_CODE	read_color_ceil (char *str, t_par *par)
 {
 	if (*str != 'C')
 		return (-1);
@@ -51,9 +52,9 @@ int 	read_color_ceil (char *str, t_par *par)
 	return (0);
 }
 
-int    read_par_colors (char *str, t_par *par, FLAG_STORE *p)
+ERROR_CODE	read_par_colors (char *str, t_par *par, FLAG_STORE *p)
 {
-    int     read_status;
+    ERROR_CODE	read_status;
 
     read_status = -1;
     if (is_f(p, FLAG_FLOOR) == 0)

@@ -12,7 +12,13 @@
 
 HEADER			= cub3d.h
 
-HEADERDIR		= ./headers/
+HEADERDIR		=	-I ./headers/ \
+					-I ./libft/ \
+					-I ./minilibx_mms_20200219/
+
+LIBFT			=	-L./libft -lft
+
+LIBMLX			=	-L./minilibx_mms_20200219 -lmlx
 
 SRCS			= src/cub3d.c \
 				src/cub3d_errors.c \
@@ -25,7 +31,8 @@ SRCS			= src/cub3d.c \
 				src/cub3d_read_par_res.c \
 				src/cub3d_read_par_texture.c \
 				src/cub3d_read_par_color.c \
-				src/cud3d_read_map.c \
+				src/cub3d_read_map.c \
+				src/cub3d_read_map_check.c \
 				src/cub3d_draw.c \
 				src/cub3d_screen.c
 
@@ -43,21 +50,21 @@ AR				= ar -r
 
 CFLAGS			= -Wall -Wextra -Werror -g
 
-LIBFT			=
-
 NORM			= norminette
 
 .c.o:
-				${CC} ${CFLAGS} -I ${HEADERDIR} -c $< -o ${<:.c=.o}
+				${CC} ${CFLAGS} ${HEADERDIR} -c $< -o ${<:.c=.o}
 
 ifndef COMPILE_BONUS
 ${NAME}:		${OBJS}
 				${MAKE} -C libft
-				${CC} -o ${NAME} -I ${HEADERDIR} ${OBJS}
+				${MAKE} -C minilibx_mms_20200219
+				${CC} -o ${NAME} ${OBJS} ${LIBFT}
 else
 ${NAME}:		${OBJS}
 				${MAKE} -C libft
-				${CC} -o ${NAME} -I ${HEADERDIR} ${OBJS}
+				${MAKE} -C minilibx_mms_20200219
+				${CC} -o ${NAME} ${OBJS} ${LIBFT}
 endif
 
 bonus:
@@ -67,10 +74,12 @@ all:			${NAME}
 
 clean:
 				${MAKE} -C libft clean
+				${MAKE} -C minilibx_mms_20200219 clean
 				${RM} ${OBJS} ${OBJS_B}
 
 fclean:
 				${MAKE} -C libft fclean
+				${MAKE} -C minilibx_mms_20200219 clean
 				${RM} ${OBJS} ${OBJS_B}
 				${RM} ${NAME}
 

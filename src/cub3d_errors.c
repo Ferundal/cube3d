@@ -1,6 +1,6 @@
 #include "../headers/cub3d.h"
 
-int		catch_error(int err_code)
+int		catch_error(ERROR_CODE err_code)
 {
 	char	err_msg;
 

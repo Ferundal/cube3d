@@ -1,7 +1,8 @@
 #include "cub3d_parcer.h"
+#include "cub3d_read_par.h"
 #include "get_next_line.h"
 
-int 	    read_par_texturies(char *str, t_par *par, FLAG_STORE *p)
+ERROR_CODE	read_par_texturies(char *str, t_par *par, FLAG_STORE *p)
 {
 	ERROR_CODE	read_status;
 
@@ -39,32 +40,29 @@ FLAG_STORE  all_flags(void)
     return (result);
 }
 
-int		    read_par(int fd, t_par *par)
+ERROR_CODE	read_par(int fd, t_par *par)
 {
 	char		*curr_line;
 	FLAG_STORE	p;
 	ERROR_CODE	read_status;
-	int 		l_st;
+	int 		line_status;
 
 	p = 0;
-	while ((p != all_flags()) && ((l_st = get_next_line(fd, &curr_line)) == 1))
+	while (p != all_flags())
 	{
-        read_status = -1;
-		if ((*curr_line != '\0'))
-        {
-			read_status = read_par_res(curr_line, par, &p);
-			if (read_status < 0)
-				read_status = read_par_texturies(curr_line, par, &p);
-			if (read_status < 0)
-				read_status = read_par_colors(curr_line, par, &p);
-			if (read_status < 0)
-			    read_status = ERROR_NOT_A_PAR;
-		}
+		line_status = get_next_line(fd, &curr_line);
+		read_status = read_par_res(curr_line, par, &p);
+		if (read_status < 0)
+			read_status = read_par_texturies(curr_line, par, &p);
+		if (read_status < 0)
+			read_status = read_par_colors(curr_line, par, &p);
+		if ((read_status < 0) && (*curr_line != '\0'))
+			read_status = ERROR_NOT_A_PAR;
 		free(curr_line);
 		if (read_status > 0)
 		    return (read_status);
+		if (line_status == 0)
+			return (ERROR_NOT_ALL_INFO);
 	}
-	if ((p != all_flags()) || l_st == 0)
-	    return (ERROR_NOT_ALL_INFO);
 	return (0);
 }

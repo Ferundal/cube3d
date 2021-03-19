@@ -17,6 +17,11 @@ void 	init_par(t_par *par)
 	par->tex_we = -1;
 	par->tex_ea = -1;
 	par->tex_spr = -1;
+	par->rez.height = 4800;
+	par->rez.width = 6400;
+	par->map_i.width = 0;
+	par->map_i.height = 0;
+	par->map_i.map = NULL;
 }
 
 int		main(int argc, char **argv)
