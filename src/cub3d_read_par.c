@@ -10,16 +10,16 @@ ERROR_CODE	read_par_texturies(char *str, t_par *par, FLAG_STORE *p)
 	if (is_f(p, FLAG_TEX_NO) == 0)
 		if ((read_status = read_par_no(str, par)) == 0)
 			set_f(p, FLAG_TEX_NO, 1);
-	if ((read_status < 1) && (is_f(p, FLAG_TEX_SO) == 0))
+	if ((read_status < 0) && (is_f(p, FLAG_TEX_SO) == 0))
 		if ((read_status = read_par_so(str, par)) == 0)
 			set_f(p, FLAG_TEX_SO, 1);
-	if ((read_status < 1) && (is_f(p, FLAG_TEX_WE) == 0))
+	if ((read_status < 0) && (is_f(p, FLAG_TEX_WE) == 0))
 		if ((read_status = read_par_we(str, par)) == 0)
 			set_f(p, FLAG_TEX_WE, 1);
-	if ((read_status < 1) && (is_f(p, FLAG_TEX_EA) == 0))
+	if ((read_status < 0) && (is_f(p, FLAG_TEX_EA) == 0))
 		if ((read_status = read_par_ea(str, par)) == 0)
 			set_f(p, FLAG_TEX_EA, 1);
-	if ((read_status < 1) && (is_f(p, FLAG_TEX_SPR) == 0))
+	if ((read_status < 0) && (is_f(p, FLAG_TEX_SPR) == 0))
 		if ((read_status = read_par_spr(str, par)) == 0)
 			set_f(p, FLAG_TEX_SPR, 1);
 	return (read_status);
@@ -37,6 +37,7 @@ FLAG_STORE  all_flags(void)
     set_f(&result, FLAG_TEX_EA, 1);
     set_f(&result, FLAG_TEX_SPR, 1);
     set_f(&result, FLAG_FLOOR, 1);
+	set_f(&result, FLAG_CEIL, 1);
     return (result);
 }
 

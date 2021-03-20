@@ -20,6 +20,8 @@ LIBFT			=	-L./libft -lft
 
 LIBMLX			=	-L./minilibx_mms_20200219 -lmlx
 
+LIBMLXOG		=	-L./minilibx_opengl_20191021 -lmlx -framework OpenGL -framework AppKit
+
 SRCS			= src/cub3d.c \
 				src/cub3d_errors.c \
 				src/cub3d_parcer.c \
@@ -35,6 +37,7 @@ SRCS			= src/cub3d.c \
 				src/cub3d_read_map_check.c \
 				src/cub3d_map_utils.c \
 				src/cub3d_draw.c \
+				src/cub3d_map_check_flow.c \
 				src/cub3d_screen.c
 
 TURNIN			= ${HEADER} ${SRCS}
@@ -60,12 +63,13 @@ ifndef COMPILE_BONUS
 ${NAME}:		${OBJS}
 				${MAKE} -C libft
 				${MAKE} -C minilibx_mms_20200219
-				${CC} -o ${NAME} ${OBJS} ${LIBFT}
+				cp ./minilibx_mms_20200219/libmlx.dylib libmlx.dylib
+				${CC} -o ${NAME} ${OBJS} ${LIBFT} ${LIBMLX}
 else
 ${NAME}:		${OBJS}
 				${MAKE} -C libft
 				${MAKE} -C minilibx_mms_20200219
-				${CC} -o ${NAME} ${OBJS} ${LIBFT}
+				${CC} -o ${NAME} ${OBJS} ${LIBFT} ${LIBMLX}
 endif
 
 bonus:
@@ -76,12 +80,9 @@ all:			${NAME}
 clean:
 				${MAKE} -C libft clean
 				${MAKE} -C minilibx_mms_20200219 clean
-				${RM} ${OBJS} ${OBJS_B}
+				${RM} ${OBJS} ${OBJS_B} libmlx.dylib
 
-fclean:
-				${MAKE} -C libft fclean
-				${MAKE} -C minilibx_mms_20200219 clean
-				${RM} ${OBJS} ${OBJS_B}
+fclean:			${MAKE} clean
 				${RM} ${NAME}
 
 norm:		

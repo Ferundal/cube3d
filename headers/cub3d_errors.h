@@ -23,4 +23,6 @@
 # define ERROR_NO_PLAYER_ON_MAP 16
 # define ERROR_MAP_NOT_CLOSED 17
 
+# define ERROR_MLX_DO_NOT_START 18
+
 #endif

@@ -16,7 +16,7 @@ int 	add_map_line(char *str, t_par *par)
 		*(temp_map + temp) = *(par->map_i.map + temp);
 		++temp;
 	}
-	*(temp_map + temp + 1) = str;
+	*(temp_map + temp) = str;
 	if (par->map_i.map != NULL)
 		free(par->map_i.map);
 	par->map_i.map = temp_map;

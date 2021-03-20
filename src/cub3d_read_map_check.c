@@ -3,6 +3,7 @@
 #include "flag_utils.h"
 #include "cub3d_errors.h"
 #include "cub3d_map.h"
+#include <stdlib.h>
 
 ERROR_CODE 	map_line_c_check(char *str, FLAG_STORE *flags)
 {
@@ -23,79 +24,56 @@ ERROR_CODE 	map_line_c_check(char *str, FLAG_STORE *flags)
 		}
 		if (*str == '1')
 			line_status = 0;
+		++str;
 	}
 	if (line_status < 0)
 		return (ERROR_MAP_ERROR);
 	return (0);
 }
 
-ERROR_CODE	map_check_pair(char prev, char next)
+ERROR_CODE	map_clone(t_map_i *src, t_map_i *dst)
 {
-	if ((next == ' ') && (prev != '1') && (prev != ' '))
-		return (ERROR_MAP_NOT_CLOSED);
-	if ((next != '1') && (next != ' ') && (prev == ' '))
-		return (ERROR_MAP_NOT_CLOSED);
+	int 		counter;
+
+	dst->height = src->height;
+	dst->width = src->width;
+	if((dst->map = (char**)malloc(sizeof(char*) * src->height)) == NULL)
+		return (ERROR_CAN_NOT_ALLOCATE_MEMORY);
+	counter = 0;
+	while (counter < dst->height)
+	{
+		*(dst->map + counter) = ft_strdup(*(src->map + counter));
+		if (*(dst->map + counter) == NULL)
+		{
+			while (counter > 0)
+			{
+				free(*(dst->map + counter - 1));
+				--counter;
+			}
+			free(dst->map);
+			return (ERROR_CAN_NOT_ALLOCATE_MEMORY);
+		}
+		++counter;
+	}
 	return (0);
 }
 
-ERROR_CODE 	map_line_check(char *str)
-{
-	char		prev;
-	ERROR_CODE	status;
 
-	prev = ' ';
-	while (*str != '\0')
-	{
-		if ((status = map_check_pair(prev, *str)) != 0)
-			return (status);
-		prev = *str;
-		++str;
-	}
-	status = map_check_pair(prev, ' ');
-	return (status);
-}
-
-ERROR_CODE 	map_collum_check(t_par *par, int x)
-{
-	char		prev;
-	char 		next;
-	ERROR_CODE	status;
-	int 		y;
-
-	prev = ' ';
-	y = 0;
-	while (y < par->map_i.height)
-	{
-		next = get_map_value(par->map_i, x, y);
-		status = map_check_pair(prev, next);
-		if (status != 0)
-			return (status);
-		prev = next;
-		++y;
-	}
-	status = map_check_pair(prev, ' ');
-	return (status);
-}
 
 ERROR_CODE 	map_check(t_par *par)
 {
-	int 		x;
-	int 		y;
 	ERROR_CODE	status;
+	t_map_i 	temp_map;
 
-	x = 0;
-	y = 0;
-	while (y < par->map_i.height)
+	status = map_clone(&(par->map_i), &temp_map);
+	if (status != 0)
+		return (status);
+	status = map_check_flow(&temp_map);
+	while (temp_map.height > 0)
 	{
-		if ((status = map_line_check(*(par->map_i.map + y))) != 0)
-			return (status);
-		++y;
+		free(*(temp_map.map + temp_map.height - 1));
+		temp_map.height -= 1;
 	}
-	while (x < par->map_i.width)
-	{
-		if ((status = map_collum_check(par, x)) != 0)
-			return (status);
-		++x;
-	}
-	return (0);
+	free(temp_map.map);
+	return (status);
 }

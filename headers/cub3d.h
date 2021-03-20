@@ -4,7 +4,8 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include "cub3d_errors.h"
-# include "../libft/libft.h"
+# include "libft.h"
+# include "mlx.h"
 
 # define SCREEN_FLAG "––save"
 
@@ -31,11 +32,11 @@ typedef struct	s_map_i
 typedef struct	s_par
 {
 	t_rez		rez;
-	int			tex_no;
-	int			tex_so;
-	int			tex_we;
-	int			tex_ea;
-	int			tex_spr;
+	char*		tex_no;
+	char*		tex_so;
+	char*		tex_we;
+	char*		tex_ea;
+	char*		tex_spr;
 	t_color		floor;
 	t_color		ceil;
 	t_map_i		map_i;
