@@ -31,27 +31,27 @@ int 	add_map_line(char *str, t_par *par)
 ERROR_CODE	read_lines(int fd, t_par *par, FLAG_STORE *flags)
 {
 	int			r_st;
-	char 		*curr_line;
+	char 		*str;
 	ERROR_CODE	l_st;
 
-	r_st = get_next_line(fd, &curr_line);
-	while ((r_st == 1) && (*curr_line == '\0'))
+	r_st = get_next_line(fd, &str);
+	while ((r_st == 1) && (*str == '\0'))
 	{
-		free(curr_line);
-		r_st = get_next_line(fd, &curr_line);
+		free(str);
+		r_st = get_next_line(fd, &str);
 	}
-	while ((r_st == 1) && ((l_st = map_line_c_check(curr_line, flags)) == 0))
+	while ((r_st == 1) && ((l_st = map_lc_check(str, flags)) == 0))
 	{
-		add_map_line(curr_line, par);
-		r_st = get_next_line(fd, &curr_line);
+		add_map_line(str, par);
+		r_st = get_next_line(fd, &str);
 	}
-	if ((r_st == 0) && ((l_st = map_line_c_check(curr_line, flags)) == 0))
+	if ((r_st == 0) && ((l_st = map_lc_check(str, flags)) == 0))
 	{
-		add_map_line(curr_line, par);
+		add_map_line(str, par);
 		return (0);
 	}
-	if (curr_line != NULL)
-		free(curr_line);
+	if (str != NULL)
+		free(str);
 	return (r_st < 0 ? ERROR_CANT_GET_MAP_LINE : l_st);
 }
 

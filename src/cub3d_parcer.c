@@ -10,7 +10,5 @@ ERROR_CODE	read_map_file(t_par *par, char *file)
 	if (is_error == 0)
 		is_error = read_map(fd, par);
 	close(fd);
-	if (is_error != 0)
-		return (catch_error(is_error));
-	return (0);
+	return (is_error);
 }
