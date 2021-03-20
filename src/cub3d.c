@@ -2,11 +2,22 @@
 
 int		arg_check(int argc, char **argv)
 {
+	int 	len;
+	int 	f_len;
+
 	if ((argc < 2) || (argc > 3))
 		return (ERROR_WRONG_ARG_AMT);
-	if ((argc == 3) &&
-		(ft_strncmp(*(argv + 2), SCREEN_FLAG, ft_strlen(*(argv + 2)))))
-		return (ERROR_WRONG_SECOND_ARG);
+	len = ft_strlen(*(argv + 1));
+	f_len = ft_strlen(FILE_F);
+	if (ft_strncmp(*(argv + 1) + len - f_len, FILE_F, f_len) != 0)
+		return (ERROR_WRONG_FIRST_ARG);
+	if (argc == 3)
+	{
+		len = ft_strlen(*(argv + 2));
+		if ((ft_strncmp(*(argv + 2), SCREEN_FLAG, len) != 0) ||
+			(*(*(argv + 2) + len) != '\0'))
+			return (ERROR_WRONG_SECOND_ARG);
+	}
 	return (0);
 }
 

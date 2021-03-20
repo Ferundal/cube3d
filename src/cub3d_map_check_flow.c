@@ -5,35 +5,25 @@
 ERROR_CODE	ft_flow(t_map_i *map, int x, int y)
 {
 	ERROR_CODE	status;
-	char 		value;
 
-	status = 0;
+	if ((get_map_value(*map, x, y)) == ' ')
+		return (ERROR_MAP_NOT_CLOSED);
 	*(*(map->map + y) + x) = '1';
 	if ((x == 0) || (x == map->width - 1) || (y == 0) || (y == map->height - 1))
 		return (ERROR_MAP_NOT_CLOSED);
-	if ((value = get_map_value(*map, x + 1, y)) == ' ')
+	status = 0;
+	if (get_map_value(*map, x + 1, y) != '1')
+		status += ft_flow(map, x + 1, y);
+	if (get_map_value(*map, x - 1, y) != '1')
+		status += ft_flow(map, x - 1, y);
+	if (get_map_value(*map, x, y + 1) != '1')
+		status += ft_flow(map, x, y + 1);
+	if (get_map_value(*map, x, y - 1) != '1')
+		status += ft_flow(map, x, y - 1);
+	if (status != 0)
 		return (ERROR_MAP_NOT_CLOSED);
-	else
-	{
-		if (value != '1')
-			status = ft_flow(map, x + 1, y);
-	}
-	if ((value = get_map_value(*map, x + 1, y)) == ' ')
-		return (ERROR_MAP_NOT_CLOSED);
-	else
-	{
-		if (value != '1')
-			status = ft_flow(map, x + 1, y);
-	}
-	if ((value = get_map_value(*map, x + 1, y)) == ' ')
-		return (ERROR_MAP_NOT_CLOSED);
-	else
-	{
-		if (value != '1')
-			status = ft_flow(map, x + 1, y);
-	}
+	return (0);
 }
-
 
 ERROR_CODE	map_check_flow(t_map_i *map)
 {
@@ -44,7 +34,7 @@ ERROR_CODE	map_check_flow(t_map_i *map)
 	status = find_map_value("NSWE", *map, &x, &y);
 	if (status != 0)
 		return (ERROR_NO_PLAYER_ON_MAP);
-
-
+	status = ft_flow(map, x, y);
+	return (status);
 }
 

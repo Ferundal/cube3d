@@ -20,23 +20,25 @@ char		get_map_value(t_map_i map_i, int x, int y)
 int 		find_map_value(char *value, t_map_i map_i, int *x, int *y)
 {
 	char 	*temp;
+	char 	temp_c;
 
-	*x = 0;
 	*y = 0;
-	while (*x < map_i.width)
+	while (*y < map_i.height)
 	{
-		while (*y < map_i.height)
+		*x = 0;
+		while (*x < map_i.width)
 		{
 			temp = value;
+			temp_c = get_map_value(map_i, *x, *y);
 			while (*temp != '\0')
 			{
-				if (*(*(map_i.map + *x) + *y) == *temp)
+				if (temp_c == *temp)
 					return (0);
 				++temp;
 			}
-			*y += 1;
+			*x += 1;
 		}
-		*x += 1;
+		*y += 1;
 	}
 	return (1);
 }

@@ -25,4 +25,6 @@
 
 # define ERROR_MLX_DO_NOT_START 18
 
+# define ERROR_WRONG_FIRST_ARG 19
+
 #endif

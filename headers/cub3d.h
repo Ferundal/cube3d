@@ -8,6 +8,7 @@
 # include "mlx.h"
 
 # define SCREEN_FLAG "––save"
+# define FILE_F ".cub"
 
 typedef struct	s_rez
 {

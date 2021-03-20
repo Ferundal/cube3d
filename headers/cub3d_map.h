@@ -6,5 +6,6 @@
 # define CUB3D_MAP_H
 char		get_map_value(t_map_i map_i, int x, int y);
 int 		find_map_value(char *value, t_map_i map_i, int *x, int *y);
+ERROR_CODE	map_check_flow(t_map_i *map);
 
 #endif
