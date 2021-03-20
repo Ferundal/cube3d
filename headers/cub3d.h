@@ -38,14 +38,20 @@ typedef struct	s_par
 	char*		tex_we;
 	char*		tex_ea;
 	char*		tex_spr;
-	t_color		floor;
-	t_color		ceil;
+	int 		floor;
+	int 		ceil;
 	t_map_i		map_i;
 }				t_par;
 
+typedef struct	s_mlx
+{
+	void		*mlx;
+	void		*win;
+}				t_mlx;
+
 int		catch_error(int err_code);
 int		read_map_file(t_par *par, char *file);
-int		screen(t_par *par);
-int		draw(t_par *par);
+int		screen(t_par *par, t_mlx *mlx);
+int		draw(t_par *par, t_mlx *mlx);
 
 #endif

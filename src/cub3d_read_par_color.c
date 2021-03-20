@@ -30,25 +30,31 @@ ERROR_CODE 	read_color (char **str, t_color *color)
 
 ERROR_CODE	read_color_floor (char *str, t_par *par)
 {
+	t_color t_color;
+
 	if (*str != 'F')
 		return (-1);
 	++str;
 	while (*str == ' ')
 		++str;
-	if (read_color(&str, &(par->floor)) != 0)
-		return (ERROR_WRONG_PAR_FLOOR);
+	if (read_color(&str, &t_color) != 0)
+		return (ERROR_WRONG_PAR_CEIL);
+	par->floor = (t_color.r << 16 | t_color.g << 8 | t_color.b);
 	return (0);
 }
 
 ERROR_CODE	read_color_ceil (char *str, t_par *par)
 {
+	t_color t_color;
+
 	if (*str != 'C')
 		return (-1);
 	++str;
 	while (*str == ' ')
 		++str;
-	if (read_color(&str, &(par->ceil)) != 0)
+	if (read_color(&str, &t_color) != 0)
 		return (ERROR_WRONG_PAR_CEIL);
+	par->ceil = (t_color.r << 16 | t_color.g << 8 | t_color.b);
 	return (0);
 }
 
