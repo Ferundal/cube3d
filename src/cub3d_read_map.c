@@ -40,12 +40,12 @@ ERROR_CODE	read_lines(int fd, t_par *par, FLAG_STORE *flags)
 		free(curr_line);
 		r_st = get_next_line(fd, &curr_line);
 	}
-	while ((r_st == 1) && ((l_st = map_line_check(curr_line, flags)) == 0))
+	while ((r_st == 1) && ((l_st = map_line_c_check(curr_line, flags)) == 0))
 	{
 		add_map_line(curr_line, par);
 		r_st = get_next_line(fd, &curr_line);
 	}
-	if ((r_st == 0) && ((l_st = map_line_check(curr_line, flags)) == 0))
+	if ((r_st == 0) && ((l_st = map_line_c_check(curr_line, flags)) == 0))
 	{
 		add_map_line(curr_line, par);
 		return (0);

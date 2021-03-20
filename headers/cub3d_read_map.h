@@ -9,7 +9,7 @@
 # define FLAG_SPACE (1 << 1)
 # define FLAG_PLAYER (1 << 2)
 
-ERROR_CODE 	map_line_check(char *str, FLAG_STORE *flags);
+ERROR_CODE 	map_line_c_check(char *str, FLAG_STORE *flags);
 ERROR_CODE 	map_check(t_par *par);
 
 #endif

@@ -33,6 +33,7 @@ SRCS			= src/cub3d.c \
 				src/cub3d_read_par_color.c \
 				src/cub3d_read_map.c \
 				src/cub3d_read_map_check.c \
+				src/cub3d_map_utils.c \
 				src/cub3d_draw.c \
 				src/cub3d_screen.c
 
