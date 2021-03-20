@@ -58,21 +58,21 @@ ERROR_CODE	map_clone(t_map_i *src, t_map_i *dst)
 	return (0);
 }
 
-
-
 ERROR_CODE 	map_check(t_par *par)
 {
 	ERROR_CODE	status;
 	t_map_i 	temp_map;
+	int 		counter;
 
 	status = map_clone(&(par->map_i), &temp_map);
 	if (status != 0)
 		return (status);
 	status = map_check_flow(&temp_map);
-	while (temp_map.height > 0)
+	counter = 0;
+	while (counter < temp_map.height)
 	{
-		free(*(temp_map.map + temp_map.height - 1));
-		temp_map.height -= 1;
+		free(*(temp_map.map + counter));
+		++counter;
 	}
 	free(temp_map.map);
 	return (status);
