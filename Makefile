@@ -36,8 +36,10 @@ SRCS			= src/cub3d.c \
 				src/cub3d_read_map.c \
 				src/cub3d_read_map_check.c \
 				src/cub3d_map_utils.c \
-				src/cub3d_draw.c \
 				src/cub3d_map_check_flow.c \
+				src/cub3d_draw.c \
+				src/cub3d_raycast.c \
+				src/cube3d_math.c \
 				src/cub3d_screen.c
 
 TURNIN			= ${HEADER} ${SRCS}

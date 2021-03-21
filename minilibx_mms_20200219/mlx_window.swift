@@ -299,7 +299,7 @@ public class MlxWin
   {
     commandQueue = device.makeCommandQueue()!
 
-    /// vertex buffer & shaders stay the always the same.
+    /// vertex buff & shaders stay the always the same.
     let lib = try! device.makeLibrary(source: shaders, options: nil)
     let vertexFunction = lib.makeFunction(name: "basic_vertex_function")
     let fragmentFunction = lib.makeFunction(name: "basic_fragment_function")
@@ -518,7 +518,7 @@ struct uniforms {
    packed_float2 dest_sub;
    packed_float4 color;
 };
-vertex VertexOut basic_vertex_function(const device VertexIn *vertices [[ buffer(0) ]], constant uniforms& uni [[ buffer(1) ]],
+vertex VertexOut basic_vertex_function(const device VertexIn *vertices [[ buff(0) ]], constant uniforms& uni [[ buff(1) ]],
 uint vertexID [[ vertex_id ]])
 {
     VertexOut vOut;

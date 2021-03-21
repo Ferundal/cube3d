@@ -1,13 +1,14 @@
 #include "cub3d.h"
 
-int		arg_check(int argc, char **argv)
+ERROR_CODE	arg_check(int argc, char **argv)
 {
 	int 	len;
 	int 	f_len;
 
 	if ((argc < 2) || (argc > 3))
 		return (ERROR_WRONG_ARG_AMT);
-	len = ft_strlen(*(argv + 1));
+	if ((len = ft_strlen(*(argv + 1))) < 5)
+		return (ERROR_WRONG_FIRST_ARG);
 	f_len = ft_strlen(FILE_F);
 	if (ft_strncmp(*(argv + 1) + len - f_len, FILE_F, f_len) != 0)
 		return (ERROR_WRONG_FIRST_ARG);

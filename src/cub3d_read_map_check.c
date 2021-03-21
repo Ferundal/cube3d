@@ -10,7 +10,7 @@ ERROR_CODE 	map_lc_check(char *str, FLAG_STORE *flags)
 	ERROR_CODE	line_status;
 
 	line_status = -1;
-	while ((*str != '\0') && (line_status == 0))
+	while (*str != '\0')
 	{
 		if ((*str == 'N') || (*str == 'S') || (*str == 'W') || (*str == 'E'))
 		{
