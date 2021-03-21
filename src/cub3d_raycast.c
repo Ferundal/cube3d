@@ -5,12 +5,7 @@
 #include "cub3d_math.h"
 #include "cub3d_map.h"
 
-#define screenWidth 640
-#define screenHeight 480
-#define mapWidth 24
-#define mapHeight 24
-
-int raycast(t_par *par, t_img *img, t_mlx *mlx, t_player *player)
+int raycast(t_par *par, t_img *img, t_mlx *mlx, t_data *data)
 {
 	 //initial direction vector
 	double planeX = 0, planeY = 0.66; //the 2d raycaster version of camera plane
@@ -19,17 +14,17 @@ int raycast(t_par *par, t_img *img, t_mlx *mlx, t_player *player)
 	{
 		//calculate ray position and direction
 		double cameraX = 2 * x / (double)par->rez.width - 1; //x-coordinate in camera space
-		double rayDirX = player->dirX + planeX * cameraX;
-		double rayDirY = player->dirY + planeY * cameraX;
-			//which box of the map we're in
-		int mapX = (int)player->posX;
-		int mapY = (int)player->posY;
+		double rayDirX = data->dirX + data->planeX * cameraX;
+		double rayDirY = data->dirY + data->planeY * cameraX;
+		//which box of the map we're in
+		int mapX = (int)data->posX;
+		int mapY = (int)data->posY;
 
-			//length of ray from current position to next x or y-side
+		//length of ray from current position to next x or y-side
 		double sideDistX;
 		double sideDistY;
 
-			//length of ray from one x or y-side to next x or y-side
+		//length of ray from one x or y-side to next x or y-side
 		double deltaDistX = d_abs(1 / rayDirX);
 		double deltaDistY = d_abs(1 / rayDirY);
 		double perpWallDist;
@@ -44,22 +39,22 @@ int raycast(t_par *par, t_img *img, t_mlx *mlx, t_player *player)
 		if(rayDirX < 0)
 		{
 			stepX = -1;
-			sideDistX = (player->posX - mapX) * deltaDistX;
+			sideDistX = (data->posX - mapX) * deltaDistX;
 		}
 		else
 		{
 			stepX = 1;
-			sideDistX = (mapX + 1.0 - player->posX) * deltaDistX;
+			sideDistX = (mapX + 1.0 - data->posX) * deltaDistX;
 		}
 		if(rayDirY < 0)
 		{
 			stepY = -1;
-			sideDistY = (player->posY - mapY) * deltaDistY;
+			sideDistY = (data->posY - mapY) * deltaDistY;
 		}
 		else
 		{
 			stepY = 1;
-			sideDistY = (mapY + 1.0 - player->posY) * deltaDistY;
+			sideDistY = (mapY + 1.0 - data->posY) * deltaDistY;
 		}
 			//perform DDA
 		while (hit == 0)
@@ -82,8 +77,8 @@ int raycast(t_par *par, t_img *img, t_mlx *mlx, t_player *player)
 				hit = 1;
 		}
 			//Calculate distance projected on camera direction (Euclidean distance will give fisheye effect!)
-		if(side == 0) perpWallDist = (mapX - player->posX + (1 - stepX) / 2) / rayDirX;
-		else          perpWallDist = (mapY - player->posY + (1 - stepY) / 2) / rayDirY;
+		if(side == 0) perpWallDist = (mapX - data->posX + (1 - stepX) / 2) / rayDirX;
+		else          perpWallDist = (mapY - data->posY + (1 - stepY) / 2) / rayDirY;
 
 			//Calculate height of line to draw on screen
 		int lineHeight = (int)(par->rez.height / perpWallDist);
@@ -121,36 +116,36 @@ int raycast(t_par *par, t_img *img, t_mlx *mlx, t_player *player)
 		//move forward if no wall in front of you
 		if(keyDown(SDLK_UP))
 		{
-			if(worldMap[int(posX + dirX * moveSpeed)][int(posY)] == false) player->posX += player->dirX * moveSpeed;
-			if(worldMap[int(posX)][int(posY + dirY * moveSpeed)] == false) player->posY += player->dirY * moveSpeed;
+			if(worldMap[int(posX + dirX * moveSpeed)][int(posY)] == false) data->posX += data->dirX * moveSpeed;
+			if(worldMap[int(posX)][int(posY + dirY * moveSpeed)] == false) data->posY += data->dirY * moveSpeed;
 		}
 		//move backwards if no wall behind you
 		if(keyDown(SDLK_DOWN))
 		{
-			if(worldMap[int(posX - dirX * moveSpeed)][int(posY)] == false) player->posX -= player->dirX * moveSpeed;
-			if(worldMap[int(posX)][int(posY - dirY * moveSpeed)] == false) player->posY -= player->dirY * moveSpeed;
+			if(worldMap[int(posX - dirX * moveSpeed)][int(posY)] == false) data->posX -= data->dirX * moveSpeed;
+			if(worldMap[int(posX)][int(posY - dirY * moveSpeed)] == false) data->posY -= data->dirY * moveSpeed;
 		}
 		//rotate to the right
 		if(keyDown(SDLK_RIGHT))
 		{
 			//both camera direction and camera plane must be rotated
-			double oldDirX = player->dirX;
-			player->dirX = player->dirX * cos(-rotSpeed) - player->dirY * sin(-rotSpeed);
-			player->dirY = oldDirX * sin(-rotSpeed) + player->dirY * cos(-rotSpeed);
-			double oldPlaneX = planeX;
-			planeX = planeX * cos(-rotSpeed) - planeY * sin(-rotSpeed);
-			planeY = oldPlaneX * sin(-rotSpeed) + planeY * cos(-rotSpeed);
+			double oldDirX = data->dirX;
+            data->dirX = data->dirX * cos(-rotSpeed) - data->dirY * sin(-rotSpeed);
+            data->dirY = oldDirX * sin(-rotSpeed) + data->dirY * cos(-rotSpeed);
+			double oldPlaneX = data->planeX;
+            data->planeX = data->planeX * cos(-rotSpeed) - data->planeY * sin(-rotSpeed);
+            data->planeY = oldPlaneX * sin(-rotSpeed) + data->planeY * cos(-rotSpeed);
 		}
 		//rotate to the left
 		if(keyDown(SDLK_LEFT))
 		{
 			//both camera direction and camera plane must be rotated
 			double oldDirX = player->dirX;
-			player->dirX = player->dirX * cos(rotSpeed) - player->dirY * sin(rotSpeed);
-			player->dirY = oldDirX * sin(rotSpeed) + player->dirY * cos(rotSpeed);
-			double oldPlaneX = planeX;
-			planeX = planeX * cos(rotSpeed) - planeY * sin(rotSpeed);
-			planeY = oldPlaneX * sin(rotSpeed) + planeY * cos(rotSpeed);
+            data->dirX = data->dirX * cos(rotSpeed) - data->dirY * sin(rotSpeed);
+            data->dirY = oldDirX * sin(rotSpeed) + data->dirY * cos(rotSpeed);
+			double oldPlaneX = data->planeX;
+            data->planeX = data->planeX * cos(rotSpeed) - data->planeY * sin(rotSpeed);
+            data->planeY = oldPlaneX * sin(rotSpeed) + data->planeY * cos(rotSpeed);
 		}
 	}
 }

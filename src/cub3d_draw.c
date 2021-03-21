@@ -4,15 +4,17 @@
 #include "cub3d_map.h"
 
 
-void	init_player(t_player *player, t_par *par) {
+void	init_player(t_data *data, t_par *par) {
 	int x;
 	int y;
 
 	find_map_value("NSWE", par->map_i, &x, &y);
-	player->posX = (double) x;
-	player->posY = (double) y;
-	player->dirX = -1;
-	player->dirY = 0;
+	data->posX = (double) x;
+	data->posY = (double) y;
+	data->dirX = -1;
+	data->dirY = 0;
+	data->planeX = 0;
+	data->planeY = 0.66;
 }
 
 void	ft_mlx_pixel_put(t_img *data, int x, int y, int color)
@@ -60,14 +62,14 @@ ERROR_CODE	draw_frame(t_par *par, t_img *img, t_mlx *mlx, t_player *player)
 ERROR_CODE	draw(t_par *par, t_mlx *mlx)
 {
 	t_img 		img;
-	t_player	player;
+	t_data	    data;
 
 	mlx->win = mlx_new_window(mlx->mlx, par->rez.width, par->rez.height, "cub3d");
 	img.img = mlx_new_image(mlx->mlx, par->rez.width, par->rez.height);
 	img.buff = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 								 &img.endian);
-	init_player(&player, par);
-	draw_frame(par, &img, mlx, &player);
+	init_player(&data, par);
+	draw_frame(par, &img, mlx, &data);
 	mlx_loop(mlx->mlx);
 	return (0);
 }

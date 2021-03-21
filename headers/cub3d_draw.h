@@ -9,13 +9,14 @@ typedef struct  s_img {
 	int         endian;
 }               t_img;
 
-typedef struct  s_player {
+typedef struct  s_data {
 	double      posX;
 	double      posY;
 	double		dirX;
 	double		dirY;
-	int         endian;
-}               t_player;
+	double      planeX;
+	double      planeY;
+}               t_data;
 
 raycast(t_par *par, t_img *img, t_mlx *mlx, t_player *player);
 
