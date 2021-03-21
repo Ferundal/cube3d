@@ -9,10 +9,9 @@ ERROR_CODE 	map_lc_check(char *str, FLAG_STORE *flags)
 {
 	ERROR_CODE	line_status;
 
-	line_status = 0;
+	line_status = -1;
 	while ((*str != '\0') && (line_status == 0))
 	{
-		line_status = -1;
 		if ((*str == 'N') || (*str == 'S') || (*str == 'W') || (*str == 'E'))
 		{
 			if (is_f(flags, FLAG_PLAYER) == 0)
@@ -23,8 +22,11 @@ ERROR_CODE 	map_lc_check(char *str, FLAG_STORE *flags)
 			else
 				return (ERROR_TWO_PLAYERS_ON_MAP);
 		}
-		if ((*str == '1') || (*str == ' ') || (*str == '0') || (*str == '2'))
-			line_status = 0;
+		else
+		    if (!((*str == '1') || (*str == ' ') || (*str == '0') || (*str == '2')))
+                return (ERROR_MAP_ERROR);
+        if ((*str == '1') || (*str == '0') || (*str == '2'))
+            line_status = 0;
 		++str;
 	}
 	if (line_status < 0)
