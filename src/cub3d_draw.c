@@ -5,10 +5,12 @@
 
 
 void	init_player(t_data *data, t_par *par) {
-	int x;
-	int y;
+	int     x;
+	int     y;
+	char    start;
 
 	find_map_value("NSWE", par->map_i, &x, &y);
+	start = get_map_value(par->map_i, x, y);
 	data->posX = (double) x;
 	data->posY = (double) y;
 	data->dirX = -1;
