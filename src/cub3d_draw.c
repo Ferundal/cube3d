@@ -4,7 +4,7 @@
 #include "cub3d_map.h"
 
 
-void	init_player(t_data *data, t_par *par)
+void	init_player(t_player *data, t_par *par)
 {
 	int		x;
 	int		y;
@@ -33,7 +33,7 @@ ERROR_CODE	draw_frame(t_par *par, t_img *img, t_mlx *mlx, t_player *player)
 ERROR_CODE	draw(t_par *par, t_mlx *mlx)
 {
 	t_img 		img;
-	t_data	    data;
+	t_player	    data;
 
 	mlx->win = mlx_new_window(mlx->mlx, par->rez.width, par->rez.height, "cub3d");
 	img.img = mlx_new_image(mlx->mlx, par->rez.width, par->rez.height);

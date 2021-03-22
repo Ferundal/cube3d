@@ -26,5 +26,6 @@
 # define ERROR_MLX_DO_NOT_START 18
 
 # define ERROR_WRONG_FIRST_ARG 19
+# define ERROR_CANT_OPEN_PAR_FILE 20
 
 #endif

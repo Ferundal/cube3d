@@ -9,7 +9,7 @@ typedef struct	s_img {
 	int			endian;
 }				t_img;
 
-typedef struct	s_data {
+typedef struct	s_player {
 	double		posX;
 	double		posY;
 	double		dirX;
@@ -18,6 +18,23 @@ typedef struct	s_data {
 	double		planeY;
 	double		moveSpeed;
 	double		rotSpeed;
+}				t_player;
+
+typedef struct	s_data {
+	double		cameraX;
+	double		rayDirX;
+	double		rayDirY;
+	int			mapX;
+	int			mapY;
+	double		sideDistX;
+	double		sideDistY;
+	double		deltaDistX;
+	double		deltaDistY;
+	double		perpWallDist;
+	int			stepX;
+	int			stepY;
+	int			hit;
+	int			side;
 }				t_data;
 
 raycast(t_par *par, t_img *img, t_mlx *mlx, t_player *player);

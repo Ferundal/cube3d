@@ -7,7 +7,7 @@ ERROR_CODE	read_map_file(t_par *par, char *file)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		is_error =
+		return (ERROR_CANT_OPEN_PAR_FILE);
 	is_error = read_par(fd, par);
 	if (is_error == 0)
 		is_error = read_map(fd, par);
