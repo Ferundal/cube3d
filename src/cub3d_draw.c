@@ -4,10 +4,11 @@
 #include "cub3d_map.h"
 
 
-void	init_player(t_data *data, t_par *par) {
-	int     x;
-	int     y;
-	char    start;
+void	init_player(t_data *data, t_par *par)
+{
+	int		x;
+	int		y;
+	char	start;
 
 	find_map_value("NSWE", par->map_i, &x, &y);
 	start = get_map_value(par->map_i, x, y);
@@ -17,40 +18,8 @@ void	init_player(t_data *data, t_par *par) {
 	data->dirY = 0;
 	data->planeX = 0;
 	data->planeY = 0.66;
-}
-
-void	ft_mlx_pixel_put(t_img *data, int x, int y, int color)
-{
-	char    *dst;
-
-	dst = data->buff + (y * data->line_length + x * (data->bits_per_pixel / 8));
-	*(unsigned int*)dst = color;
-}
-
-void 	draw_background(t_img *data, t_par *par)
-{
-	char 	*dst;
-	int 	half;
-	int 	counter;
-	int 	x_step;
-
-	dst = data->buff;
-	half = par->rez.height / 2;
-	x_step = data->bits_per_pixel / 8;
-	counter = half * par->rez.width;
-	while (counter > 0)
-	{
-		*(unsigned int*)dst = par->ceil;
-		--counter;
-		dst += x_step;
-	}
-	counter = (par->rez.height - half) * par->rez.width;
-	while (counter > 0)
-	{
-		*(unsigned int*)dst = par->floor;
-		--counter;
-		dst += x_step;
-	}
+	data->moveSpeed = 0.1; //the constant value is in squares/second
+	data->rotSpeed = 0.3;
 }
 
 ERROR_CODE	draw_frame(t_par *par, t_img *img, t_mlx *mlx, t_player *player)
