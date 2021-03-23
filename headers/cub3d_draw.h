@@ -1,26 +1,10 @@
 #ifndef CUB3D_DRAW_H
 #define CUB3D_DRAW_H
+#include "cub3d.h"
 
-typedef struct	s_img {
-	void		*img;
-	char		*buff;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
-}				t_img;
-
-typedef struct	s_player {
-	double		posX;
-	double		posY;
-	double		dirX;
-	double		dirY;
-	double		planeX;
-	double		planeY;
-	double		moveSpeed;
-	double		rotSpeed;
-}				t_player;
-
-typedef struct	s_data {
+typedef struct	s_raycast
+{
+	int			x;
 	double		cameraX;
 	double		rayDirX;
 	double		rayDirY;
@@ -30,14 +14,34 @@ typedef struct	s_data {
 	double		sideDistY;
 	double		deltaDistX;
 	double		deltaDistY;
-	double		perpWallDist;
 	int			stepX;
 	int			stepY;
-	int			hit;
 	int			side;
-}				t_data;
+}				t_raycast;
 
-raycast(t_par *par, t_img *img, t_mlx *mlx, t_player *player);
+typedef struct	s_vline
+{
+	int			drawStart;
+	int			drawEnd;
+}				t_vline;
+
+ERROR_CODE		draw_frame(t_draw_data *data);
+
+void			raycast(t_draw_data *data);
+void			ft_mlx_put_line(t_draw_data *data, t_vline *line, int x_ray);
+int				key_press(int keycode, t_draw_data *data);
+int				key_unpress(int keycode, t_draw_data *data);
+int 			exit_pressed(int keycode, t_draw_data *data);
+
+
+
+void			move_forward(t_draw_data *data);
+void			move_backward(t_draw_data *data);
+void			move_right(t_draw_data *p);
+void			move_left(t_draw_data *p);
+void			rotate_right(t_draw_data *data);
+void			rotate_left(t_draw_data *data);
+
 
 
 #endif

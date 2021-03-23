@@ -3,45 +3,76 @@
 #include "cub3d_errors.h"
 #include "cub3d_map.h"
 
+void	choose_dir(t_draw_data *data, char start)
+{
+	if (start == 'N')
+	{
+		data->dirX = 0;
+		data->dirY = 1;
+		data->planeX = 0.66;
+		data->planeY = 0;
+	}
+	if (start == 'S')
+	{
+		data->dirX = 0;
+		data->dirY = -1;
+		data->planeX = -0.66;
+		data->planeY = 0;
+	}
+	if (start == 'W')
+	{
+		data->dirX = -1;
+		data->dirY = 0;
+		data->planeX = 0;
+		data->planeY = 0.66;
+	}
+	if (start == 'E')
+	{
+		data->dirX = 1;
+		data->dirY = 0;
+		data->planeX = 0;
+		data->planeY = -0.66;
+	}
+}
 
-void	init_player(t_player *data, t_par *par)
+void	init_player(t_draw_data *data)
 {
 	int		x;
 	int		y;
 	char	start;
 
-	find_map_value("NSWE", par->map_i, &x, &y);
-	start = get_map_value(par->map_i, x, y);
+	find_map_value("NSWE", data->par.map_i, &x, &y);
+	start = get_map_value(data->par.map_i, x, y);
+	choose_dir(data, start);
 	data->posX = (double) x;
 	data->posY = (double) y;
-	data->dirX = -1;
-	data->dirY = 0;
-	data->planeX = 0;
-	data->planeY = 0.66;
 	data->moveSpeed = 0.1; //the constant value is in squares/second
-	data->rotSpeed = 0.3;
+	data->rotSpeed = 0.1;
 }
 
-ERROR_CODE	draw_frame(t_par *par, t_img *img, t_mlx *mlx, t_player *player)
+ERROR_CODE	draw_frame(t_draw_data *data)
 {
-	draw_background(img, par);
-	raycast(par, img, mlx, &player);
-	mlx_put_image_to_window(mlx, mlx->win, img->img, 0, 0);
+	raycast(data);
+	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->img.img, 0, 0);
 	return (0);
 }
 
 ERROR_CODE	draw(t_par *par, t_mlx *mlx)
 {
-	t_img 		img;
-	t_player	    data;
+	t_draw_data	data;
 
-	mlx->win = mlx_new_window(mlx->mlx, par->rez.width, par->rez.height, "cub3d");
-	img.img = mlx_new_image(mlx->mlx, par->rez.width, par->rez.height);
-	img.buff = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-								 &img.endian);
-	init_player(&data, par);
-	draw_frame(par, &img, mlx, &data);
-	mlx_loop(mlx->mlx);
+	data.mlx = *mlx;
+	data.par = *par;
+	data.mlx.win = mlx_new_window(data.mlx.mlx, data.par.rez.width, data.par.rez.height, "cub3d");
+	data.img.img = mlx_new_image(data.mlx.mlx, data.par.rez.width, data.par.rez.height);
+	data.img.buff = mlx_get_data_addr(data.img.img, &data.img.bits_per_pixel,
+									&data.img.line_length, &data.img.endian);
+	init_player(&data);
+	draw_frame(&data);
+	mlx_hook(data.mlx.win, 2, 1L << 0, key_press, &data);
+	mlx_hook(data.mlx.win, 3, 1L << 1, key_unpress, &data);
+	mlx_hook(data.mlx.win, 17, 0, exit_pressed, &data);
+	mlx_loop(data.mlx.mlx);
 	return (0);
 }
 

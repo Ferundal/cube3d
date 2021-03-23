@@ -1,4 +1,13 @@
 #include "cub3d.h"
+#include "cub3d_draw.h"
+#include <stdlib.h>
+
+
+ERROR_CODE	cub3d_exit(t_draw_data *data)
+{
+	mlx_destroy_window(data->mlx.mlx, data->mlx.win);
+	exit (0);
+}
 
 ERROR_CODE	arg_check(int argc, char **argv)
 {

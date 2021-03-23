@@ -1,3 +1,6 @@
+#include "cub3d.h"
+#include "cub3d_draw.h"
+
 void	ft_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
 	char	*dst;
@@ -6,28 +9,31 @@ void	ft_mlx_pixel_put(t_img *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-void 	draw_background(t_img *data, t_par *par)
+void ft_mlx_put_line(t_draw_data *data, t_vline *line, int x_ray)
 {
-	char	*dst;
-	int		half;
-	int		counter;
+	char	*start;
 	int		x_step;
+	int		counter;
 
-	dst = data->buff;
-	half = par->rez.height / 2;
-	x_step = data->bits_per_pixel / 8;
-	counter = half * par->rez.width;
-	while (counter > 0)
+	counter = 0;
+	x_step = data->img.bits_per_pixel / 8;
+	start = data->img.buff + x_step * x_ray;
+	while (counter < line->drawStart)
 	{
-		*(unsigned int*)dst = par->ceil;
-		--counter;
-		dst += x_step;
+		*(unsigned int*)start = data->par.ceil;
+		++counter;
+		start += data->img.line_length;
 	}
-	counter = (par->rez.height - half) * par->rez.width;
-	while (counter > 0)
+	while (counter < line->drawEnd)
 	{
-		*(unsigned int*)dst = par->floor;
-		--counter;
-		dst += x_step;
+		*(unsigned int*)start = 0x000000FF;
+		++counter;
+		start += data->img.line_length;
+	}
+	while (counter < data->par.rez.height)
+	{
+		*(unsigned int*)start = data->par.floor;
+		++counter;
+		start += data->img.line_length;
 	}
 }
