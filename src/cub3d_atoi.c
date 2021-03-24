@@ -12,14 +12,16 @@ int 	cub3d_atoi(char **str, int max)
 	while ((**str >= '0') && (**str <= '9'))
 	{
 		if ((result < max_result) ||
-			((result == max_result) && (**str - '0' < max_num )))
+			((result == max_result) && (**str - '0' <= max_num )))
 		{
 			result = result * 10 + (**str - '0');
 			(*str) += 1;
 		}
 		else
-			return (max);
+			break;
 	}
+	while ((**str >= '0') && (**str <= '9'))
+		(*str) += 1;
 	return (result);
 }
 
