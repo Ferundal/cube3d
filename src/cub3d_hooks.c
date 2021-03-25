@@ -1,7 +1,7 @@
 #include "cub3d_draw.h"
 #include "mlx.h"
 
-void	move_calc(t_draw_data *data)
+int		move_calc(t_draw_data *data)
 {
 	if (data->keys.m_forw == 1)
 		move_forward(data);
@@ -15,6 +15,8 @@ void	move_calc(t_draw_data *data)
 		rotate_right(data);
 	if (data->keys.r_left == 1)
 		rotate_left(data);
+	draw_frame(data);
+	return (0);
 }
 
 int		key_press(int keycode, t_draw_data *data)
@@ -33,8 +35,6 @@ int		key_press(int keycode, t_draw_data *data)
 		data->keys.r_right = 1;
 	if (keycode == 123)
 		data->keys.r_left = 1;
-	move_calc(data);
-	draw_frame(data);
 	return (0);
 }
 
@@ -52,8 +52,6 @@ int		key_unpress(int keycode, t_draw_data *data)
 		data->keys.r_right = 0;
 	if (keycode == 123)
 		data->keys.r_left = 0;
-	move_calc(data);
-	draw_frame(data);
 	return (0);
 }
 

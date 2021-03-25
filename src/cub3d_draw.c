@@ -69,10 +69,10 @@ ERROR_CODE	draw(t_par *par, t_mlx *mlx)
 	data.img.buff = mlx_get_data_addr(data.img.img, &data.img.bits_per_pixel,
 									&data.img.line_length, &data.img.endian);
 	init_player(&data);
-	draw_frame(&data);
 	mlx_hook(data.mlx.win, 2, 1L << 0, key_press, &data);
 	mlx_hook(data.mlx.win, 3, 1L << 1, key_unpress, &data);
 	mlx_hook(data.mlx.win, 17, 0, exit_pressed, &data);
+	mlx_loop_hook(data.mlx.mlx, move_calc, &data);
 	mlx_loop(data.mlx.mlx);
 	return (0);
 }

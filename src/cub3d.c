@@ -33,12 +33,12 @@ ERROR_CODE	arg_check(int argc, char **argv)
 
 void 	init_par(t_par *par, void *mlx)
 {
-	par->tex_no = NULL;
-	par->tex_so = NULL;
-	par->tex_we = NULL;
-	par->tex_ea =NULL;
-	par->tex_spr = NULL;
-	par->floor = 0;
+	par->tex_no.img = NULL;
+	par->tex_so.img = NULL;
+	par->tex_we.img = NULL;
+	par->tex_ea.img =NULL;
+	par->tex_spr.img = NULL;
+	par->floor= 0;
 	par->ceil = 0;
 	mlx_get_screen_size(mlx, &(par->rez.width), &(par->rez.height));
 	par->map_i.map = NULL;
@@ -55,7 +55,7 @@ int		main(int argc, char **argv)
 	if ((is_error = arg_check(argc, argv)) != 0)
 		return (catch_error(is_error));
 	init_par(&par, mlx.mlx);
-	if ((is_error = read_map_file(&par, *(argv + 1))) != 0)
+	if ((is_error = read_map_file(&par, *(argv + 1), mlx.mlx)) != 0)
 		return (catch_error(is_error));
 	if ((argc == 3) && ((is_error = screen(&par, &mlx)) != 0))
 		return (catch_error(is_error));

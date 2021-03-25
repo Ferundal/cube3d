@@ -16,6 +16,13 @@ typedef struct	s_rez
 	int			width;
 }				t_rez;
 
+typedef struct	s_text
+{
+	int			height;
+	int			width;
+	void		*img;
+}				t_text;
+
 typedef struct	s_color
 {
 	int			r;
@@ -33,11 +40,11 @@ typedef struct	s_map_i
 typedef struct	s_par
 {
 	t_rez		rez;
-	char*		tex_no;
-	char*		tex_so;
-	char*		tex_we;
-	char*		tex_ea;
-	char*		tex_spr;
+	t_text		tex_no;
+	t_text		tex_so;
+	t_text		tex_we;
+	t_text		tex_ea;
+	t_text		tex_spr;
 	int 		floor;
 	int 		ceil;
 	t_map_i		map_i;
@@ -84,7 +91,7 @@ typedef struct	s_draw_data
 }				t_draw_data;
 
 int			catch_error(int err_code);
-int			read_map_file(t_par *par, char *file);
+int			read_map_file(t_par *par, char *file, void *mlx);
 int			screen(t_par *par, t_mlx *mlx);
 int			draw(t_par *par, t_mlx *mlx);
 ERROR_CODE 	cub3d_exit(t_draw_data *date_);

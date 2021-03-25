@@ -1,4 +1,3 @@
-#include <math.h>
 
 #include "cub3d.h"
 #include "cub3d_draw.h"
@@ -67,18 +66,17 @@ void	raycast_find_hit(t_draw_data *data, t_raycast *temp)
 void	raycast_draw_line(t_draw_data *data, t_raycast *temp)
 {
 	double	perpWallDist;
-	int		lineHeight;
-	t_vline	line;
+	t_line	line;
 
 	if(temp->side == 0)
 		perpWallDist = (temp->mapX - data->posX + (1 - temp->stepX) / 2) / temp->rayDirX;
 	else
 		perpWallDist = (temp->mapY - data->posY + (1 - temp->stepY) / 2) / temp->rayDirY;
-	lineHeight = (int)(data->par.rez.height / perpWallDist);
-	line.drawStart = -lineHeight / 2 + data->par.rez.height / 2;
+	line.lineHeight = (int)(data->par.rez.height / perpWallDist);
+	line.drawStart = -line.lineHeight / 2 + data->par.rez.height / 2;
 	if(line.drawStart < 0)
 		line.drawStart = 0;
-	line.drawEnd = lineHeight / 2 + data->par.rez.height / 2;
+	line.drawEnd = line.lineHeight / 2 + data->par.rez.height / 2;
 	if(line.drawEnd >= data->par.rez.height)
 		line.drawEnd = data->par.rez.height - 1;
 	ft_mlx_put_line(data, &line, temp->x);

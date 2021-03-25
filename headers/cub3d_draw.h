@@ -19,21 +19,26 @@ typedef struct	s_raycast
 	int			side;
 }				t_raycast;
 
-typedef struct	s_vline
+typedef struct	s_line
 {
+	t_text		text;
+	int			texX;
+	int			lineHeight;
 	int			drawStart;
 	int			drawEnd;
-}				t_vline;
+}				t_line;
+
 
 ERROR_CODE		draw_frame(t_draw_data *data);
 
 void			raycast(t_draw_data *data);
-void			ft_mlx_put_line(t_draw_data *data, t_vline *line, int x_ray);
+void			ft_mlx_put_line(t_draw_data *data, t_line *line, int x_ray);
 int				key_press(int keycode, t_draw_data *data);
 int				key_unpress(int keycode, t_draw_data *data);
 int 			exit_pressed(int keycode, t_draw_data *data);
 
 
+int 			move_calc(t_draw_data *data);
 
 void			move_forward(t_draw_data *data);
 void			move_backward(t_draw_data *data);
