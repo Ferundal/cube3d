@@ -8,14 +8,14 @@ void	choose_dir(t_draw_data *data, char start)
 	if (start == 'N')
 	{
 		data->dirX = 0;
-		data->dirY = 1;
+		data->dirY = -1;
 		data->planeX = 0.66;
 		data->planeY = 0;
 	}
 	if (start == 'S')
 	{
 		data->dirX = 0;
-		data->dirY = -1;
+		data->dirY = 1;
 		data->planeX = -0.66;
 		data->planeY = 0;
 	}
@@ -24,14 +24,14 @@ void	choose_dir(t_draw_data *data, char start)
 		data->dirX = -1;
 		data->dirY = 0;
 		data->planeX = 0;
-		data->planeY = 0.66;
+		data->planeY = -0.66;
 	}
 	if (start == 'E')
 	{
 		data->dirX = 1;
 		data->dirY = 0;
 		data->planeX = 0;
-		data->planeY = -0.66;
+		data->planeY = 0.66;
 	}
 }
 
@@ -44,16 +44,17 @@ void	init_player(t_draw_data *data)
 	find_map_value("NSWE", data->par.map_i, &x, &y);
 	start = get_map_value(data->par.map_i, x, y);
 	choose_dir(data, start);
-	data->posX = (double) x;
-	data->posY = (double) y;
-	data->moveSpeed = 0.1; //the constant value is in squares/second
-	data->rotSpeed = 0.1;
+	data->posX = (double) x + 0.5;
+	data->posY = (double) y + 0.5;
+	data->moveSpeed = 0.05; //the constant value is in squares/second
+	data->rotSpeed = 0.05;
 }
 
 ERROR_CODE	draw_frame(t_draw_data *data)
 {
 	raycast(data);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->img.img, 0, 0);
+	mlx_do_sync(data->mlx.mlx);
 	return (0);
 }
 

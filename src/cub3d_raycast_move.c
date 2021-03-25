@@ -21,16 +21,16 @@ void		move_backward(t_draw_data *p)
 }
 void			move_right(t_draw_data *p)
 {
-	if(get_map_value(p->par.map_i, (int)(p->posX + p->dirY * p->moveSpeed), (int)p->posY) != '1')
-		p->posX += p->dirY * p->moveSpeed;
-	if(get_map_value(p->par.map_i, (int)p->posX, (int)(p->posY - p->dirX * p->moveSpeed)) != '1')
-		p->posY -= p->dirX * p->moveSpeed;
-}
-
-void			move_left(t_draw_data *p)
-{
 	if(get_map_value(p->par.map_i, (int)(p->posX - p->dirY * p->moveSpeed), (int)p->posY) != '1')
 		p->posX -= p->dirY * p->moveSpeed;
 	if(get_map_value(p->par.map_i, (int)p->posX, (int)(p->posY + p->dirX * p->moveSpeed)) != '1')
 		p->posY += p->dirX * p->moveSpeed;
+}
+
+void			move_left(t_draw_data *p)
+{
+	if(get_map_value(p->par.map_i, (int)(p->posX + p->dirY * p->moveSpeed), (int)p->posY) != '1')
+		p->posX += p->dirY * p->moveSpeed;
+	if(get_map_value(p->par.map_i, (int)p->posX, (int)(p->posY - p->dirX * p->moveSpeed)) != '1')
+		p->posY -= p->dirX * p->moveSpeed;
 }

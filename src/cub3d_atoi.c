@@ -18,10 +18,12 @@ int 	cub3d_atoi(char **str, int max)
 			(*str) += 1;
 		}
 		else
-			break;
+		{
+			while ((**str >= '0') && (**str <= '9'))
+				(*str) += 1;
+			return (max);
+		}
 	}
-	while ((**str >= '0') && (**str <= '9'))
-		(*str) += 1;
 	return (result);
 }
 
