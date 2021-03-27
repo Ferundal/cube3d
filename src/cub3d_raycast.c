@@ -41,7 +41,7 @@ void	raycast_find_steps(t_draw_data *data, t_raycast *temp)
 
 void	raycast_find_hit(t_draw_data *data, t_raycast *temp)
 {
-	int		hit;
+	int			hit;
 
 	hit = 0;
 	while (hit == 0)
@@ -65,15 +65,16 @@ void	raycast_find_hit(t_draw_data *data, t_raycast *temp)
 
 void	raycast_draw_line(t_draw_data *data, t_raycast *temp)
 {
-	double	perpWallDist;
-	t_line	line;
-	double	wallX;
+	double		perpWallDist;
+	t_line		line;
+	double		wallX;
 
 	if(temp->side == 0)
 		perpWallDist = (temp->mapX - data->posX + (1 - temp->stepX) / 2) / temp->rayDirX;
 	else
 		perpWallDist = (temp->mapY - data->posY + (1 - temp->stepY) / 2) / temp->rayDirY;
 	line.lineHeight = (int)(data->par.rez.height / perpWallDist);
+	data->z_buff[temp->x] = perpWallDist;
 	line.drawStart = -line.lineHeight / 2 + data->par.rez.height / 2;
 	if(line.drawStart < 0)
 		line.drawStart = 0;
@@ -87,12 +88,12 @@ void	raycast_draw_line(t_draw_data *data, t_raycast *temp)
 	wallX -= (double)((int)wallX);
 	line.text = text_switch(data, temp);
 	line.texX = (int)(wallX * (double)line.text.width);
-	ft_mlx_put_line(data, &line, temp->x);
+	ft_mlx_put_tex_line(data, &line, temp->x);
 }
 
 void	raycast(t_draw_data *data)
 {
-	t_raycast temp;
+	t_raycast	temp;
 
 	temp.x = 0;
 	while(temp.x < data->par.rez.width)

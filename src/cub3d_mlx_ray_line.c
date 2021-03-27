@@ -46,7 +46,7 @@ void	ft_mlx_put_floor(int *counter, t_draw_data *data, int **start)
 	}
 }
 
-void	ft_mlx_put_line(t_draw_data *data, t_line *line, int x_ray)
+void	ft_mlx_put_tex_line(t_draw_data *data, t_line *line, int x_ray)
 {
 	int		*start;
 	int		counter;

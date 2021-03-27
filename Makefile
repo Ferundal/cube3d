@@ -38,12 +38,14 @@ SRCS			= src/cub3d.c \
 				src/cub3d_map_utils.c \
 				src/cub3d_map_check_flow.c \
 				src/cub3d_draw.c \
-				src/cub3d_mlx_image_utils.c \
+				src/cub3d_mlx_ray_line.c \
+				src/cub3d_mlx_sprite_line.c \
 				src/cub3d_raycast.c \
 				src/cub3d_hooks.c \
 				src/cub3d_raycast_move.c \
 				src/cub3d_raycast_rotate.c \
 				src/cub3d_raycast_utils.c \
+				src/cub3d_sprite.c \
 				src/cube3d_math.c \
 				src/cub3d_screen.c
 
