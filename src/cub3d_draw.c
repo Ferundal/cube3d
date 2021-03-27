@@ -46,7 +46,7 @@ void	init_player(t_draw_data *data)
 	choose_dir(data, start);
 	data->posX = (double) x + 0.5;
 	data->posY = (double) y + 0.5;
-	data->moveSpeed = 0.05; //the constant value is in squares/second
+	data->moveSpeed = 0.05;
 	data->rotSpeed = 0.05;
 }
 
@@ -66,7 +66,7 @@ ERROR_CODE	draw(t_par *par, t_mlx *mlx)
 	data.par = *par;
 	data.mlx.win = mlx_new_window(data.mlx.mlx, data.par.rez.width, data.par.rez.height, "cub3d");
 	data.img.img = mlx_new_image(data.mlx.mlx, data.par.rez.width, data.par.rez.height);
-	data.img.buff = mlx_get_data_addr(data.img.img, &data.img.bits_per_pixel,
+	data.img.buff = (int*)mlx_get_data_addr(data.img.img, &data.img.bits_per_pixel,
 									&data.img.line_length, &data.img.endian);
 	init_player(&data);
 	mlx_hook(data.mlx.win, 2, 1L << 0, key_press, &data);

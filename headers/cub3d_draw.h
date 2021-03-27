@@ -32,6 +32,8 @@ typedef struct	s_line
 ERROR_CODE		draw_frame(t_draw_data *data);
 
 void			raycast(t_draw_data *data);
+t_text			text_switch(t_draw_data *data, t_raycast *temp);
+
 void			ft_mlx_put_line(t_draw_data *data, t_line *line, int x_ray);
 int				key_press(int keycode, t_draw_data *data);
 int				key_unpress(int keycode, t_draw_data *data);

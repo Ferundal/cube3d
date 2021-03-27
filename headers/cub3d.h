@@ -21,6 +21,11 @@ typedef struct	s_text
 	int			height;
 	int			width;
 	void		*img;
+	int			*buff;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+
 }				t_text;
 
 typedef struct	s_color
@@ -58,7 +63,7 @@ typedef struct	s_mlx
 
 typedef struct	s_img {
 	void		*img;
-	char		*buff;
+	int			*buff;
 	int			bits_per_pixel;
 	int			line_length;
 	int			endian;

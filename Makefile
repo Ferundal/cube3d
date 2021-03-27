@@ -43,6 +43,7 @@ SRCS			= src/cub3d.c \
 				src/cub3d_hooks.c \
 				src/cub3d_raycast_move.c \
 				src/cub3d_raycast_rotate.c \
+				src/cub3d_raycast_utils.c \
 				src/cube3d_math.c \
 				src/cub3d_screen.c
 

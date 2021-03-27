@@ -67,6 +67,7 @@ void	raycast_draw_line(t_draw_data *data, t_raycast *temp)
 {
 	double	perpWallDist;
 	t_line	line;
+	double	wallX;
 
 	if(temp->side == 0)
 		perpWallDist = (temp->mapX - data->posX + (1 - temp->stepX) / 2) / temp->rayDirX;
@@ -79,6 +80,13 @@ void	raycast_draw_line(t_draw_data *data, t_raycast *temp)
 	line.drawEnd = line.lineHeight / 2 + data->par.rez.height / 2;
 	if(line.drawEnd >= data->par.rez.height)
 		line.drawEnd = data->par.rez.height - 1;
+	if (temp->side == 0)
+		wallX = data->posY + perpWallDist * temp->rayDirY;
+	else
+		wallX = data->posX + perpWallDist * temp->rayDirX;
+	wallX -= (double)((int)wallX);
+	line.text = text_switch(data, temp);
+	line.texX = (int)(wallX * (double)line.text.width);
 	ft_mlx_put_line(data, &line, temp->x);
 }
 
