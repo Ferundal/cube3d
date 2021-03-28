@@ -74,7 +74,7 @@ void	raycast_draw_line(t_draw_data *data, t_raycast *temp)
 	else
 		perpWallDist = (temp->mapY - data->posY + (1 - temp->stepY) / 2) / temp->rayDirY;
 	line.lineHeight = (int)(data->par.rez.height / perpWallDist);
-	data->z_buff[temp->x] = perpWallDist;
+	*(data->z_buff + temp->x) = perpWallDist;
 	line.drawStart = -line.lineHeight / 2 + data->par.rez.height / 2;
 	if(line.drawStart < 0)
 		line.drawStart = 0;

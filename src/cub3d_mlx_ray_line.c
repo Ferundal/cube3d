@@ -1,7 +1,7 @@
 #include "cub3d.h"
 #include "cub3d_draw.h"
 
-void	ft_mlx_put_text(int *counter, t_draw_data *data, t_line *line, int **start)
+void	ft_mlx_put_text(int *counter, t_draw_data *data, t_line *line, char **start)
 {
 	double	step;
 	double	text_pos;
@@ -18,41 +18,42 @@ void	ft_mlx_put_text(int *counter, t_draw_data *data, t_line *line, int **start)
 			if (texY == line->text.height)
 				texY -= 1;
 			text_pos += step;
-			**start = *(line->text.buff +
-					line->texX + line->text.width * texY);
+			**(int**)start = *(int*)(line->text.buff +
+					line->texX * (line->text.bits_per_pixel / 8) + line->text.line_length * texY);
 			(*counter) += 1;
-			*start += data->par.rez.width;
+			*start += data->img.line_length;
 		}
 	}
 }
 
-void	ft_mlx_put_ceil(int *counter, t_draw_data *data, t_line *line, int **start)
+void	ft_mlx_put_ceil(int *counter, t_draw_data *data, t_line *line, char **start)
 {
 	while (*counter < line->drawStart)
 	{
-		**start = data->par.ceil;
+		**(int**)start = data->par.ceil;
 		(*counter) += 1;
-		*start += data->par.rez.width;
+		*start += data->img.line_length;
 	}
 }
 
-void	ft_mlx_put_floor(int *counter, t_draw_data *data, int **start)
+void	ft_mlx_put_floor(int *counter, t_draw_data *data, char **start)
 {
+
 	while (*counter < data->par.rez.height)
 	{
-		**start = data->par.floor;
+		**(int**)start = data->par.floor;
 		(*counter) += 1;
-		*start += data->par.rez.width;
+		*start += data->img.line_length;
 	}
 }
 
 void	ft_mlx_put_tex_line(t_draw_data *data, t_line *line, int x_ray)
 {
-	int		*start;
+	char	*start;
 	int		counter;
 
 	counter = 0;
-	start = data->img.buff + x_ray;
+	start = data->img.buff + x_ray * (data->img.bits_per_pixel / 8);
 	ft_mlx_put_ceil(&counter, data, line, &start);
 	ft_mlx_put_text(&counter, data, line, &start);
 	ft_mlx_put_floor(&counter, data, &start);

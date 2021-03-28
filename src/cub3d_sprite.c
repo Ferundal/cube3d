@@ -49,26 +49,19 @@ void	find_sprite_pos(t_draw_data *data, t_sprites *temp, int counter)
 {
 	temp->spriteX = (data->spr_arr.arr + counter)->x - data->posX;
 	temp->spriteY = (data->spr_arr.arr + counter)->y - data->posY;
-
-	temp->invDet = 1.0 / (data->planeX * data->dirY - data->dirX * data->planeY); //required for correct matrix multiplication
-
+	temp->invDet = 1.0 / (data->planeX * data->dirY - data->dirX * data->planeY);
 	temp->transformX = temp->invDet * (data->dirY * temp->spriteX - data->dirX * temp->spriteY);
-	temp->transformY = temp->invDet * (-data->planeY * temp->spriteX + data->planeX * temp->spriteY); //this is actually the depth inside the screen, that what Z is in 3D
-
+	temp->transformY = temp->invDet * (-data->planeY * temp->spriteX + data->planeX * temp->spriteY);
 	temp->spriteScreenX = (int)((data->par.rez.width / 2) * (1 + temp->transformX / temp->transformY));
 }
 
 void	find_sprite_size(t_draw_data *data, t_sprites *temp)
 {
-	//calculate height of the sprite on screen
-	temp->spriteHeight = abs((int) (data->par.rez.height / (temp->transformY))); //using 'transformY' instead of the real distance prevents fisheye
-	//calculate lowest and highest pixel to fill in current stripe
+	temp->spriteHeight = abs((int) (data->par.rez.height / (temp->transformY)));
 	temp->drawStartY = -temp->spriteHeight / 2 + data->par.rez.height / 2;
 	if(temp->drawStartY < 0) temp->drawStartY = 0;
 	temp->drawEndY = temp->spriteHeight / 2 + data->par.rez.height / 2;
 	if(temp->drawEndY >= data->par.rez.height) temp->drawEndY = data->par.rez.height - 1;
-
-	//calculate width of the sprite
 	temp->spriteWidth = abs( (int) (data->par.rez.height / (temp->transformY)));
 	temp->drawStartX = -temp->spriteWidth / 2 + temp->spriteScreenX;
 	if(temp->drawStartX < 0) temp->drawStartX = 0;

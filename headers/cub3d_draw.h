@@ -42,6 +42,8 @@ typedef struct	s_sprites
 	int			spriteWidth;
 	int			drawStartX;
 	int			drawEndX;
+	int			texX;
+	int			texY;
 }				t_sprites;
 
 ERROR_CODE		draw_frame(t_draw_data *data);

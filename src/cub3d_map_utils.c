@@ -42,7 +42,7 @@ int 		find_map_value(char *value, t_map_i map_i, int *x, int *y)
 		}
 		*y += 1;
 	}
-	return (1);
+	return (0);
 }
 
 int			add_spr(t_spr_arr *spr_arr, char value, int x, int y)
@@ -96,5 +96,5 @@ int			find_all(char *value, t_map_i map_i, t_spr_arr *spr_arr)
 		}
 		++y;
 	}
-	return (1);
+	return (0);
 }

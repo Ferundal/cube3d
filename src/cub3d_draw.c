@@ -67,13 +67,13 @@ ERROR_CODE	draw(t_par *par, t_mlx *mlx)
 {
 	ERROR_CODE	is_error;
 	t_draw_data	data;
-	double		z_buffer[data.par.rez.width];
+	double		z_buffer[par->rez.width];
 
 	data.mlx = *mlx;
 	data.par = *par;
 	data.mlx.win = mlx_new_window(data.mlx.mlx, data.par.rez.width, data.par.rez.height, "cub3d");
 	data.img.img = mlx_new_image(data.mlx.mlx, data.par.rez.width, data.par.rez.height);
-	data.img.buff = (int*)mlx_get_data_addr(data.img.img, &data.img.bits_per_pixel,
+	data.img.buff = (char*)mlx_get_data_addr(data.img.img, &data.img.bits_per_pixel,
 									&data.img.line_length, &data.img.endian);
 	if((is_error = init_data(&data)) != 0)
 		return (is_error);

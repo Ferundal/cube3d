@@ -13,7 +13,7 @@ ERROR_CODE	read_par_no(char *str, t_par *par, void *mlx)
 											&par->tex_no.height);
 		if (par->tex_no.img != NULL)
 		{
-			par->tex_no.buff = (int*)mlx_get_data_addr(par->tex_no.img,
+			par->tex_no.buff = mlx_get_data_addr(par->tex_no.img,
 								&par->tex_no.bits_per_pixel,
 								&par->tex_no.line_length,
 								&par->tex_no.endian);
@@ -36,10 +36,10 @@ ERROR_CODE	read_par_so(char *str, t_par *par, void *mlx)
 												&par->tex_so.height);
 		if (par->tex_so.img != NULL)
 		{
-			par->tex_so.buff = (int*)mlx_get_data_addr(par->tex_so.img,
-													   &par->tex_so.bits_per_pixel,
-													   &par->tex_so.line_length,
-													   &par->tex_so.endian);
+			par->tex_so.buff = mlx_get_data_addr(par->tex_so.img,
+								&par->tex_so.bits_per_pixel,
+								&par->tex_so.line_length,
+								&par->tex_so.endian);
 			return (0);
 		}
 	}
@@ -59,10 +59,10 @@ ERROR_CODE	read_par_we(char *str, t_par *par, void *mlx)
 												&par->tex_we.height);
 		if (par->tex_we.img != NULL)
 		{
-			par->tex_we.buff = (int*)mlx_get_data_addr(par->tex_we.img,
-													   &par->tex_we.bits_per_pixel,
-													   &par->tex_we.line_length,
-													   &par->tex_we.endian);
+			par->tex_we.buff = mlx_get_data_addr(par->tex_we.img,
+								&par->tex_we.bits_per_pixel,
+								&par->tex_we.line_length,
+								&par->tex_we.endian);
 			return (0);
 		}
 	}
@@ -82,10 +82,10 @@ ERROR_CODE	read_par_ea(char *str, t_par *par, void *mlx)
 												&par->tex_ea.height);
 		if (par->tex_ea.img != NULL)
 		{
-			par->tex_ea.buff = (int*)mlx_get_data_addr(par->tex_ea.img,
-													   &par->tex_ea.bits_per_pixel,
-													   &par->tex_ea.line_length,
-													   &par->tex_ea.endian);
+			par->tex_ea.buff = mlx_get_data_addr(par->tex_ea.img,
+								&par->tex_ea.bits_per_pixel,
+								&par->tex_ea.line_length,
+								&par->tex_ea.endian);
 			return (0);
 		}
 	}
@@ -105,10 +105,10 @@ ERROR_CODE	read_par_spr(char *str, t_par *par, void *mlx)
 												&par->tex_spr.height);
 		if (par->tex_spr.img != NULL)
 		{
-			par->tex_spr.buff = (int*)mlx_get_data_addr(par->tex_spr.img,
-													   &par->tex_spr.bits_per_pixel,
-													   &par->tex_spr.line_length,
-													   &par->tex_spr.endian);
+			par->tex_spr.buff = mlx_get_data_addr(par->tex_spr.img,
+								&par->tex_spr.bits_per_pixel,
+								&par->tex_spr.line_length,
+								&par->tex_spr.endian);
 			return (0);
 		}
 	}
