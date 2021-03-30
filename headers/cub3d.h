@@ -78,7 +78,7 @@ typedef struct	s_keys
 	int			r_right;
 	int			r_left;
 }				t_keys;
-/*
+
 typedef struct	s_sprite
 {
 	char		type;
@@ -92,14 +92,14 @@ typedef struct	s_spr_arr
 	int			size;
 	t_sprite	*arr;
 }				t_spr_arr;
-*/
+
 typedef struct	s_draw_data
 {
 	t_mlx		mlx;
 	t_par		par;
 	t_img		img;
 	t_keys		keys;
-//	t_spr_arr	spr_arr;
+	t_spr_arr	spr_arr;
 	double		*z_buff;
 	double		posX;
 	double		posY;

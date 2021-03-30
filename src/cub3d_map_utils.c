@@ -44,7 +44,7 @@ int 		find_map_value(char *value, t_map_i map_i, int *x, int *y)
 	}
 	return (0);
 }
-/*
+
 int			add_spr(t_spr_arr *spr_arr, char value, int x, int y)
 {
 	t_spr_arr	temp;
@@ -99,4 +99,3 @@ int			find_all(char *value, t_map_i map_i, t_spr_arr *spr_arr)
 	}
 	return (0);
 }
- */

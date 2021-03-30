@@ -2,7 +2,7 @@
 #include "cub3d_draw.h"
 #include <math.h>
 #include <stdlib.h>
-/*
+
 void	sort_sprites(t_draw_data *data)
 {
 	int			ex_counter;
@@ -85,4 +85,3 @@ void	draw_sprites(t_draw_data *data)
 		++counter;
 	}
 }
- */

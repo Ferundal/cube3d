@@ -37,15 +37,15 @@ void	choose_dir(t_draw_data *data, char start)
 
 ERROR_CODE	init_data(t_draw_data *data)
 {
-//	ERROR_CODE	is_error;
+	ERROR_CODE	is_error;
 	int			x;
 	int			y;
 	char		start;
 
-//	data->spr_arr.size = 0;
-//	data->spr_arr.arr = NULL;
-//	if ((is_error = find_all("2", data->par.map_i, &data->spr_arr)) != 0)
-//		return (is_error);
+	data->spr_arr.size = 0;
+	data->spr_arr.arr = NULL;
+	if ((is_error = find_all("2", data->par.map_i, &data->spr_arr)) != 0)
+		return (is_error);
 	find_map_value("NSWE", data->par.map_i, &x, &y);
 	start = get_map_value(data->par.map_i, x, y);
 	choose_dir(data, start);
@@ -65,7 +65,7 @@ ERROR_CODE	init_data(t_draw_data *data)
 ERROR_CODE	draw_frame(t_draw_data *data)
 {
 	raycast(data);
-//	draw_sprites(data);
+	draw_sprites(data);
 	mlx_put_image_to_window(data->mlx.mlx, data->mlx.win, data->img.img, 0, 0);
 	mlx_do_sync(data->mlx.mlx);
 	return (0);
@@ -85,7 +85,7 @@ ERROR_CODE	draw(t_par *par, t_mlx *mlx)
 									&data.img.line_length, &data.img.endian);
 	if((is_error = init_data(&data)) != 0)
 		return (is_error);
-	data.z_buff = z_buffer;
+	data.z_buff = &z_buffer[0];
 	draw_frame(&data);
 	mlx_hook(data.mlx.win, 2, 1L << 0, key_press, &data);
 	mlx_hook(data.mlx.win, 3, 1L << 1, key_unpress, &data);
