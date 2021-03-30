@@ -5,7 +5,9 @@
 
 ERROR_CODE	cub3d_exit(t_draw_data *data)
 {
+	mlx_destroy_image(data->mlx.mlx, data->img.img);
 	mlx_destroy_window(data->mlx.mlx, data->mlx.win);
+	free(data->spr_arr.arr);
 	exit (0);
 }
 
@@ -59,7 +61,7 @@ int		main(int argc, char **argv)
 		return (catch_error(is_error));
 	if ((argc == 3) && ((is_error = screen(&par, &mlx)) != 0))
 		return (catch_error(is_error));
-	if ((is_error = draw(&par, &mlx)) != 0)
+	if ((argc == 2) && ((is_error = draw(&par, &mlx) != 0)))
 		return (catch_error(is_error));
 	return (0);
 }

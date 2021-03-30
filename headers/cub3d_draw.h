@@ -46,7 +46,29 @@ typedef struct	s_sprites
 	int			texY;
 }				t_sprites;
 
+typedef struct	s_bmp_header
+{
+	short		file_type;
+	int 		file_size;
+	short		reserved_1;
+	short		reserved_2;
+	int 		pixel_data_offset;
+	int			header_size;
+	int			image_width;
+	int			image_height;
+	short		planes;
+	short		bit_per_pixel;
+	int			compression;
+	int			image_size;
+	int			x_pixels_per_meter;
+	int			y_pixels_per_meter;
+	int			total_colors;
+	int			important_colors;
+}				t_bmp_header;
+
 ERROR_CODE		draw_frame(t_draw_data *data);
+ERROR_CODE		init_data(t_draw_data *data);
+
 
 void			raycast(t_draw_data *data);
 t_text			text_switch(t_draw_data *data, t_raycast *temp);

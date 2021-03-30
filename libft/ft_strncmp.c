@@ -25,7 +25,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n)
 		++t_s2;
 		--n;
 	}
-	if ((*t_s1 == *t_s2) || (!(n > 0)))
+	if ((*t_s1 == *t_s2) || (n <= 0))
 	{
 		return (0);
 	}

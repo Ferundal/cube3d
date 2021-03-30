@@ -16,8 +16,12 @@ void	ft_mlx_put_spr(t_draw_data *data, t_sprites *temp, t_text *c_text, char *st
 	y = temp->drawStartY;
 	while (y < temp->drawEndY)
 	{
-		temp->texY = (int)((((double)y + ((double)temp->spriteHeight - (double)data->par.rez.height)  / 2) * (double)c_text->height) / (double)temp->spriteHeight);
-		t_color = *(int*)(c_text->buff + temp->texX * (c_text->bits_per_pixel / 8) + (temp->texY * c_text->line_length));
+		temp->texY = (int)((((double)y + ((double)temp->spriteHeight -
+				(double)data->par.rez.height)  / 2) * (double)c_text->height) / (double)temp->spriteHeight);
+		if (temp->texY > c_text->height)
+			temp->texY = c_text->height;
+		t_color = *(int*)(c_text->buff + temp->texX *
+				(c_text->bits_per_pixel / 8) + (temp->texY * c_text->line_length));
 		if (t_color != 0)
 			*(int*)start = t_color;
 		++y;
@@ -38,6 +42,8 @@ void	ft_mlx_put_spr_line(t_draw_data *data, t_sprites *temp, t_sprite *spr)
 		temp->texX = (int)(((double)x - (-(double)temp->spriteWidth / 2 +
 				(double)temp->spriteScreenX)) *
 				(double)curr_text->width / (double)temp->spriteWidth);
+		if(temp->texX > curr_text->width)
+			temp->texX = curr_text->width;
 		if(temp->transformY > 0 && x > 0 && x <
 				data->par.rez.width && temp->transformY < *(data->z_buff + x))
 		{

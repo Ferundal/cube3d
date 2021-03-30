@@ -7,7 +7,7 @@
 # include "libft.h"
 # include "mlx.h"
 
-# define SCREEN_FLAG "––save"
+# define SCREEN_FLAG "--save"
 # define FILE_F ".cub"
 
 typedef struct	s_rez
@@ -113,7 +113,7 @@ typedef struct	s_draw_data
 
 int			catch_error(int err_code);
 int			read_map_file(t_par *par, char *file, void *mlx);
-int			screen(t_par *par, t_mlx *mlx);
+ERROR_CODE	screen(t_par *par, t_mlx *mlx);
 int			draw(t_par *par, t_mlx *mlx);
 ERROR_CODE 	cub3d_exit(t_draw_data *date_);
 

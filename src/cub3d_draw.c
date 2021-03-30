@@ -5,33 +5,26 @@
 
 void	choose_dir(t_draw_data *data, char start)
 {
-	if (start == 'N')
+	if ((start == 'N') || (start == 'S'))
 	{
 		data->dirX = 0;
 		data->dirY = -1;
 		data->planeX = 0.66;
 		data->planeY = 0;
 	}
-	if (start == 'S')
-	{
-		data->dirX = 0;
-		data->dirY = 1;
-		data->planeX = -0.66;
-		data->planeY = 0;
-	}
-	if (start == 'W')
+	if ((start == 'W') || (start == 'E'))
 	{
 		data->dirX = -1;
 		data->dirY = 0;
 		data->planeX = 0;
 		data->planeY = -0.66;
 	}
-	if (start == 'E')
+	if ((start == 'S') || (start == 'E'))
 	{
-		data->dirX = 1;
-		data->dirY = 0;
-		data->planeX = 0;
-		data->planeY = 0.66;
+		data->dirX = -data->dirX ;
+		data->dirY = -data->dirY;
+		data->planeX = -data->planeX;
+		data->planeY = -data->planeY;
 	}
 }
 
@@ -86,7 +79,6 @@ ERROR_CODE	draw(t_par *par, t_mlx *mlx)
 	if((is_error = init_data(&data)) != 0)
 		return (is_error);
 	data.z_buff = &z_buffer[0];
-	draw_frame(&data);
 	mlx_hook(data.mlx.win, 2, 1L << 0, key_press, &data);
 	mlx_hook(data.mlx.win, 3, 1L << 1, key_unpress, &data);
 	mlx_hook(data.mlx.win, 17, 0, exit_pressed, &data);

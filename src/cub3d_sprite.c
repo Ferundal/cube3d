@@ -15,7 +15,7 @@ void	sort_sprites(t_draw_data *data)
 	{
 		max = data->spr_arr.arr + ex_counter;
 		in_counter = ex_counter + 1;
-		while (in_counter < data->spr_arr.size - 1)
+		while (in_counter < data->spr_arr.size)
 		{
 			if (max->dist < (data->spr_arr.arr + in_counter)->dist )
 			{
