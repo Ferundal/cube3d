@@ -1,6 +1,6 @@
 #include "cub3d.h"
 #include "cub3d_draw.h"
-
+/*
 t_text	*sprite_choose(t_draw_data *data, t_sprite *spr)
 {
 	if (spr->type == '2')
@@ -47,3 +47,4 @@ void	ft_mlx_put_spr_line(t_draw_data *data, t_sprites *temp, t_sprite *spr)
 		++x;
 	}
 }
+*/

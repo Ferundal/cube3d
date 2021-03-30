@@ -27,7 +27,7 @@ typedef struct	s_line
 	int			drawStart;
 	int			drawEnd;
 }				t_line;
-
+/*
 typedef struct	s_sprites
 {
 	double		spriteX;
@@ -45,7 +45,7 @@ typedef struct	s_sprites
 	int			texX;
 	int			texY;
 }				t_sprites;
-
+*/
 ERROR_CODE		draw_frame(t_draw_data *data);
 
 void			raycast(t_draw_data *data);
@@ -67,6 +67,9 @@ void			rotate_right(t_draw_data *data);
 void			rotate_left(t_draw_data *data);
 
 void			draw_sprites(t_draw_data *data);
+
+/*
 void			ft_mlx_put_spr_line(t_draw_data *data,
 									t_sprites *temp, t_sprite *spr);
+									*/
 #endif

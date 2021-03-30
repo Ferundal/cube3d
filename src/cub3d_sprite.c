@@ -2,7 +2,7 @@
 #include "cub3d_draw.h"
 #include <math.h>
 #include <stdlib.h>
-
+/*
 void	sort_sprites(t_draw_data *data)
 {
 	int			ex_counter;
@@ -11,7 +11,7 @@ void	sort_sprites(t_draw_data *data)
 	t_sprite	temp;
 
 	ex_counter = 0;
-	while (ex_counter < data->spr_arr.size - 1)
+	while (ex_counter < data->spr_arr.size)
 	{
 		max = data->spr_arr.arr + ex_counter;
 		in_counter = ex_counter + 1;
@@ -85,3 +85,4 @@ void	draw_sprites(t_draw_data *data)
 		++counter;
 	}
 }
+ */

@@ -44,28 +44,29 @@ int 		find_map_value(char *value, t_map_i map_i, int *x, int *y)
 	}
 	return (0);
 }
-
+/*
 int			add_spr(t_spr_arr *spr_arr, char value, int x, int y)
 {
 	t_spr_arr	temp;
+	int			counter;
 
 	temp.size = spr_arr->size + 1;
 	if ((temp.arr = (t_sprite*)malloc(sizeof (t_sprite) * temp.size)) == NULL)
 		return (ERROR_CAN_NOT_ALLOCATE_MEMORY);
-	while (spr_arr->size > 0)
+	counter = 0;
+	while (counter < spr_arr->size)
 	{
-		*(temp.arr) = *(spr_arr->arr);
-		temp.arr += 1;
-		spr_arr->arr += 1;
-		spr_arr->size -= 1;
+		*(temp.arr + counter) = *(spr_arr->arr + counter);
+		++counter;
 	}
-	(*(temp.arr)).x = x + 0.5;
-	(*(temp.arr)).y = y + 0.5;
-	(*(temp.arr)).type = value;
-	if (spr_arr->arr != NULL)
-		free(spr_arr->arr);
-	temp.arr -= temp.size - 1;
-	*spr_arr = temp;
+	(*(temp.arr + counter)).x = x + 0.5;
+	(*(temp.arr + counter)).y = y + 0.5;
+	(*(temp.arr + counter)).type = value;
+//	if (spr_arr->size != 0)
+//		free(spr_arr->arr);
+	spr_arr->arr = temp.arr;
+	spr_arr->size = temp.size;
+//	temp.arr = NULL;
 	return (0);
 }
 
@@ -98,3 +99,4 @@ int			find_all(char *value, t_map_i map_i, t_spr_arr *spr_arr)
 	}
 	return (0);
 }
+ */
