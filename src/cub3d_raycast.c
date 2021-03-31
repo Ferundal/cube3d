@@ -7,7 +7,7 @@
 void	raycast_init_values(t_draw_data *data, t_raycast *temp)
 {
 	temp->cameraX = 2 * temp->x / (double)data->par.rez.width - 1;
-	temp->rayDirX = data->dirX + data->planeX * temp->cameraX;
+	temp->rayDirX = data->dirX + data->plane_x * temp->cameraX;
 	temp->rayDirY = data->dirY + data->planeY * temp->cameraX;
 	temp->mapX = (int)data->posX;
 	temp->mapY = (int)data->posY;
@@ -79,8 +79,8 @@ void	raycast_draw_line(t_draw_data *data, t_raycast *temp)
 	if(line.drawStart < 0)
 		line.drawStart = 0;
 	line.drawEnd = line.lineHeight / 2 + data->par.rez.height / 2;
-	if(line.drawEnd >= data->par.rez.height)
-		line.drawEnd = data->par.rez.height - 1;
+	if(line.drawEnd > data->par.rez.height)
+		line.drawEnd = data->par.rez.height;
 	if (temp->side == 0)
 		wallX = data->posY + perpWallDist * temp->rayDirY;
 	else

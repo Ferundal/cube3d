@@ -9,21 +9,21 @@ void	choose_dir(t_draw_data *data, char start)
 	{
 		data->dirX = 0;
 		data->dirY = -1;
-		data->planeX = 0.66;
+		data->plane_x = 0.66;
 		data->planeY = 0;
 	}
 	if ((start == 'W') || (start == 'E'))
 	{
 		data->dirX = -1;
 		data->dirY = 0;
-		data->planeX = 0;
+		data->plane_x = 0;
 		data->planeY = -0.66;
 	}
 	if ((start == 'S') || (start == 'E'))
 	{
 		data->dirX = -data->dirX ;
 		data->dirY = -data->dirY;
-		data->planeX = -data->planeX;
+		data->plane_x = -data->plane_x;
 		data->planeY = -data->planeY;
 	}
 }

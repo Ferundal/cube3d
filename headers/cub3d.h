@@ -105,7 +105,7 @@ typedef struct	s_draw_data
 	double		posY;
 	double		dirX;
 	double		dirY;
-	double		planeX;
+	double		plane_x;
 	double		planeY;
 	double		moveSpeed;
 	double		rotSpeed;
