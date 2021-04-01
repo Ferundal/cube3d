@@ -22,7 +22,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct	s_fd_i
+typedef struct s_fd_i
 {
 	int			fd;
 	char		*buff_p;
