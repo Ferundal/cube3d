@@ -71,12 +71,11 @@ int	add_spr(t_spr_arr *spr_arr, char value, int x, int y)
 	return (0);
 }
 
-int	find_all(char *value, t_map_i map_i, t_spr_arr *spr_arr)
+ERROR_CODE	find_all(char *value, t_map_i map_i, t_spr_arr *spr_arr)
 {
-	char		*temp;
-	char		temp_c;
 	int			x;
 	int			y;
+	char		temp_c;
 	ERROR_CODE	is_error;
 
 	y = 0;
@@ -85,14 +84,12 @@ int	find_all(char *value, t_map_i map_i, t_spr_arr *spr_arr)
 		x = 0;
 		while (x < map_i.w)
 		{
-			temp = value;
 			temp_c = get_map_value(map_i, x, y);
-			while (*temp != '\0')
+			if ((ft_strchr(value, temp_c) != NULL) && (temp_c != 0))
 			{
-				if (temp_c == *temp)
-					if((is_error = add_spr(spr_arr, temp_c, x, y)) != 0)
-						return (is_error);
-				++temp;
+				is_error = add_spr(spr_arr, temp_c, x, y);
+				if (is_error != 0)
+					return (is_error);
 			}
 			++x;
 		}

@@ -2,7 +2,7 @@
 #include "cub3d_errors.h"
 #include <stdlib.h>
 
-void 		put_error_msg_1(ERROR_CODE err_code, int fd)
+void	put_error_msg_1(ERROR_CODE err_code, int fd)
 {
 	if (err_code == ERROR_WRONG_ARG_AMT)
 		ft_putstr_fd("Wrong argument amount", fd);
@@ -30,7 +30,7 @@ void 		put_error_msg_1(ERROR_CODE err_code, int fd)
 		ft_putstr_fd("Not enough data", fd);
 }
 
-void 		put_error_msg_2(ERROR_CODE err_code, int fd)
+void	put_error_msg_2(ERROR_CODE err_code, int fd)
 {
 	if (err_code == ERROR_CAN_NOT_ALLOCATE_MEMORY)
 		ft_putstr_fd("Can't allocate memory", fd);

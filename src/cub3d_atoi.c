@@ -1,8 +1,8 @@
-int 	cub3d_atoi(char **str, int max)
+int	cub3d_atoi(char **str, int max)
 {
-	int 	result;
-	int 	max_result;
-	int 	max_num;
+	int		result;
+	int		max_result;
+	int		max_num;
 
 	if (!((**str >= '0') && (**str <= '9')))
 		return (-1);
@@ -11,8 +11,8 @@ int 	cub3d_atoi(char **str, int max)
 	max_num = max % 10;
 	while ((**str >= '0') && (**str <= '9'))
 	{
-		if ((result < max_result) ||
-			((result == max_result) && (**str - '0' <= max_num )))
+		if ((result < max_result) || \
+			((result == max_result) && (**str - '0' <= max_num)))
 		{
 			result = result * 10 + (**str - '0');
 			(*str) += 1;
@@ -27,9 +27,9 @@ int 	cub3d_atoi(char **str, int max)
 	return (result);
 }
 
-int 	cub3d_atoi_l(char **str, int max)
+int	cub3d_atoi_l(char **str, int max)
 {
-	int 	result;
+	int		result;
 
 	result = cub3d_atoi(str, max);
 	if (result == max)

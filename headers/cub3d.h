@@ -115,6 +115,6 @@ ERROR_CODE	catch_error(int err_code);
 ERROR_CODE	read_map_file(t_par *par, char *file, void *mlx);
 ERROR_CODE	screen(t_par *par, t_mlx *mlx);
 ERROR_CODE	draw(t_par *par, t_mlx *mlx);
-ERROR_CODE 	cub3d_exit(t_draw_data *date_);
+ERROR_CODE 	cub3d_exit(t_draw_data *date, ERROR_CODE is_error);
 
 #endif

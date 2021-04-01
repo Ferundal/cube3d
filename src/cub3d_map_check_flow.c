@@ -49,7 +49,8 @@ ERROR_CODE	ft_flow(t_map_i *map, int x, int y)
 		return (ERROR_MAP_NOT_CLOSED);
 	*(*(map->map + y) + x) = '1';
 	status = 0;
-	if ((status = ft_flow_switch_1(map, x, y)) == 0)
+	status = ft_flow_switch_1(map, x, y);
+	if (status == 0)
 		status = ft_flow_switch_2(map, x, y);
 	if (status != 0)
 		return (ERROR_MAP_NOT_CLOSED);
@@ -59,8 +60,8 @@ ERROR_CODE	ft_flow(t_map_i *map, int x, int y)
 ERROR_CODE	map_check_flow(t_map_i *map)
 {
 	ERROR_CODE	status;
-	int 		x;
-	int 		y;
+	int			x;
+	int			y;
 
 	status = find_map_value("NSWE", *map, &x, &y);
 	if (status != 0)
@@ -68,4 +69,3 @@ ERROR_CODE	map_check_flow(t_map_i *map)
 	status = ft_flow(map, x, y);
 	return (status);
 }
-

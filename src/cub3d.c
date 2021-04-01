@@ -14,7 +14,7 @@
 #include "cub3d_draw.h"
 #include <stdlib.h>
 
-ERROR_CODE	cub3d_exit(t_draw_data *data)
+ERROR_CODE	cub3d_exit(t_draw_data *data, ERROR_CODE is_error)
 {
 	mlx_destroy_image(data->mlx.mlx, data->img.img);
 	mlx_destroy_window(data->mlx.mlx, data->mlx.win);
@@ -23,6 +23,7 @@ ERROR_CODE	cub3d_exit(t_draw_data *data)
 	mlx_destroy_image(data->mlx.mlx, data->par.tex_we.img);
 	mlx_destroy_image(data->mlx.mlx, data->par.tex_ea.img);
 	mlx_destroy_image(data->mlx.mlx, data->par.tex_spr.img);
+	catch_error(is_error);
 	if (data->spr_arr.arr != NULL)
 		free(data->spr_arr.arr);
 	exit (0);
@@ -35,7 +36,8 @@ ERROR_CODE	arg_check(int argc, char **argv)
 
 	if ((argc < 2) || (argc > 3))
 		return (ERROR_WRONG_ARG_AMT);
-	if ((len = ft_strlen(*(argv + 1))) < 5)
+	len = ft_strlen(*(argv + 1));
+	if (len < 5)
 		return (ERROR_WRONG_FIRST_ARG);
 	f_len = ft_strlen(FILE_F);
 	if (ft_strncmp(*(argv + 1) + len - f_len, FILE_F, f_len) != 0)
@@ -69,16 +71,19 @@ int	main(int argc, char **argv)
 	ERROR_CODE	is_error;
 	t_mlx		mlx;
 
-	if ((mlx.mlx = mlx_init()) == NULL)
+	mlx.mlx = mlx_init();
+	if (mlx.mlx == NULL)
 		return (catch_error(ERROR_MLX_DO_NOT_START));
-	if ((is_error = arg_check(argc, argv)) != 0)
-		return (catch_error(is_error));
-	init_par(&par, mlx.mlx);
-	if ((is_error = read_map_file(&par, *(argv + 1), mlx.mlx)) != 0)
-		return (catch_error(is_error));
-	if ((argc == 3) && ((is_error = screen(&par, &mlx)) != 0))
-		return (catch_error(is_error));
-	if ((argc == 2) && ((is_error = draw(&par, &mlx) != 0)))
+	is_error = arg_check(argc, argv);
+	if (is_error == 0)
+		init_par(&par, mlx.mlx);
+	if (is_error == 0)
+		is_error = read_map_file(&par, *(argv + 1), mlx.mlx);
+	if ((is_error == 0) && (argc == 3))
+		is_error = screen(&par, &mlx);
+	if ((is_error == 0) && (argc == 2))
+		is_error = draw(&par, &mlx);
+	if (is_error != 0)
 		return (catch_error(is_error));
 	return (0);
 }
