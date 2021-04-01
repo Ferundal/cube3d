@@ -3,7 +3,6 @@
 #include "cub3d_parcer.h"
 #include "cub3d_read_par.h"
 
-
 ERROR_CODE	read_res(char *str, t_par *par)
 {
 	if (*str != 'R')
@@ -11,13 +10,13 @@ ERROR_CODE	read_res(char *str, t_par *par)
 	++str;
 	while (*str == ' ')
 		str++;
-	par->rez.width = cub3d_atoi(&str, par->rez.width);
-	if (par->rez.width < 1)
+	par->rez.w = cub3d_atoi(&str, par->rez.w);
+	if (par->rez.w < 1)
 		return (ERROR_WRONG_PAR_REZ);
 	while (*str == ' ')
 		str++;
-	par->rez.height = cub3d_atoi(&str, par->rez.height);
-	if (par->rez.height < 1)
+	par->rez.h = cub3d_atoi(&str, par->rez.h);
+	if (par->rez.h < 1)
 		return (ERROR_WRONG_PAR_REZ);
 	if (*str == '\0')
 		return (0);

@@ -7,24 +7,24 @@ void	choose_dir(t_draw_data *data, char start)
 {
 	if ((start == 'N') || (start == 'S'))
 	{
-		data->dirX = 0;
-		data->dirY = -1;
+		data->dir_x = 0;
+		data->dir_y = -1;
 		data->plane_x = 0.66;
-		data->planeY = 0;
+		data->plane_y = 0;
 	}
 	if ((start == 'W') || (start == 'E'))
 	{
-		data->dirX = -1;
-		data->dirY = 0;
+		data->dir_x = -1;
+		data->dir_y = 0;
 		data->plane_x = 0;
-		data->planeY = -0.66;
+		data->plane_y = -0.66;
 	}
 	if ((start == 'S') || (start == 'E'))
 	{
-		data->dirX = -data->dirX ;
-		data->dirY = -data->dirY;
+		data->dir_x = -data->dir_x ;
+		data->dir_y = -data->dir_y;
 		data->plane_x = -data->plane_x;
-		data->planeY = -data->planeY;
+		data->plane_y = -data->plane_y;
 	}
 }
 
@@ -42,10 +42,10 @@ ERROR_CODE	init_data(t_draw_data *data)
 	find_map_value("NSWE", data->par.map_i, &x, &y);
 	start = get_map_value(data->par.map_i, x, y);
 	choose_dir(data, start);
-	data->posX = (double) x + 0.5;
-	data->posY = (double) y + 0.5;
-	data->moveSpeed = 0.05;
-	data->rotSpeed = 0.05;
+	data->pos_x = (double) x + 0.5;
+	data->pos_y = (double) y + 0.5;
+	data->m_speed = 0.05;
+	data->r_speed = 0.05;
 	data->keys.r_right = 0;
 	data->keys.r_left = 0;
 	data->keys.m_right = 0;
@@ -68,12 +68,12 @@ ERROR_CODE	draw(t_par *par, t_mlx *mlx)
 {
 	ERROR_CODE	is_error;
 	t_draw_data	data;
-	double		z_buffer[par->rez.width];
+	double		z_buffer[par->rez.w];
 
 	data.mlx = *mlx;
 	data.par = *par;
-	data.mlx.win = mlx_new_window(data.mlx.mlx, data.par.rez.width, data.par.rez.height, "cub3d");
-	data.img.img = mlx_new_image(data.mlx.mlx, data.par.rez.width, data.par.rez.height);
+	data.mlx.win = mlx_new_window(data.mlx.mlx, data.par.rez.w, data.par.rez.h, "cub3d");
+	data.img.img = mlx_new_image(data.mlx.mlx, data.par.rez.w, data.par.rez.h);
 	data.img.buff = (char*)mlx_get_data_addr(data.img.img, &data.img.bits_per_pixel,
 									&data.img.line_length, &data.img.endian);
 	if((is_error = init_data(&data)) != 0)

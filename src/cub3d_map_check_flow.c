@@ -45,7 +45,7 @@ ERROR_CODE	ft_flow(t_map_i *map, int x, int y)
 
 	if ((get_map_value(*map, x, y)) == ' ')
 		return (ERROR_MAP_NOT_CLOSED);
-	if ((x == 0) || (x == map->width - 1) || (y == 0) || (y == map->height - 1))
+	if ((x == 0) || (x == map->w - 1) || (y == 0) || (y == map->h - 1))
 		return (ERROR_MAP_NOT_CLOSED);
 	*(*(map->map + y) + x) = '1';
 	status = 0;

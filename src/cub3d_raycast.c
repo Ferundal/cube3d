@@ -1,4 +1,3 @@
-
 #include "cub3d.h"
 #include "cub3d_draw.h"
 #include "cub3d_math.h"
@@ -6,36 +5,38 @@
 
 void	raycast_init_values(t_draw_data *data, t_raycast *temp)
 {
-	temp->cameraX = 2 * temp->x / (double)data->par.rez.width - 1;
-	temp->rayDirX = data->dirX + data->plane_x * temp->cameraX;
-	temp->rayDirY = data->dirY + data->planeY * temp->cameraX;
-	temp->mapX = (int)data->posX;
-	temp->mapY = (int)data->posY;
-	temp->deltaDistX = d_abs(1 / temp->rayDirX);
-	temp->deltaDistY = d_abs(1 / temp->rayDirY);
+	temp->camera_x = 2 * temp->x / (double)data->par.rez.w - 1;
+	temp->r_dir_x = data->dir_x + data->plane_x * temp->camera_x;
+	temp->r_dir_y = data->dir_y + data->plane_y * temp->camera_x;
+	temp->map_x = (int)data->pos_x;
+	temp->map_y = (int)data->pos_y;
+	temp->delta_dist_x = d_abs(1 / temp->r_dir_x);
+	temp->delta_dist_y = d_abs(1 / temp->r_dir_y);
 }
 
 void	raycast_find_steps(t_draw_data *data, t_raycast *temp)
 {
-	if(temp->rayDirX < 0)
+	if (temp->r_dir_x < 0)
 	{
-		temp->stepX = -1;
-		temp->sideDistX = (data->posX - temp->mapX) * temp->deltaDistX;
+		temp->step_x = -1;
+		temp->side_dist_x = (data->pos_x - temp->map_x) * temp->delta_dist_x;
 	}
 	else
 	{
-		temp->stepX = 1;
-		temp->sideDistX = (temp->mapX + 1.0 - data->posX) * temp->deltaDistX;
+		temp->step_x = 1;
+		temp->side_dist_x = \
+			(temp->map_x + 1.0 - data->pos_x) * temp->delta_dist_x;
 	}
-	if(temp->rayDirY < 0)
+	if (temp->r_dir_y < 0)
 	{
-		temp->stepY = -1;
-		temp->sideDistY = (data->posY - temp->mapY) * temp->deltaDistY;
+		temp->step_y = -1;
+		temp->side_dist_y = (data->pos_y - temp->map_y) * temp->delta_dist_y;
 	}
 	else
 	{
-		temp->stepY = 1;
-		temp->sideDistY = (temp->mapY + 1.0 - data->posY) * temp->deltaDistY;
+		temp->step_y = 1;
+		temp->side_dist_y = \
+			(temp->map_y + 1.0 - data->pos_y) * temp->delta_dist_y;
 	}
 }
 
@@ -46,49 +47,49 @@ void	raycast_find_hit(t_draw_data *data, t_raycast *temp)
 	hit = 0;
 	while (hit == 0)
 	{
-		if(temp->sideDistX < temp->sideDistY)
+		if (temp->side_dist_x < temp->side_dist_y)
 		{
-			temp->sideDistX += temp->deltaDistX;
-			temp->mapX += temp->stepX;
+			temp->side_dist_x += temp->delta_dist_x;
+			temp->map_x += temp->step_x;
 			temp->side = 0;
 		}
 		else
 		{
-			temp->sideDistY += temp->deltaDistY;
-			temp->mapY += temp->stepY;
+			temp->side_dist_y += temp->delta_dist_y;
+			temp->map_y += temp->step_y;
 			temp->side = 1;
 		}
-		if(get_map_value(data->par.map_i, temp->mapX, temp->mapY) == '1')
+		if (get_map_value(data->par.map_i, temp->map_x, temp->map_y) == '1')
 			hit = 1;
 	}
 }
 
-void	raycast_draw_line(t_draw_data *data, t_raycast *temp)
+void	raycast_draw_line(t_draw_data *data, t_raycast *t)
 {
-	double		perpWallDist;
+	double		perp_w_d;
 	t_line		line;
 	double		wallX;
 
-	if(temp->side == 0)
-		perpWallDist = (temp->mapX - data->posX + (1 - temp->stepX) / 2) / temp->rayDirX;
+	if (t->side == 0)
+		perp_w_d = (t->map_x - data->pos_x + (1 - t->step_x) / 2) / t->r_dir_x;
 	else
-		perpWallDist = (temp->mapY - data->posY + (1 - temp->stepY) / 2) / temp->rayDirY;
-	line.lineHeight = (int)(data->par.rez.height / perpWallDist);
-	*(data->z_buff + temp->x) = perpWallDist;
-	line.drawStart = -line.lineHeight / 2 + data->par.rez.height / 2;
-	if(line.drawStart < 0)
-		line.drawStart = 0;
-	line.drawEnd = line.lineHeight / 2 + data->par.rez.height / 2;
-	if(line.drawEnd > data->par.rez.height)
-		line.drawEnd = data->par.rez.height;
-	if (temp->side == 0)
-		wallX = data->posY + perpWallDist * temp->rayDirY;
+		perp_w_d = (t->map_y - data->pos_y + (1 - t->step_y) / 2) / t->r_dir_y;
+	line.line_height = (int)(data->par.rez.h / perp_w_d);
+	*(data->z_buff + t->x) = perp_w_d;
+	line.draw_start = -line.line_height / 2 + data->par.rez.h / 2;
+	if (line.draw_start < 0)
+		line.draw_start = 0;
+	line.draw_end = line.line_height / 2 + data->par.rez.h / 2;
+	if (line.draw_end > data->par.rez.h)
+		line.draw_end = data->par.rez.h;
+	if (t->side == 0)
+		wallX = data->pos_y + perp_w_d * t->r_dir_y;
 	else
-		wallX = data->posX + perpWallDist * temp->rayDirX;
+		wallX = data->pos_x + perp_w_d * t->r_dir_x;
 	wallX -= (double)((int)wallX);
-	line.text = text_switch(data, temp);
-	line.texX = (int)(wallX * (double)line.text.width);
-	ft_mlx_put_tex_line(data, &line, temp->x);
+	line.text = text_switch(data, t);
+	line.tex_x = (int)(wallX * (double)line.text.w);
+	ft_mlx_put_tex_line(data, &line, t->x);
 }
 
 void	raycast(t_draw_data *data)
@@ -96,7 +97,7 @@ void	raycast(t_draw_data *data)
 	t_raycast	temp;
 
 	temp.x = 0;
-	while(temp.x < data->par.rez.width)
+	while (temp.x < data->par.rez.w)
 	{
 		raycast_init_values(data, &temp);
 		raycast_find_steps(data, &temp);
@@ -105,5 +106,3 @@ void	raycast(t_draw_data *data)
 		++temp.x;
 	}
 }
-
-

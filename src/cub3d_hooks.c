@@ -55,9 +55,8 @@ int		key_unpress(int keycode, t_draw_data *data)
 	return (0);
 }
 
-int 	exit_pressed(int keycode, t_draw_data *data)
+int 	exit_pressed(t_draw_data *data)
 {
-	if (keycode == (keycode + 1) - 1)
-		cub3d_exit(data);
+	cub3d_exit(data);
 	return (0);
 }

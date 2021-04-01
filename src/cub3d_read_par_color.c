@@ -5,7 +5,8 @@
 
 ERROR_CODE 	read_color (char **str, t_color *color)
 {
-	if ((color->r = cub3d_atoi_l(str, 256)) < 0)
+	color->r = cub3d_atoi_l(str, 256);
+	if (color->r < 0)
 		return (1);
 	while (**str == ' ')
 		*str += 1;
@@ -14,7 +15,8 @@ ERROR_CODE 	read_color (char **str, t_color *color)
 	*str += 1;
 	while (**str == ' ')
 		*str += 1;
-	if ((color->g = cub3d_atoi_l(str, 256)) < 0)
+	color->g = cub3d_atoi_l(str, 256);
+	if (color->g < 0)
 		return (1);
 	while (**str == ' ')
 		*str += 1;
@@ -23,14 +25,15 @@ ERROR_CODE 	read_color (char **str, t_color *color)
 	*str += 1;
 	while (**str == ' ')
 		*str += 1;
-	if ((color->b = cub3d_atoi_l(str, 256)) < 0)
+	color->b = cub3d_atoi_l(str, 256);
+	if (color->b < 0)
 		return (1);
 	return (0);
 }
 
 ERROR_CODE	read_color_floor (char *str, t_par *par)
 {
-	t_color t_color;
+	t_color	t_color;
 
 	if (*str != 'F')
 		return (-1);
@@ -45,7 +48,7 @@ ERROR_CODE	read_color_floor (char *str, t_par *par)
 
 ERROR_CODE	read_color_ceil (char *str, t_par *par)
 {
-	t_color t_color;
+	t_color	t_color;
 
 	if (*str != 'C')
 		return (-1);
@@ -60,14 +63,20 @@ ERROR_CODE	read_color_ceil (char *str, t_par *par)
 
 ERROR_CODE	read_par_colors (char *str, t_par *par, FLAG_STORE *p)
 {
-    ERROR_CODE	read_status;
+	ERROR_CODE	read_status;
 
-    read_status = -1;
-    if (is_f(p, FLAG_FLOOR) == 0)
-        if ((read_status = read_color_floor(str, par)) == 0)
-            set_f(p, FLAG_FLOOR, 1);
-    if ((read_status < 0) && (is_f(p, FLAG_CEIL) == 0))
-        if ((read_status = read_color_ceil(str, par)) == 0)
-            set_f(p, FLAG_CEIL, 1);
-    return (read_status);
+	read_status = -1;
+	if (is_f(p, FLAG_FLOOR) == 0)
+	{
+		read_status = read_color_floor(str, par);
+		if (read_status == 0)
+			set_f(p, FLAG_FLOOR, 1);
+	}
+	if ((read_status < 0) && (is_f(p, FLAG_CEIL) == 0))
+	{
+		read_status = read_color_ceil(str, par);
+		if (read_status == 0)
+			set_f(p, FLAG_CEIL, 1);
+	}
+	return (read_status);
 }

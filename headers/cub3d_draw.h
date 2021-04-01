@@ -5,45 +5,45 @@
 typedef struct	s_raycast
 {
 	int			x;
-	double		cameraX;
-	double		rayDirX;
-	double		rayDirY;
-	int			mapX;
-	int			mapY;
-	double		sideDistX;
-	double		sideDistY;
-	double		deltaDistX;
-	double		deltaDistY;
-	int			stepX;
-	int			stepY;
+	double		camera_x;
+	double		r_dir_x;
+	double		r_dir_y;
+	int			map_x;
+	int			map_y;
+	double		side_dist_x;
+	double		side_dist_y;
+	double		delta_dist_x;
+	double		delta_dist_y;
+	int			step_x;
+	int			step_y;
 	int			side;
 }				t_raycast;
 
 typedef struct	s_line
 {
 	t_text		text;
-	int			texX;
-	int			lineHeight;
-	int			drawStart;
-	int			drawEnd;
+	int			tex_x;
+	int			line_height;
+	int			draw_start;
+	int			draw_end;
 }				t_line;
 
 typedef struct	s_sprites
 {
-	double		spriteX;
-	double		spriteY;
-	double		invDet;
-	double		transformX;
-	double		transformY;
-	int			spriteScreenX;
-	int			spriteHeight;
-	int			drawStartY;
-	int			drawEndY;
-	int			spriteWidth;
-	int			drawStartX;
-	int			drawEndX;
-	int			texX;
-	int			texY;
+	double		sprite_x;
+	double		sprite_y;
+	double		inv_det;
+	double		transform_x;
+	double		transform_y;
+	int			sprite_screen_x;
+	int			sprite_height;
+	int			draw_start_y;
+	int			draw_end_y;
+	int			sprite_width;
+	int			draw_start_x;
+	int			draw_end_x;
+	int			tex_x;
+	int			tex_y;
 }				t_sprites;
 
 typedef struct	s_bmp_header
@@ -76,7 +76,7 @@ t_text			text_switch(t_draw_data *data, t_raycast *temp);
 void			ft_mlx_put_tex_line(t_draw_data *data, t_line *line, int x_ray);
 int				key_press(int keycode, t_draw_data *data);
 int				key_unpress(int keycode, t_draw_data *data);
-int 			exit_pressed(int keycode, t_draw_data *data);
+int 			exit_pressed(t_draw_data *data);
 
 
 int 			move_calc(t_draw_data *data);

@@ -6,19 +6,19 @@
 /*   By: cjettie <cjettie@21-school.ru>             +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/20 14:00:56 by cjettie           #+#    #+#             */
-/*   Updated: 2021/01/08 19:27:15 by cjettie          ###   ########.fr       */
+/*   Updated: 2021/04/01 15:54:25 by cjettie          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char			*strrebuffl(char *str, size_t *str_l, \
+static char	*strrebuffl(char *str, size_t *str_l, \
 		const char *buff, size_t len)
 {
 	char			*result;
 	size_t			counter;
 
-	result = (char*)malloc(sizeof(char) * (*str_l + len + 1));
+	result = (char *)malloc(sizeof(char) * (*str_l + len + 1));
 	if (result != NULL)
 	{
 		counter = 0;
@@ -41,7 +41,7 @@ static char			*strrebuffl(char *str, size_t *str_l, \
 	return (result);
 }
 
-static int			add_line_part(t_fd_i *fd_i_p, size_t *str_l, \
+static int	add_line_part(t_fd_i *fd_i_p, size_t *str_l, \
 		char **line, char *is_eol_p)
 {
 	int				i;
@@ -63,7 +63,7 @@ static int			add_line_part(t_fd_i *fd_i_p, size_t *str_l, \
 	return (0);
 }
 
-static int			read_line(t_fd_i *fd_i_p, char **line, char *is_eol)
+static int	read_line(t_fd_i *fd_i_p, char **line, char *is_eol)
 {
 	size_t			str_l;
 
@@ -87,7 +87,7 @@ static int			read_line(t_fd_i *fd_i_p, char **line, char *is_eol)
 	return (0);
 }
 
-int					get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line)
 {
 	static t_fd_i	**fd_i_pp = NULL;
 	t_fd_i			*fd_i_p;

@@ -12,14 +12,14 @@
 
 typedef struct	s_rez
 {
-	int			height;
-	int			width;
+	int			h;
+	int			w;
 }				t_rez;
 
 typedef struct	s_text
 {
-	int			height;
-	int			width;
+	int			h;
+	int			w;
 	void		*img;
 	char		*buff;
 	int			bits_per_pixel;
@@ -37,8 +37,8 @@ typedef struct	s_color
 
 typedef struct	s_map_i
 {
-	int			height;
-	int			width;
+	int			h;
+	int			w;
 	char		**map;
 }				t_map_i;
 
@@ -101,20 +101,20 @@ typedef struct	s_draw_data
 	t_keys		keys;
 	t_spr_arr	spr_arr;
 	double		*z_buff;
-	double		posX;
-	double		posY;
-	double		dirX;
-	double		dirY;
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
 	double		plane_x;
-	double		planeY;
-	double		moveSpeed;
-	double		rotSpeed;
+	double		plane_y;
+	double		m_speed;
+	double		r_speed;
 }				t_draw_data;
 
-int			catch_error(int err_code);
-int			read_map_file(t_par *par, char *file, void *mlx);
+ERROR_CODE	catch_error(int err_code);
+ERROR_CODE	read_map_file(t_par *par, char *file, void *mlx);
 ERROR_CODE	screen(t_par *par, t_mlx *mlx);
-int			draw(t_par *par, t_mlx *mlx);
+ERROR_CODE	draw(t_par *par, t_mlx *mlx);
 ERROR_CODE 	cub3d_exit(t_draw_data *date_);
 
 #endif

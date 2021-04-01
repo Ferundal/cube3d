@@ -7,7 +7,7 @@ ERROR_CODE	read_map_file(t_par *par, char *file, void *mlx)
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (ERROR_CANT_OPEN_PAR_FILE);
+		return (ERROR_CANT_OPEN_CUB_FILE);
 	is_error = read_par(fd, par, mlx);
 	if (is_error == 0)
 		is_error = read_map(fd, par);

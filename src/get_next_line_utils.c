@@ -16,10 +16,10 @@
 
 static int	new_fd_info(int fd, t_fd_i **fd_i_pp)
 {
-	*fd_i_pp = (t_fd_i*)malloc(sizeof(t_fd_i));
+	*fd_i_pp = (t_fd_i *)malloc(sizeof(t_fd_i));
 	if (*fd_i_pp == NULL)
 		return (1);
-	(*fd_i_pp)->buff_p = (char*)malloc(sizeof(char) * BUFFER_SIZE);
+	(*fd_i_pp)->buff_p = (char *)malloc(sizeof(char) * BUFFER_SIZE);
 	if ((*fd_i_pp)->buff_p == NULL)
 	{
 		free(*fd_i_pp);
@@ -39,7 +39,7 @@ static int	new_fd_info(int fd, t_fd_i **fd_i_pp)
 	return (0);
 }
 
-int			del_fd_info(int fd, t_fd_i ***fd_i_ppp)
+int	del_fd_info(int fd, t_fd_i ***fd_i_ppp)
 {
 	t_fd_i	**temp_fd_i_pp;
 	char	fd_found_flag;
@@ -70,7 +70,7 @@ int			del_fd_info(int fd, t_fd_i ***fd_i_ppp)
 
 static void	cpy_fd_info(t_fd_i ***fd_i_ppp, t_fd_i ***new_fd_i_ppp)
 {
-	t_fd_i **temp_fd_i_pp;
+	t_fd_i	**temp_fd_i_pp;
 
 	temp_fd_i_pp = *fd_i_ppp;
 	while (*temp_fd_i_pp != NULL)
@@ -83,7 +83,7 @@ static void	cpy_fd_info(t_fd_i ***fd_i_ppp, t_fd_i ***new_fd_i_ppp)
 
 static int	add_fd_info(int fd, t_fd_i ***fd_i_ppp, size_t new_size)
 {
-	t_fd_i **new_fd_i_pp;
+	t_fd_i	**new_fd_i_pp;
 
 	new_fd_i_pp = (t_fd_i **)malloc(sizeof(t_fd_i *) * (new_size + 1));
 	if (new_fd_i_pp == NULL)
@@ -104,7 +104,7 @@ static int	add_fd_info(int fd, t_fd_i ***fd_i_ppp, size_t new_size)
 	return (0);
 }
 
-int			get_fd_info(int fd, t_fd_i ***fd_i_ppp, t_fd_i **fd_i_pp)
+int	get_fd_info(int fd, t_fd_i ***fd_i_ppp, t_fd_i **fd_i_pp)
 {
 	t_fd_i	**t_fd_i_pp;
 

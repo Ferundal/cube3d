@@ -17,7 +17,7 @@ void	sort_sprites(t_draw_data *data)
 		in_counter = ex_counter + 1;
 		while (in_counter < data->spr_arr.size)
 		{
-			if (max->dist < (data->spr_arr.arr + in_counter)->dist )
+			if (max->dist < (data->spr_arr.arr + in_counter)->dist)
 			{
 				temp = *max;
 				*max = *(data->spr_arr.arr + in_counter);
@@ -32,14 +32,14 @@ void	sort_sprites(t_draw_data *data)
 void	set_dist(t_draw_data *data)
 {
 	int			counter;
-	t_sprite 	*temp;
+	t_sprite	*temp;
 
 	temp = data->spr_arr.arr;
 	counter = 0;
 	while (counter < data->spr_arr.size)
 	{
-		temp->dist = ((data->posX - temp->x) * (data->posX - temp->x) +
-				(data->posY - temp->y) * (data->posY - temp->y));
+		temp->dist = ((data->pos_x - temp->x) * (data->pos_x - temp->x) + \
+				(data->pos_y - temp->y) * (data->pos_y - temp->y));
 		++temp;
 		++counter;
 	}
@@ -47,30 +47,35 @@ void	set_dist(t_draw_data *data)
 
 void	find_sprite_pos(t_draw_data *data, t_sprites *temp, int counter)
 {
-	temp->spriteX = (data->spr_arr.arr + counter)->x - data->posX;
-	temp->spriteY = (data->spr_arr.arr + counter)->y - data->posY;
-	temp->invDet = 1.0 / (data->plane_x * data->dirY - data->dirX * data->planeY);
-	temp->transformX = temp->invDet * (data->dirY * temp->spriteX - data->dirX * temp->spriteY);
-	temp->transformY = temp->invDet * (-data->planeY * temp->spriteX + data->plane_x * temp->spriteY);
-	temp->spriteScreenX = (int)((data->par.rez.width / 2) * (1 + temp->transformX / temp->transformY));
+	temp->sprite_x = (data->spr_arr.arr + counter)->x - data->pos_x;
+	temp->sprite_y = (data->spr_arr.arr + counter)->y - data->pos_y;
+	temp->inv_det = 1.0 / \
+		(data->plane_x * data->dir_y - data->dir_x * data->plane_y);
+	temp->transform_x = temp->inv_det * \
+		(data->dir_y * temp->sprite_x - data->dir_x * temp->sprite_y);
+	temp->transform_y = temp->inv_det * \
+		(-data->plane_y * temp->sprite_x + data->plane_x * temp->sprite_y);
+	temp->sprite_screen_x = (int)((data->par.rez.w / 2) \
+	* (1 + temp->transform_x / temp->transform_y));
 }
 
 void	find_sprite_size(t_draw_data *data, t_sprites *temp)
 {
-	temp->spriteHeight = abs((int) (data->par.rez.height / (temp->transformY)));
-	temp->drawStartY = -temp->spriteHeight / 2 + data->par.rez.height / 2;
-	if(temp->drawStartY < 0)
-		temp->drawStartY = 0;
-	temp->drawEndY = temp->spriteHeight / 2 + data->par.rez.height / 2;
-	if(temp->drawEndY >= data->par.rez.height)
-		temp->drawEndY = data->par.rez.height - 1;
-	temp->spriteWidth = abs( (int) (data->par.rez.height / (temp->transformY)));
-	temp->drawStartX = -temp->spriteWidth / 2 + temp->spriteScreenX;
-	if(temp->drawStartX < 0)
-		temp->drawStartX = 0;
-	temp->drawEndX = temp->spriteWidth / 2 + temp->spriteScreenX;
-	if(temp->drawEndX > data->par.rez.width)
-		temp->drawEndX = data->par.rez.width;
+	temp->sprite_height = \
+		abs((int)(data->par.rez.h / (temp->transform_y)));
+	temp->draw_start_y = -temp->sprite_height / 2 + data->par.rez.h / 2;
+	if (temp->draw_start_y < 0)
+		temp->draw_start_y = 0;
+	temp->draw_end_y = temp->sprite_height / 2 + data->par.rez.h / 2;
+	if (temp->draw_end_y >= data->par.rez.h)
+		temp->draw_end_y = data->par.rez.h - 1;
+	temp->sprite_width = abs((int)(data->par.rez.h / (temp->transform_y)));
+	temp->draw_start_x = -temp->sprite_width / 2 + temp->sprite_screen_x;
+	if (temp->draw_start_x < 0)
+		temp->draw_start_x = 0;
+	temp->draw_end_x = temp->sprite_width / 2 + temp->sprite_screen_x;
+	if (temp->draw_end_x > data->par.rez.w)
+		temp->draw_end_x = data->par.rez.w;
 }
 
 void	draw_sprites(t_draw_data *data)

@@ -1,5 +1,6 @@
 #include "cub3d.h"
 #include "cub3d_errors.h"
+#include <stdlib.h>
 
 void 		put_error_msg_1(ERROR_CODE err_code, int fd)
 {
@@ -47,11 +48,17 @@ void 		put_error_msg_2(ERROR_CODE err_code, int fd)
 		ft_putstr_fd("MLX do not start", fd);
 	if (err_code == ERROR_WRONG_FIRST_ARG)
 		ft_putstr_fd("Wrong map file name", fd);
+	if (err_code == ERROR_CANT_OPEN_CUB_FILE)
+		ft_putstr_fd("Can't open file", fd);
+	if (err_code == ERROR_CANT_CREATE_SCREEN_FILE)
+		ft_putstr_fd("Can't create new file for screen", fd);
 }
 
 ERROR_CODE	catch_error(ERROR_CODE err_code)
 {
 	put_error_msg_1(err_code, 1);
 	put_error_msg_2(err_code, 1);
+	if (err_code != 0)
+		exit(0);
 	return (err_code);
 }

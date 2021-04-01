@@ -20,7 +20,7 @@ void	set_f(FLAG_STORE *f_store, FLAG_STORE flag, int value)
 		*f_store = *f_store | flag;
 }
 
-int		is_f(FLAG_STORE *f_store, FLAG_STORE flag)
+int	is_f(FLAG_STORE *f_store, FLAG_STORE flag)
 {
 	if ((*f_store & flag) == 0)
 		return (0);

@@ -17,7 +17,8 @@ ERROR_CODE 	map_lc_check(char *str, FLAG_STORE *flags)
 				return (ERROR_TWO_PLAYERS_ON_MAP);
 		}
 		else
-			if (!((*str == '1') || (*str == ' ') || (*str == '0') || (*str == '2')))
+			if (!((*str == '1') || (*str == ' ') \
+				|| (*str == '0') || (*str == '2')))
 				return (ERROR_MAP_ERROR);
 		++str;
 	}
@@ -26,14 +27,15 @@ ERROR_CODE 	map_lc_check(char *str, FLAG_STORE *flags)
 
 ERROR_CODE	map_clone(t_map_i *src, t_map_i *dst)
 {
-	int 		counter;
+	int			counter;
 
-	dst->height = src->height;
-	dst->width = src->width;
-	if((dst->map = (char**)malloc(sizeof(char*) * src->height)) == NULL)
+	dst->h = src->h;
+	dst->w = src->w;
+	dst->map = (char **)malloc(sizeof(char *) * src->h);
+	if (dst->map == NULL)
 		return (ERROR_CAN_NOT_ALLOCATE_MEMORY);
 	counter = 0;
-	while (counter < dst->height)
+	while (counter < dst->h)
 	{
 		*(dst->map + counter) = ft_strdup(*(src->map + counter));
 		if (*(dst->map + counter) == NULL)
@@ -54,15 +56,15 @@ ERROR_CODE	map_clone(t_map_i *src, t_map_i *dst)
 ERROR_CODE 	map_check(t_par *par)
 {
 	ERROR_CODE	status;
-	t_map_i 	temp_map;
-	int 		counter;
+	t_map_i		temp_map;
+	int			counter;
 
 	status = map_clone(&(par->map_i), &temp_map);
 	if (status != 0)
 		return (status);
 	status = map_check_flow(&temp_map);
 	counter = 0;
-	while (counter < temp_map.height)
+	while (counter < temp_map.h)
 	{
 		free(*(temp_map.map + counter));
 		++counter;
