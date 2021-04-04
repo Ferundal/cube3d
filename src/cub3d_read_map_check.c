@@ -1,18 +1,17 @@
 #include "cub3d.h"
 #include "cub3d_read_map.h"
-#include "flag_utils.h"
 #include "cub3d_errors.h"
 #include "cub3d_map.h"
 #include <stdlib.h>
 
-ERROR_CODE 	map_lc_check(char *str, FLAG_STORE *flags)
+ERROR_CODE 	map_lc_check(char *str, int *p_flag)
 {
 	while (*str != '\0')
 	{
 		if ((*str == 'N') || (*str == 'S') || (*str == 'W') || (*str == 'E'))
 		{
-			if (is_f(flags, FLAG_PLAYER) == 0)
-				set_f(flags, FLAG_PLAYER, 1);
+			if (*p_flag == 0)
+				*p_flag = 1;
 			else
 				return (ERROR_TWO_PLAYERS_ON_MAP);
 		}

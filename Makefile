@@ -26,7 +26,6 @@ SRCS			= src/cub3d.c \
 				src/cub3d_errors.c \
 				src/cub3d_parcer.c \
 				src/cub3d_atoi.c \
-				src/flag_utils.c \
 				src/get_next_line.c \
 				src/get_next_line_utils.c \
 				src/cub3d_read_par.c \

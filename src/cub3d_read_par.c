@@ -1,54 +1,53 @@
 #include "cub3d_parcer.h"
-#include "cub3d_read_par.h"
 #include "get_next_line.h"
 
-ERROR_CODE	text_switch_1(char *str, t_par *par, FLAG_STORE *p, void *mlx)
+ERROR_CODE	text_switch_1(char *str, t_par *par, t_flags *p, void *mlx)
 {
 	ERROR_CODE	read_status;
 
 	read_status = -1;
-	if (is_f(p, FLAG_TEX_NO) == 0)
+	if (p->text_no == 0)
 	{
 		read_status = read_par_no(str, par, mlx);
 		if (read_status == 0)
-			set_f(p, FLAG_TEX_NO, 1);
+			p->text_no = 1;
 	}
-	if ((read_status < 0) && (is_f(p, FLAG_TEX_SO) == 0))
+	if ((read_status < 0) && (p->text_so == 0))
 	{
 		read_status = read_par_so(str, par, mlx);
 		if (read_status == 0)
-			set_f(p, FLAG_TEX_SO, 1);
+			p->text_so = 1;
 	}
-	if ((read_status < 0) && (is_f(p, FLAG_TEX_WE) == 0))
+	if ((read_status < 0) && (p->text_we == 0))
 	{
 		read_status = read_par_we(str, par, mlx);
 		if (read_status == 0)
-			set_f(p, FLAG_TEX_WE, 1);
+			p->text_we = 1;
 	}
 	return (read_status);
 }
 
-ERROR_CODE	text_switch_2(char *str, t_par *par, FLAG_STORE *p, void *mlx)
+ERROR_CODE	text_switch_2(char *str, t_par *par, t_flags *p, void *mlx)
 {
 	ERROR_CODE	read_status;
 
 	read_status = -1;
-	if (is_f(p, FLAG_TEX_EA) == 0)
+	if (p->text_ea == 0)
 	{
 		read_status = read_par_ea(str, par, mlx);
 		if (read_status == 0)
-			set_f(p, FLAG_TEX_EA, 1);
+			p->text_ea = 1;
 	}
-	if ((read_status < 0) && (is_f(p, FLAG_TEX_SPR) == 0))
+	if ((read_status < 0) && (p->text_spr == 0))
 	{
 		read_status = read_par_spr(str, par, mlx);
 		if (read_status == 0)
-			set_f(p, FLAG_TEX_SPR, 1);
+			p->text_spr = 1;
 	}
 	return (read_status);
 }
 
-ERROR_CODE	read_par_texturies(char *str, t_par *par, FLAG_STORE *p, void *mlx)
+ERROR_CODE	read_par_texturies(char *str, t_par *par, t_flags *p, void *mlx)
 {
 	ERROR_CODE	read_status;
 
@@ -58,31 +57,28 @@ ERROR_CODE	read_par_texturies(char *str, t_par *par, FLAG_STORE *p, void *mlx)
 	return (read_status);
 }
 
-FLAG_STORE	all_flags(void)
+void	flags_init(t_flags *flags)
 {
-	FLAG_STORE	result;
-
-	result = 0;
-	set_f(&result, FLAG_REZ, 1);
-	set_f(&result, FLAG_TEX_NO, 1);
-	set_f(&result, FLAG_TEX_SO, 1);
-	set_f(&result, FLAG_TEX_WE, 1);
-	set_f(&result, FLAG_TEX_EA, 1);
-	set_f(&result, FLAG_TEX_SPR, 1);
-	set_f(&result, FLAG_FLOOR, 1);
-	set_f(&result, FLAG_CEIL, 1);
-	return (result);
+	flags->rez = 0;
+	flags->text_no = 0;
+	flags->text_so = 0;
+	flags->text_we = 0;
+	flags->text_ea = 0;
+	flags->text_spr = 0;
+	flags->ceil = 0;
+	flags->floor = 0;
 }
 
 ERROR_CODE	read_par(int fd, t_par *par, void *mlx)
 {
 	char		*curr_line;
-	FLAG_STORE	p;
+	t_flags		p;
 	ERROR_CODE	read_status;
 	int			line_status;
 
-	p = 0;
-	while (p != all_flags())
+	flags_init(&p);
+	while (p.rez == 0 || p.text_no == 0 || p.text_so == 0 || p.text_ea == 0 \
+			|| p.text_we == 0 || p.text_spr == 0 || p.ceil == 0 || p.floor == 0)
 	{
 		line_status = get_next_line(fd, &curr_line);
 		read_status = read_par_res(curr_line, par, &p);

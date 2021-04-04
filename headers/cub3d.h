@@ -10,6 +10,18 @@
 # define SCREEN_FLAG "--save"
 # define FILE_F ".cub"
 
+typedef struct s_flags
+{
+	int			rez;
+	int			text_no;
+	int			text_so;
+	int			text_we;
+	int			text_ea;
+	int			text_spr;
+	int			ceil;
+	int			floor;
+}				t_flags;
+
 typedef struct s_rez
 {
 	int			h;

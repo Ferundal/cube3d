@@ -1,7 +1,6 @@
 #include "cub3d.h"
 #include "cub3d_atoi.h"
 #include "cub3d_parcer.h"
-#include "cub3d_read_par.h"
 
 ERROR_CODE	read_res(char *str, t_par *par)
 {
@@ -23,16 +22,16 @@ ERROR_CODE	read_res(char *str, t_par *par)
 	return (ERROR_WRONG_PAR_REZ);
 }
 
-ERROR_CODE	read_par_res(char *str, t_par *par, FLAG_STORE *p)
+ERROR_CODE	read_par_res(char *str, t_par *par, t_flags *p)
 {
 	ERROR_CODE	read_status;
 
 	read_status = -1;
-	if (is_f(p, FLAG_REZ) == 0)
+	if (p->rez == 0)
 	{
 		read_status = read_res(str, par);
 		if (read_status == 0)
-			set_f(p, FLAG_REZ, 1);
+			p->rez = 1;
 	}
 	return (read_status);
 }

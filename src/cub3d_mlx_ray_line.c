@@ -18,8 +18,8 @@ void	ft_mlx_put_text(int *counter, \
 		while (*counter < line->draw_end)
 		{
 			texY = (int)text_pos;
-			if (texY == line->text.h)
-				texY -= 1;
+			if (texY >= line->text.h)
+				texY = line->text.h - 1;
 			text_pos += step;
 			**(int **)start = *(int *)(line->text.buff + \
 				line->tex_x * (line->text.bits_per_pixel / 8) + \

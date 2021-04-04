@@ -36,7 +36,7 @@ int	add_map_line(char *str, t_par *par)
 	return (0);
 }
 
-ERROR_CODE	read_lines(int fd, t_par *par, FLAG_STORE *flags)
+ERROR_CODE	read_lines(int fd, t_par *par, int *flags)
 {
 	int			r_st;
 	char		*str;
@@ -66,13 +66,13 @@ ERROR_CODE	read_lines(int fd, t_par *par, FLAG_STORE *flags)
 ERROR_CODE	read_map(int fd, t_par *par)
 {
 	ERROR_CODE	status;
-	FLAG_STORE	flags;
+	int			p_flag;
 
-	flags = 0;
-	status = read_lines(fd, par, &flags);
+	p_flag = 0;
+	status = read_lines(fd, par, &p_flag);
 	if (status > 0)
 		return (status);
-	if (is_f(&flags, FLAG_PLAYER) == 0)
+	if (p_flag == 0)
 		return (ERROR_NO_PLAYER_ON_MAP);
 	return (map_check(par));
 }

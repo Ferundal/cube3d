@@ -1,7 +1,6 @@
 #include "cub3d.h"
 #include "cub3d_atoi.h"
 #include "cub3d_parcer.h"
-#include "cub3d_read_par.h"
 
 ERROR_CODE 	read_color (char **str, t_color *color)
 {
@@ -61,22 +60,22 @@ ERROR_CODE	read_color_ceil (char *str, t_par *par)
 	return (0);
 }
 
-ERROR_CODE	read_par_colors (char *str, t_par *par, FLAG_STORE *p)
+ERROR_CODE	read_par_colors (char *str, t_par *par, t_flags *p)
 {
 	ERROR_CODE	read_status;
 
 	read_status = -1;
-	if (is_f(p, FLAG_FLOOR) == 0)
+	if (p->floor == 0)
 	{
 		read_status = read_color_floor(str, par);
 		if (read_status == 0)
-			set_f(p, FLAG_FLOOR, 1);
+			p->floor = 1;
 	}
-	if ((read_status < 0) && (is_f(p, FLAG_CEIL) == 0))
+	if ((read_status < 0) && (p->ceil == 0))
 	{
 		read_status = read_color_ceil(str, par);
 		if (read_status == 0)
-			set_f(p, FLAG_CEIL, 1);
+			p->ceil = 1;
 	}
 	return (read_status);
 }
