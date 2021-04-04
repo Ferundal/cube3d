@@ -4,7 +4,7 @@
 #include "cub3d_map.h"
 #include <stdlib.h>
 
-void	choose_dir(t_draw_data *data, char start)
+static void	choose_dir(t_draw_data *data, char start)
 {
 	if ((start == 'N') || (start == 'S'))
 	{
@@ -54,6 +54,7 @@ ERROR_CODE	init_data(t_draw_data *data)
 	data->keys.m_left = 0;
 	data->keys.m_forw = 0;
 	data->keys.m_back = 0;
+	data->z_buff = NULL;
 	return (0);
 }
 
@@ -79,6 +80,8 @@ ERROR_CODE	draw(t_par *par, t_mlx *mlx)
 	data.mlx.win = \
 		mlx_new_window(data.mlx.mlx, data.par.rez.w, data.par.rez.h, "cub3d");
 	data.img.img = mlx_new_image(data.mlx.mlx, data.par.rez.w, data.par.rez.h);
+	if (data.img.img == NULL)
+		return (ERROR_CAN_NOT_ALLOCATE_MEMORY);
 	data.img.buff = (char *)mlx_get_data_addr(data.img.img, \
 		&data.img.bits_per_pixel, &data.img.line_length, &data.img.endian);
 	data.z_buff = malloc(sizeof(double) * par->rez.w);

@@ -23,13 +23,15 @@ ERROR_CODE	cub3d_exit(t_draw_data *data, ERROR_CODE is_error)
 	mlx_destroy_image(data->mlx.mlx, data->par.tex_we.img);
 	mlx_destroy_image(data->mlx.mlx, data->par.tex_ea.img);
 	mlx_destroy_image(data->mlx.mlx, data->par.tex_spr.img);
-	catch_error(is_error);
+	catch_error(is_error, &data->par);
+	if (data->z_buff != NULL)
+		free(data->z_buff);
 	if (data->spr_arr.arr != NULL)
 		free(data->spr_arr.arr);
 	exit (0);
 }
 
-ERROR_CODE	arg_check(int argc, char **argv)
+static ERROR_CODE	arg_check(int argc, char **argv)
 {
 	int		len;
 	int		f_len;
@@ -52,7 +54,7 @@ ERROR_CODE	arg_check(int argc, char **argv)
 	return (0);
 }
 
-void	init_par(t_par *par, void *mlx)
+static void	init_par(t_par *par, void *mlx)
 {
 	par->tex_no.img = NULL;
 	par->tex_so.img = NULL;
@@ -63,6 +65,8 @@ void	init_par(t_par *par, void *mlx)
 	par->ceil = 0;
 	mlx_get_screen_size(mlx, &(par->rez.w), &(par->rez.h));
 	par->map_i.map = NULL;
+	par->map_i.h = 0;
+	par->map_i.w = 0;
 }
 
 int	main(int argc, char **argv)
@@ -73,7 +77,7 @@ int	main(int argc, char **argv)
 
 	mlx.mlx = mlx_init();
 	if (mlx.mlx == NULL)
-		return (catch_error(ERROR_MLX_DO_NOT_START));
+		return (catch_error(ERROR_MLX_DO_NOT_START, &par));
 	is_error = arg_check(argc, argv);
 	if (is_error == 0)
 		init_par(&par, mlx.mlx);
@@ -84,6 +88,6 @@ int	main(int argc, char **argv)
 	if ((is_error == 0) && (argc == 2))
 		is_error = draw(&par, &mlx);
 	if (is_error != 0)
-		return (catch_error(is_error));
+		return (catch_error(is_error, &par));
 	return (0);
 }

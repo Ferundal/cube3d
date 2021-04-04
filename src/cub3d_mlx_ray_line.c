@@ -1,7 +1,7 @@
 #include "cub3d.h"
 #include "cub3d_draw.h"
 
-void	ft_mlx_put_text(int *counter, \
+static void	ft_mlx_put_text(int *counter, \
 						t_draw_data *data, \
 						t_line *line, \
 						char **start)
@@ -30,7 +30,7 @@ void	ft_mlx_put_text(int *counter, \
 	}
 }
 
-void	ft_mlx_put_ceil(int *counter, \
+static void	ft_mlx_put_ceil(int *counter, \
 						t_draw_data *data, \
 						t_line *line, \
 						char **start)
@@ -43,7 +43,7 @@ void	ft_mlx_put_ceil(int *counter, \
 	}
 }
 
-void	ft_mlx_put_floor(int *counter, t_draw_data *data, char **start)
+static void	ft_mlx_put_floor(int *counter, t_draw_data *data, char **start)
 {
 	while (*counter < data->par.rez.h)
 	{

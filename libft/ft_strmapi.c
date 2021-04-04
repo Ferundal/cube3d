@@ -26,14 +26,14 @@ static unsigned int	ft_find_size(char const *s)
 	return (size);
 }
 
-char				*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
 	char			*result;
 	unsigned int	pos;
 
 	if ((s == NULL) || (f == NULL))
 		return (NULL);
-	result = (char*)malloc(sizeof(char) * (ft_find_size(s) + 1));
+	result = (char *)malloc(sizeof(char) * (ft_find_size(s) + 1));
 	if (result == NULL)
 		return (NULL);
 	pos = 0;

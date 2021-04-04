@@ -3,7 +3,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-void	sort_sprites(t_draw_data *data)
+static void	sort_sprites(t_draw_data *data)
 {
 	int			ex_counter;
 	int			in_counter;
@@ -29,7 +29,7 @@ void	sort_sprites(t_draw_data *data)
 	}
 }
 
-void	set_dist(t_draw_data *data)
+static void	set_dist(t_draw_data *data)
 {
 	int			counter;
 	t_sprite	*temp;
@@ -45,7 +45,7 @@ void	set_dist(t_draw_data *data)
 	}
 }
 
-void	find_sprite_pos(t_draw_data *data, t_sprites *temp, int counter)
+static void	find_sprite_pos(t_draw_data *data, t_sprites *temp, int counter)
 {
 	temp->sprite_x = (data->spr_arr.arr + counter)->x - data->pos_x;
 	temp->sprite_y = (data->spr_arr.arr + counter)->y - data->pos_y;
@@ -59,7 +59,7 @@ void	find_sprite_pos(t_draw_data *data, t_sprites *temp, int counter)
 	* (1 + temp->transform_x / temp->transform_y));
 }
 
-void	find_sprite_size(t_draw_data *data, t_sprites *temp)
+static void	find_sprite_size(t_draw_data *data, t_sprites *temp)
 {
 	temp->sprite_height = \
 		abs((int)(data->par.rez.h / (temp->transform_y)));

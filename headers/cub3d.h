@@ -123,7 +123,7 @@ typedef struct s_draw_data
 	double		r_speed;
 }				t_draw_data;
 
-ERROR_CODE	catch_error(int err_code);
+ERROR_CODE	catch_error(ERROR_CODE err_code, t_par *par);
 ERROR_CODE	read_map_file(t_par *par, char *file, void *mlx);
 ERROR_CODE	screen(t_par *par, t_mlx *mlx);
 ERROR_CODE	draw(t_par *par, t_mlx *mlx);

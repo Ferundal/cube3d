@@ -25,7 +25,7 @@ static int	ft_setcmp(char const *set, char c)
 	return (1);
 }
 
-char		*ft_strtrim(char const *s1, char const *set)
+char	*ft_strtrim(char const *s1, char const *set)
 {
 	char const	*begin;
 	char const	*end;
@@ -44,7 +44,7 @@ char		*ft_strtrim(char const *s1, char const *set)
 			--end;
 	}
 	r_len = end - begin;
-	result = (char*)malloc(sizeof(char) * (r_len + 1));
+	result = (char *)malloc(sizeof(char) * (r_len + 1));
 	if (result == NULL)
 		return (NULL);
 	ft_strlcpy(result, begin, r_len + 1);

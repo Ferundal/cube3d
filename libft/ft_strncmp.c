@@ -12,13 +12,13 @@
 
 #include <stddef.h>
 
-int		ft_strncmp(const char *s1, const char *s2, size_t n)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
 	unsigned char	*t_s1;
 	unsigned char	*t_s2;
 
-	t_s1 = (unsigned char*)s1;
-	t_s2 = (unsigned char*)s2;
+	t_s1 = (unsigned char *)s1;
+	t_s2 = (unsigned char *)s2;
 	while ((*t_s1 == *t_s2) && (*t_s1 != '\0') && (n > 0))
 	{
 		++t_s1;

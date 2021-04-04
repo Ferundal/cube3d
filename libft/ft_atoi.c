@@ -13,7 +13,7 @@
 #include <limits.h>
 #include "libft.h"
 
-static void		ft_skip(const char **str, int *sign)
+static void	ft_skip(const char **str, int *sign)
 {
 	while ((**str == ' ') || ((**str >= '\t') && (**str <= '\r')))
 		++(*str);
@@ -27,21 +27,21 @@ static void		ft_skip(const char **str, int *sign)
 		++(*str);
 }
 
-static long		ft_find_max_amount(int sign)
+static long	ft_find_max_amount(int sign)
 {
 	if (sign < 0)
 		return (-(LONG_MIN / 10));
 	return (LONG_MAX / 10);
 }
 
-static char		ft_find_max_num(int sign)
+static char	ft_find_max_num(int sign)
 {
 	if (sign < 0)
 		return ((char)((-(LONG_MIN % 10)) + '0'));
 	return ((char)((LONG_MAX % 10) + '0'));
 }
 
-int				ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	long		result;
 	int			sign;
@@ -55,7 +55,7 @@ int				ft_atoi(const char *str)
 	result = 0;
 	while ((*str >= '0') && (*str <= '9'))
 	{
-		if ((result * sign > max_amount) ||
+		if ((result * sign > max_amount) || \
 			((result * sign == max_amount) && (*str > max_num)))
 		{
 			return (-((1 + sign) / 2));

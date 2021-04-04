@@ -2,7 +2,7 @@
 #include "get_next_line.h"
 #include "cub3d_read_map.h"
 
-void	skip_empty(int fd, char **str, int *r_st)
+static void	skip_empty(int fd, char **str, int *r_st)
 {
 	while ((*r_st == 1) && (**str == '\0'))
 	{
@@ -11,7 +11,7 @@ void	skip_empty(int fd, char **str, int *r_st)
 	}
 }
 
-int	add_map_line(char *str, t_par *par)
+static int	add_map_line(char *str, t_par *par)
 {
 	char		**temp_map;
 	int			temp;
@@ -36,7 +36,7 @@ int	add_map_line(char *str, t_par *par)
 	return (0);
 }
 
-ERROR_CODE	read_lines(int fd, t_par *par, int *flags)
+static ERROR_CODE	read_lines(int fd, t_par *par, int *flags)
 {
 	int			r_st;
 	char		*str;

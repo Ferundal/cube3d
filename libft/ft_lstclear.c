@@ -22,7 +22,7 @@ static void	ft_lstclear_rec(t_list *lst, void (*del)(void*))
 	ft_lstdelone(lst, del);
 }
 
-void		ft_lstclear(t_list **lst, void (*del)(void*))
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
 	if ((lst != NULL) && (*lst != NULL) && (del != NULL))
 	{

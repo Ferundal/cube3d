@@ -12,14 +12,14 @@
 
 #include <stddef.h>
 
-int		ft_memcmp(const void *s1, const void *s2, size_t n)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
 	unsigned char	*t_s1;
 	unsigned char	*t_s2;
 	int				diff;
 
-	t_s1 = (unsigned char*)s1;
-	t_s2 = (unsigned char*)s2;
+	t_s1 = (unsigned char *)s1;
+	t_s2 = (unsigned char *)s2;
 	while (n > 0)
 	{
 		diff = *t_s1 - *t_s2;

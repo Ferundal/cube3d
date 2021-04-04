@@ -3,7 +3,7 @@
 #include "cub3d_errors.h"
 #include <stdlib.h>
 
-void	screen_init(t_draw_data *data, t_bmp_header *header)
+static void	screen_init(t_draw_data *data, t_bmp_header *header)
 {
 	*((char *)&header->file_type) = 'B';
 	*((char *)&header->file_type + 1) = 'M';
@@ -26,7 +26,7 @@ void	screen_init(t_draw_data *data, t_bmp_header *header)
 	header->important_colors = 0;
 }
 
-void	write_header(int fd, t_bmp_header *header)
+static void	write_header(int fd, t_bmp_header *header)
 {
 	write(fd, &header->file_type, sizeof (header->file_type));
 	write(fd, &header->file_size, sizeof (header->file_size));
@@ -46,7 +46,7 @@ void	write_header(int fd, t_bmp_header *header)
 	write(fd, &header->important_colors, sizeof (header->important_colors));
 }
 
-ERROR_CODE	write_screen(t_draw_data *data, t_bmp_header *bmp_h)
+static ERROR_CODE	write_screen(t_draw_data *data, t_bmp_header *bmp_h)
 {
 	int		fd;
 
@@ -82,9 +82,9 @@ ERROR_CODE	screen(t_par *par, t_mlx *mlx)
 		screen_init(&data, &bmp_header);
 		write_screen(&data, &bmp_header);
 	}
-	free(data.z_buff);
-	free(data.img.buff);
 	if ((data.z_buff == NULL) || (data.img.buff == NULL))
 		return (ERROR_CAN_NOT_ALLOCATE_MEMORY);
+	free(data.z_buff);
+	free(data.img.buff);
 	return (0);
 }

@@ -2,7 +2,7 @@
 #include "cub3d_atoi.h"
 #include "cub3d_parcer.h"
 
-ERROR_CODE 	read_color (char **str, t_color *color)
+static ERROR_CODE 	read_color (char **str, t_color *color)
 {
 	color->r = cub3d_atoi_l(str, 256);
 	if (color->r < 0)
@@ -30,7 +30,7 @@ ERROR_CODE 	read_color (char **str, t_color *color)
 	return (0);
 }
 
-ERROR_CODE	read_color_floor (char *str, t_par *par)
+static ERROR_CODE	read_color_floor (char *str, t_par *par)
 {
 	t_color	t_color;
 
@@ -40,12 +40,14 @@ ERROR_CODE	read_color_floor (char *str, t_par *par)
 	while (*str == ' ')
 		++str;
 	if (read_color(&str, &t_color) != 0)
-		return (ERROR_WRONG_PAR_CEIL);
+		return (ERROR_WRONG_PAR_FLOOR);
+	if (*str != '\0')
+		return (ERROR_WRONG_PAR_FLOOR);
 	par->floor = (t_color.r << 16 | t_color.g << 8 | t_color.b);
 	return (0);
 }
 
-ERROR_CODE	read_color_ceil (char *str, t_par *par)
+static ERROR_CODE	read_color_ceil (char *str, t_par *par)
 {
 	t_color	t_color;
 
@@ -57,6 +59,8 @@ ERROR_CODE	read_color_ceil (char *str, t_par *par)
 	if (read_color(&str, &t_color) != 0)
 		return (ERROR_WRONG_PAR_CEIL);
 	par->ceil = (t_color.r << 16 | t_color.g << 8 | t_color.b);
+	if (*str != '\0')
+		return (ERROR_WRONG_PAR_CEIL);
 	return (0);
 }
 

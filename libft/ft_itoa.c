@@ -44,7 +44,7 @@ static void	ft_set_num(char *result, int n, int num_amount)
 	}
 }
 
-char		*ft_itoa(int n)
+char	*ft_itoa(int n)
 {
 	int		is_neg_fl;
 	char	*result;
@@ -55,7 +55,7 @@ char		*ft_itoa(int n)
 	else
 		is_neg_fl = 0;
 	num_amount = ft_num_amount(n);
-	result = (char*)malloc(sizeof(char) * (num_amount + is_neg_fl + 1));
+	result = (char *)malloc(sizeof(char) * (num_amount + is_neg_fl + 1));
 	if (result == NULL)
 		return (NULL);
 	if (is_neg_fl == 1)

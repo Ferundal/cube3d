@@ -1,7 +1,7 @@
 #include "cub3d_parcer.h"
 #include "get_next_line.h"
 
-ERROR_CODE	text_switch_1(char *str, t_par *par, t_flags *p, void *mlx)
+static ERROR_CODE	text_switch_1(char *str, t_par *par, t_flags *p, void *mlx)
 {
 	ERROR_CODE	read_status;
 
@@ -27,7 +27,7 @@ ERROR_CODE	text_switch_1(char *str, t_par *par, t_flags *p, void *mlx)
 	return (read_status);
 }
 
-ERROR_CODE	text_switch_2(char *str, t_par *par, t_flags *p, void *mlx)
+static ERROR_CODE	text_switch_2(char *str, t_par *par, t_flags *p, void *mlx)
 {
 	ERROR_CODE	read_status;
 
@@ -47,7 +47,10 @@ ERROR_CODE	text_switch_2(char *str, t_par *par, t_flags *p, void *mlx)
 	return (read_status);
 }
 
-ERROR_CODE	read_par_texturies(char *str, t_par *par, t_flags *p, void *mlx)
+static ERROR_CODE	read_par_texturies(char *str, \
+										t_par *par, \
+										t_flags *p, \
+										void *mlx)
 {
 	ERROR_CODE	read_status;
 
@@ -57,7 +60,7 @@ ERROR_CODE	read_par_texturies(char *str, t_par *par, t_flags *p, void *mlx)
 	return (read_status);
 }
 
-void	flags_init(t_flags *flags)
+static void	flags_init(t_flags *flags)
 {
 	flags->rez = 0;
 	flags->text_no = 0;

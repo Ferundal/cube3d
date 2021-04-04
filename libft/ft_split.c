@@ -38,7 +38,7 @@ static size_t	ft_word_amount(char const *s, char c)
 	return (word_amount);
 }
 
-static void		ft_result_init(char **result, size_t word_amount)
+static void	ft_result_init(char **result, size_t word_amount)
 {
 	while (word_amount + 1 > 0)
 	{
@@ -48,7 +48,7 @@ static void		ft_result_init(char **result, size_t word_amount)
 	}
 }
 
-static int		ft_full_res(char **res, size_t w_amount, char const *s, char c)
+static int	ft_full_res(char **res, size_t w_amount, char const *s, char c)
 {
 	size_t	word_len;
 
@@ -72,7 +72,7 @@ static int		ft_full_res(char **res, size_t w_amount, char const *s, char c)
 	return (0);
 }
 
-static void		ft_free_result(char **result, size_t word_amount)
+static void	ft_free_result(char **result, size_t word_amount)
 {
 	while (word_amount > 0)
 	{
@@ -84,7 +84,7 @@ static void		ft_free_result(char **result, size_t word_amount)
 	free(result);
 }
 
-char			**ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**result;
 	size_t	word_amount;
@@ -92,7 +92,7 @@ char			**ft_split(char const *s, char c)
 	if (s == NULL)
 		return (NULL);
 	word_amount = ft_word_amount(s, c);
-	result = (char**)malloc(sizeof(char*) * (word_amount + 1));
+	result = (char **)malloc(sizeof(char *) * (word_amount + 1));
 	if (result == NULL)
 		return (NULL);
 	ft_result_init(result, word_amount);

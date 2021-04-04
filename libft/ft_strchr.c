@@ -23,7 +23,7 @@ char	*ft_strchr(const char *s, int c)
 	}
 	if (*s == t_c)
 	{
-		return ((char*)s);
+		return ((char *)s);
 	}
 	return (NULL);
 }

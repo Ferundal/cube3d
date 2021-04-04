@@ -2,7 +2,7 @@
 #include "cub3d_errors.h"
 #include <stdlib.h>
 
-void	put_error_msg_1(ERROR_CODE err_code, int fd)
+static void	put_error_msg_1(ERROR_CODE err_code, int fd)
 {
 	if (err_code == ERROR_WRONG_ARG_AMT)
 		ft_putstr_fd("Wrong argument amount", fd);
@@ -30,7 +30,7 @@ void	put_error_msg_1(ERROR_CODE err_code, int fd)
 		ft_putstr_fd("Not enough data", fd);
 }
 
-void	put_error_msg_2(ERROR_CODE err_code, int fd)
+static void	put_error_msg_2(ERROR_CODE err_code, int fd)
 {
 	if (err_code == ERROR_CAN_NOT_ALLOCATE_MEMORY)
 		ft_putstr_fd("Can't allocate memory", fd);
@@ -54,10 +54,29 @@ void	put_error_msg_2(ERROR_CODE err_code, int fd)
 		ft_putstr_fd("Can't create new file for screen", fd);
 }
 
-ERROR_CODE	catch_error(ERROR_CODE err_code)
+void	destroy_map(t_par *par)
+{
+	int	counter;
+
+	counter = 0;
+	while (counter < par->map_i.h)
+	{
+		if (*(par->map_i.map + counter) != NULL)
+		{
+			free(*(par->map_i.map + counter));
+			*(par->map_i.map + counter) = NULL;
+		}
+		++counter;
+	}
+	if (par->map_i.map != NULL)
+		free(par->map_i.map);
+}
+
+ERROR_CODE	catch_error(ERROR_CODE err_code, t_par *par)
 {
 	put_error_msg_1(err_code, 1);
 	put_error_msg_2(err_code, 1);
+	destroy_map(par);
 	if (err_code != 0)
 		exit(0);
 	return (err_code);

@@ -1,6 +1,5 @@
 #include <math.h>
 #include "cub3d.h"
-#include "cub3d_map.h"
 #include "cub3d_draw.h"
 
 void	rotate_right(t_draw_data *data)

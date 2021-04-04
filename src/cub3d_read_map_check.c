@@ -6,6 +6,9 @@
 
 ERROR_CODE 	map_lc_check(char *str, int *p_flag)
 {
+	char	*temp;
+
+	temp = str;
 	while (*str != '\0')
 	{
 		if ((*str == 'N') || (*str == 'S') || (*str == 'W') || (*str == 'E'))
@@ -21,10 +24,12 @@ ERROR_CODE 	map_lc_check(char *str, int *p_flag)
 				return (ERROR_MAP_ERROR);
 		++str;
 	}
+	if (str == temp)
+		return (ERROR_MAP_ERROR);
 	return (0);
 }
 
-ERROR_CODE	map_clone(t_map_i *src, t_map_i *dst)
+static ERROR_CODE	map_clone(t_map_i *src, t_map_i *dst)
 {
 	int			counter;
 

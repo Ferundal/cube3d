@@ -3,7 +3,7 @@
 #include "cub3d_math.h"
 #include "cub3d_map.h"
 
-void	raycast_init_values(t_draw_data *data, t_raycast *temp)
+static void	raycast_init_values(t_draw_data *data, t_raycast *temp)
 {
 	temp->camera_x = 2 * temp->x / (double)data->par.rez.w - 1;
 	temp->r_dir_x = data->dir_x + data->plane_x * temp->camera_x;
@@ -14,7 +14,7 @@ void	raycast_init_values(t_draw_data *data, t_raycast *temp)
 	temp->delta_dist_y = d_abs(1 / temp->r_dir_y);
 }
 
-void	raycast_find_steps(t_draw_data *data, t_raycast *temp)
+static void	raycast_find_steps(t_draw_data *data, t_raycast *temp)
 {
 	if (temp->r_dir_x < 0)
 	{
@@ -40,7 +40,7 @@ void	raycast_find_steps(t_draw_data *data, t_raycast *temp)
 	}
 }
 
-void	raycast_find_hit(t_draw_data *data, t_raycast *temp)
+static void	raycast_find_hit(t_draw_data *data, t_raycast *temp)
 {
 	int			hit;
 
@@ -64,7 +64,7 @@ void	raycast_find_hit(t_draw_data *data, t_raycast *temp)
 	}
 }
 
-void	raycast_draw_line(t_draw_data *data, t_raycast *t)
+static void	raycast_draw_line(t_draw_data *data, t_raycast *t)
 {
 	double		perp_w_d;
 	t_line		line;

@@ -36,15 +36,15 @@ static void	ft_src_first(unsigned char *t_dst, unsigned char *t_src, size_t len)
 	}
 }
 
-void		*ft_memmove(void *dst, const void *src, size_t len)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	unsigned char	*t_dst;
 	unsigned char	*t_src;
 
 	if (dst != src)
 	{
-		t_dst = (unsigned char*)dst;
-		t_src = (unsigned char*)src;
+		t_dst = (unsigned char *)dst;
+		t_src = (unsigned char *)src;
 		if (t_dst < t_src)
 		{
 			ft_dst_first(t_dst, t_src, len);

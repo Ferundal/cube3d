@@ -69,8 +69,8 @@ NORM			= norminette
 
 ifndef COMPILE_BONUS
 ${NAME}:		${OBJS}
-				${MAKE} -C libft
-				${MAKE} -C minilibx_mms_20200219
+				${MAKE} -sC libft
+				${MAKE} -sC minilibx_mms_20200219
 				cp ./minilibx_mms_20200219/libmlx.dylib libmlx.dylib
 				${CC} -o ${NAME} ${OBJS} ${LIBFT} ${LIBMLX}
 else
@@ -90,7 +90,10 @@ clean:
 				${MAKE} -C minilibx_mms_20200219 clean
 				${RM} ${OBJS} ${OBJS_B} libmlx.dylib
 
-fclean:			${MAKE} clean
+fclean:
+				${MAKE} -C libft fclean
+				${MAKE} -C minilibx_mms_20200219 clean
+				${RM} ${OBJS} ${OBJS_B} libmlx.dylib
 				${RM} ${NAME}
 
 norm:		

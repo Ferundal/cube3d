@@ -3,7 +3,7 @@
 #include "cub3d_map.h"
 #include "cub3d_map.h"
 
-ERROR_CODE	ft_flow_switch_1(t_map_i *map, int x, int y)
+static ERROR_CODE	ft_flow_switch_1(t_map_i *map, int x, int y)
 {
 	ERROR_CODE	status;
 
@@ -21,7 +21,7 @@ ERROR_CODE	ft_flow_switch_1(t_map_i *map, int x, int y)
 	return (0);
 }
 
-ERROR_CODE	ft_flow_switch_2(t_map_i *map, int x, int y)
+static ERROR_CODE	ft_flow_switch_2(t_map_i *map, int x, int y)
 {
 	ERROR_CODE	status;
 

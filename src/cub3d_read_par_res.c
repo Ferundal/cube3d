@@ -2,7 +2,7 @@
 #include "cub3d_atoi.h"
 #include "cub3d_parcer.h"
 
-ERROR_CODE	read_res(char *str, t_par *par)
+static ERROR_CODE	read_res(char *str, t_par *par)
 {
 	if (*str != 'R')
 		return (-1);

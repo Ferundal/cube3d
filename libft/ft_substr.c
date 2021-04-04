@@ -34,7 +34,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		--len;
 	}
 	s -= res_len;
-	result = (char*)malloc(res_len + 1);
+	result = (char *)malloc(res_len + 1);
 	if (result == NULL)
 		return (NULL);
 	result = ft_memcpy(result, s, res_len);

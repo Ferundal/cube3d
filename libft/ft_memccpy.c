@@ -18,8 +18,8 @@ void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 	unsigned char	*t_src;
 	unsigned char	t_c;
 
-	t_dst = (unsigned char*)dst;
-	t_src = (unsigned char*)src;
+	t_dst = (unsigned char *)dst;
+	t_src = (unsigned char *)src;
 	t_c = (unsigned char)c;
 	while (n > 0)
 	{
