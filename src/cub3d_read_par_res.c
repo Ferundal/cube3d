@@ -4,6 +4,8 @@
 
 static ERROR_CODE	read_res(char *str, t_par *par)
 {
+	while (*str == ' ')
+		str++;
 	if (*str != 'R')
 		return (-1);
 	++str;

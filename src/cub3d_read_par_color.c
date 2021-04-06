@@ -34,6 +34,8 @@ static ERROR_CODE	read_color_floor (char *str, t_par *par)
 {
 	t_color	t_color;
 
+	while (*str == ' ')
+		str++;
 	if (*str != 'F')
 		return (-1);
 	++str;
@@ -51,6 +53,8 @@ static ERROR_CODE	read_color_ceil (char *str, t_par *par)
 {
 	t_color	t_color;
 
+	while (*str == ' ')
+		str++;
 	if (*str != 'C')
 		return (-1);
 	++str;

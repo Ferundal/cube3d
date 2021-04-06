@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-HEADER			= cub3d.h
+HEADER			=	cub3d.h
 
 HEADERDIR		=	-I ./headers/ \
 					-I ./libft/ \
@@ -18,87 +18,93 @@ HEADERDIR		=	-I ./headers/ \
 
 LIBFT			=	-L./libft -lft
 
+LIBFTNAME		=	./libft/libft.a
+
+${LIBFTNAME}	:
+					${MAKE} -C libft
+
 LIBMLX			=	-L./minilibx_mms_20200219 -lmlx
 
-LIBMLXOG		=	-L./minilibx_opengl_20191021 -lmlx -framework OpenGL -framework AppKit
+liblmxmake		:
+					${MAKE} -C minilibx_mms_20200219
+					cp ./minilibx_mms_20200219/libmlx.dylib libmlx.dylib
 
-SRCS			= src/cub3d.c \
-				src/cub3d_errors.c \
-				src/cub3d_parcer.c \
-				src/cub3d_atoi.c \
-				src/get_next_line.c \
-				src/get_next_line_utils.c \
-				src/cub3d_read_par.c \
-				src/cub3d_read_par_res.c \
-				src/cub3d_read_par_texture.c \
-				src/cub3d_read_par_color.c \
-				src/cub3d_read_map.c \
-				src/cub3d_read_map_check.c \
-				src/cub3d_map_utils.c \
-				src/cub3d_map_check_flow.c \
-				src/cub3d_draw.c \
-				src/cub3d_mlx_ray_line.c \
-				src/cub3d_mlx_sprite_line.c \
-				src/cub3d_raycast.c \
-				src/cub3d_hooks.c \
-				src/cub3d_raycast_move.c \
-				src/cub3d_raycast_rotate.c \
-				src/cub3d_raycast_utils.c \
-				src/cub3d_sprite.c \
-				src/cube3d_math.c \
-				src/cub3d_screen.c
 
-TURNIN			= ${HEADER} ${SRCS}
+SRCS			=	src/cub3d.c \
+					src/cub3d_errors.c \
+					src/cub3d_parcer.c \
+					src/cub3d_atoi.c \
+					src/get_next_line.c \
+					src/get_next_line_utils.c \
+					src/cub3d_read_par.c \
+					src/cub3d_read_par_res.c \
+					src/cub3d_read_par_texture.c \
+					src/cub3d_read_par_color.c \
+					src/cub3d_read_map.c \
+					src/cub3d_read_map_check.c \
+					src/cub3d_map_utils.c \
+					src/cub3d_map_check_flow.c \
+					src/cub3d_draw.c \
+					src/cub3d_mlx_ray_line.c \
+					src/cub3d_mlx_sprite_line.c \
+					src/cub3d_raycast.c \
+					src/cub3d_hooks.c \
+					src/cub3d_raycast_move.c \
+					src/cub3d_raycast_rotate.c \
+					src/cub3d_raycast_utils.c \
+					src/cub3d_sprite.c \
+					src/cube3d_math.c \
+					src/cub3d_screen.c
 
-NORMO			= ${TURNIN}
+TURNIN			=	${HEADER} ${SRCS}
 
-OBJS			= ${SRCS:.c=.o}
+NORMO			=	${TURNIN}
 
-NAME			= cub3d
+OBJS			=	${SRCS:.c=.o}
 
-CC				= cc
-RM				= rm -f
-AR				= ar -r
+NAME			=	cub3D
 
-CFLAGS			= -Wall -Wextra -Werror -g
+CC				=	cc
+RM				=	rm -f
+AR				=	ar -r
 
-NORM			= norminette
+CFLAGS			=	-Wall -Wextra -Werror -g
+
+NORM			=	norminette
 
 .c.o:
-				${CC} ${CFLAGS} ${HEADERDIR} -c $< -o ${<:.c=.o}
+					${CC} ${CFLAGS} ${HEADERDIR} -c $< -o ${<:.c=.o}
 
 ifndef COMPILE_BONUS
-${NAME}:		${OBJS}
-				${MAKE} -sC libft
-				${MAKE} -sC minilibx_mms_20200219
-				cp ./minilibx_mms_20200219/libmlx.dylib libmlx.dylib
-				${CC} -o ${NAME} ${OBJS} ${LIBFT} ${LIBMLX}
+${NAME}:			${OBJS}
+					${MAKE} -C libft
+					${MAKE} -C minilibx_mms_20200219
+					cp ./minilibx_mms_20200219/libmlx.dylib libmlx.dylib
+					${CC} -o ${NAME} ${OBJS} ${LIBFT} ${LIBMLX}
 else
-${NAME}:		${OBJS}
-				${MAKE} -C libft
-				${MAKE} -C minilibx_mms_20200219
-				${CC} -o ${NAME} ${OBJS} ${LIBFT} ${LIBMLX}
+${NAME}:			${OBJS}
+					${CC} -o ${NAME} ${OBJS} ${LIBFT} ${LIBMLX}
 endif
 
 bonus:
-				${MAKE} COMPILE_BONUS=1 all
+					${MAKE} COMPILE_BONUS=1 all
 
-all:			${NAME}
+all:				${NAME}
 
 clean:
-				${MAKE} -C libft clean
-				${MAKE} -C minilibx_mms_20200219 clean
-				${RM} ${OBJS} ${OBJS_B} libmlx.dylib
+					${MAKE} -C libft clean
+					${MAKE} -C minilibx_mms_20200219 clean
+					${RM} ${OBJS} ${OBJS_B} libmlx.dylib
 
 fclean:
-				${MAKE} -C libft fclean
-				${MAKE} -C minilibx_mms_20200219 clean
-				${RM} ${OBJS} ${OBJS_B} libmlx.dylib
-				${RM} ${NAME}
+					${MAKE} -C libft fclean
+					${MAKE} -C minilibx_mms_20200219 clean
+					${RM} ${OBJS} ${OBJS_B} libmlx.dylib
+					${RM} ${NAME}
 
 norm:		
-				${NORM} ${NORMO}
+					${NORM} ${NORMO}
 
-re:				fclean ${NAME}
+re:					fclean ${NAME}
 
-.PHONY:			all clean fclean re bonus
+.PHONY:				all clean fclean re bonus

@@ -2,6 +2,8 @@
 
 ERROR_CODE	read_par_no(char *str, t_par *par, void *mlx)
 {
+	while (*str == ' ')
+		str++;
 	if (ft_strncmp("NO", str, 2) != 0)
 		return (-1);
 	str += 2;
@@ -25,6 +27,8 @@ ERROR_CODE	read_par_no(char *str, t_par *par, void *mlx)
 
 ERROR_CODE	read_par_so(char *str, t_par *par, void *mlx)
 {
+	while (*str == ' ')
+		str++;
 	if (ft_strncmp("SO", str, 2) != 0)
 		return (-1);
 	str += 2;
@@ -48,6 +52,8 @@ ERROR_CODE	read_par_so(char *str, t_par *par, void *mlx)
 
 ERROR_CODE	read_par_we(char *str, t_par *par, void *mlx)
 {
+	while (*str == ' ')
+		str++;
 	if (ft_strncmp("WE", str, 2) != 0)
 		return (-1);
 	str += 2;
@@ -71,6 +77,8 @@ ERROR_CODE	read_par_we(char *str, t_par *par, void *mlx)
 
 ERROR_CODE	read_par_ea(char *str, t_par *par, void *mlx)
 {
+	while (*str == ' ')
+		str++;
 	if (ft_strncmp("EA", str, 2) != 0)
 		return (-1);
 	str += 2;
@@ -94,6 +102,8 @@ ERROR_CODE	read_par_ea(char *str, t_par *par, void *mlx)
 
 ERROR_CODE	read_par_spr(char *str, t_par *par, void *mlx)
 {
+	while (*str == ' ')
+		str++;
 	if (ft_strncmp("S", str, 1) != 0)
 		return (-1);
 	str += 2;

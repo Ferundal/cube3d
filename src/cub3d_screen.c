@@ -68,23 +68,22 @@ ERROR_CODE	screen(t_par *par, t_mlx *mlx)
 
 	data.mlx = *mlx;
 	data.par = *par;
+	is_error = init_data(&data);
+	if ((is_error) != 0)
+		return (is_error);
 	data.z_buff = malloc(sizeof(double) * par->rez.w);
 	data.img.buff = malloc(sizeof(int) * data.par.rez.w * data.par.rez.h);
-	if ((data.z_buff != NULL) || (data.img.buff != NULL))
+	if ((data.z_buff != NULL) && (data.img.buff != NULL))
 	{
 		data.img.bits_per_pixel = 32;
 		data.img.line_length = data.par.rez.w * sizeof(int);
-		is_error = init_data(&data);
-		if ((is_error) != 0)
-			return (is_error);
 		raycast(&data);
 		draw_sprites(&data);
 		screen_init(&data, &bmp_header);
 		write_screen(&data, &bmp_header);
 	}
 	if ((data.z_buff == NULL) || (data.img.buff == NULL))
-		return (ERROR_CAN_NOT_ALLOCATE_MEMORY);
-	free(data.z_buff);
-	free(data.img.buff);
+		catch_error(ERROR_CAN_NOT_ALLOCATE_MEMORY);
+	catch_error(0);
 	return (0);
 }

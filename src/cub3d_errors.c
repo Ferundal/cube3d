@@ -72,12 +72,11 @@ void	destroy_map(t_par *par)
 		free(par->map_i.map);
 }
 
-ERROR_CODE	catch_error(ERROR_CODE err_code, t_par *par)
+ERROR_CODE	catch_error(ERROR_CODE err_code)
 {
+	if (err_code != 0)
+		ft_putstr_fd("Error\n", 1);
 	put_error_msg_1(err_code, 1);
 	put_error_msg_2(err_code, 1);
-	destroy_map(par);
-	if (err_code != 0)
-		exit(0);
-	return (err_code);
+	exit(err_code);
 }
