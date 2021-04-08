@@ -15,7 +15,9 @@ int	move_calc(t_draw_data *data)
 		rotate_right(data);
 	if (data->keys.r_left == 1)
 		rotate_left(data);
-	draw_frame(data);
+	if (data->keys.m_forw || data->keys.m_back || data->keys.m_right \
+		|| data->keys.m_left || data->keys.r_right || data->keys.r_left)
+		draw_frame(data);
 	return (0);
 }
 

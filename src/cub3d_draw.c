@@ -87,6 +87,7 @@ ERROR_CODE	draw(t_par *par, t_mlx *mlx)
 	data.z_buff = malloc(sizeof(double) * par->rez.w);
 	if (data.z_buff == NULL)
 		cub3d_exit(&data, ERROR_CAN_NOT_ALLOCATE_MEMORY);
+	draw_frame(&data);
 	mlx_hook(data.mlx.win, 2, 1L << 0, key_press, &data);
 	mlx_hook(data.mlx.win, 3, 1L << 1, key_unpress, &data);
 	mlx_hook(data.mlx.win, 17, 0, exit_pressed, &data);
