@@ -56,7 +56,7 @@ NORM			= norminette
 .c.o:
 				${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
-${NAME}:		${OBJS}
+${NAME}:		${OBJS} ${LIBHEADER}
 				${AR} ${NAME} ${OBJS} 
 
 all:			${NAME}

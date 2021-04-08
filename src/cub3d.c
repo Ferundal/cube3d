@@ -44,7 +44,7 @@ static ERROR_CODE	arg_check(int argc, char **argv)
 	return (0);
 }
 
-static void	init_par(t_par *par, void *mlx)
+static void	init_par(t_par *par, void *mlx, int is_screen)
 {
 	par->tex_no.img = NULL;
 	par->tex_so.img = NULL;
@@ -53,7 +53,13 @@ static void	init_par(t_par *par, void *mlx)
 	par->tex_spr.img = NULL;
 	par->floor = 0;
 	par->ceil = 0;
-	mlx_get_screen_size(mlx, &(par->rez.w), &(par->rez.h));
+	if (is_screen == 0)
+		mlx_get_screen_size(mlx, &(par->rez.w), &(par->rez.h));
+	else
+	{
+		par->rez.w = 2147483647;
+		par->rez.h = 2147483647;
+	}
 	par->map_i.map = NULL;
 	par->map_i.h = 0;
 	par->map_i.w = 0;
@@ -70,7 +76,7 @@ int	main(int argc, char **argv)
 		return (catch_error(ERROR_MLX_DO_NOT_START));
 	is_error = arg_check(argc, argv);
 	if (is_error == 0)
-		init_par(&par, mlx.mlx);
+		init_par(&par, mlx.mlx, argc - 2);
 	if (is_error == 0)
 		is_error = read_map_file(&par, *(argv + 1), mlx.mlx);
 	if ((is_error == 0) && (argc == 3))

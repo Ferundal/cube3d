@@ -55,7 +55,7 @@ static ERROR_CODE	write_screen(t_draw_data *data, t_bmp_header *bmp_h)
 		return (ERROR_CANT_CREATE_SCREEN_FILE);
 	write_header(fd, bmp_h);
 	write(fd, data->img.buff, \
-	sizeof(int) * data->par.rez.h * data->par.rez.w);
+        sizeof(int) * data->par.rez.w * data->par.rez.h);
 	close(fd);
 	return (0);
 }

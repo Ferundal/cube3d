@@ -10,27 +10,23 @@
 #                                                                              #
 # **************************************************************************** #
 
-HEADER			=	cub3d.h
+HEADER=				${wildcard ./headers/*.h}
 
-HEADERDIR		=	-I ./headers/ \
+HEADERDIR=			-I ./headers/ \
 					-I ./libft/ \
 					-I ./minilibx_mms_20200219/
 
-LIBFT			=	-L./libft -lft
+LIBFT=				-L./libft -lft
 
-LIBFTNAME		=	./libft/libft.a
+LIBFTNAME=			./libft/libft.a
 
-${LIBFTNAME}	:
-					${MAKE} -C libft
+LIBMLX=				-L./minilibx_mms_20200219 -lmlx
 
-LIBMLX			=	-L./minilibx_mms_20200219 -lmlx
+LIBMLXNAME=			./minilibx_mms_20200219/libmlx.dylib
 
-liblmxmake		:
-					${MAKE} -C minilibx_mms_20200219
-					cp ./minilibx_mms_20200219/libmlx.dylib libmlx.dylib
+LIBMLXNEWDEST=		./libmlx.dylib
 
-
-SRCS			=	src/cub3d.c \
+SRCS=				src/cub3d.c \
 					src/cub3d_errors.c \
 					src/cub3d_parcer.c \
 					src/cub3d_atoi.c \
@@ -56,30 +52,29 @@ SRCS			=	src/cub3d.c \
 					src/cube3d_math.c \
 					src/cub3d_screen.c
 
-TURNIN			=	${HEADER} ${SRCS}
+TURNIN=				${HEADER} ${SRCS}
 
-NORMO			=	${TURNIN}
+NORMO=				${TURNIN}
 
-OBJS			=	${SRCS:.c=.o}
+OBJS=				${SRCS:.c=.o}
 
-NAME			=	cub3D
+NAME=				cub3D
 
-CC				=	cc
-RM				=	rm -f
-AR				=	ar -r
+CC=					cc
+RM=					rm -f
+AR=					ar -r
 
-CFLAGS			=	-Wall -Wextra -Werror -g
+CFLAGS=				-Wall -Wextra -Werror -g
 
-NORM			=	norminette
+NORM=				norminette
+
+all:				libmlxmake ${LIBMLXNEWDEST} libftmake ${NAME}
 
 .c.o:
 					${CC} ${CFLAGS} ${HEADERDIR} -c $< -o ${<:.c=.o}
 
 ifndef COMPILE_BONUS
-${NAME}:			${OBJS}
-					${MAKE} -C libft
-					${MAKE} -C minilibx_mms_20200219
-					cp ./minilibx_mms_20200219/libmlx.dylib libmlx.dylib
+${NAME}:			${OBJS} ${LIBFTNAME} ${LIBMLXNAME} ${HEADER}
 					${CC} -o ${NAME} ${OBJS} ${LIBFT} ${LIBMLX}
 else
 ${NAME}:			${OBJS}
@@ -89,7 +84,14 @@ endif
 bonus:
 					${MAKE} COMPILE_BONUS=1 all
 
-all:				${NAME}
+libmlxmake:
+					${MAKE} -C minilibx_mms_20200219
+
+${LIBMLXNEWDEST}:	${LIBMLXNAME}
+					cp ./minilibx_mms_20200219/libmlx.dylib ./libmlx.dylib
+
+libftmake:
+					${MAKE} -C libft
 
 clean:
 					${MAKE} -C libft clean
@@ -105,6 +107,6 @@ fclean:
 norm:		
 					${NORM} ${NORMO}
 
-re:					fclean ${NAME}
+re:					fclean all
 
-.PHONY:				all clean fclean re bonus
+.PHONY:				all clean fclean re bonus libmlxmake libftmake
