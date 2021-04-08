@@ -30,4 +30,6 @@
 
 # define ERROR_CANT_CREATE_SCREEN_FILE 21
 
+# define ERROR_WRONG_RESOLUTION 22
+
 #endif

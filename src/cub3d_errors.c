@@ -52,24 +52,8 @@ static void	put_error_msg_2(ERROR_CODE err_code, int fd)
 		ft_putstr_fd("Can't open file", fd);
 	if (err_code == ERROR_CANT_CREATE_SCREEN_FILE)
 		ft_putstr_fd("Can't create new file for screen", fd);
-}
-
-void	destroy_map(t_par *par)
-{
-	int	counter;
-
-	counter = 0;
-	while (counter < par->map_i.h)
-	{
-		if (*(par->map_i.map + counter) != NULL)
-		{
-			free(*(par->map_i.map + counter));
-			*(par->map_i.map + counter) = NULL;
-		}
-		++counter;
-	}
-	if (par->map_i.map != NULL)
-		free(par->map_i.map);
+	if (err_code == ERROR_WRONG_RESOLUTION)
+		ft_putstr_fd("Wrong resolution for bmp file", fd);
 }
 
 ERROR_CODE	catch_error(ERROR_CODE err_code)

@@ -1,4 +1,4 @@
-R 4000 3000
+R 7000 7000
  NO ./purplestone.xpm
  SO ./bluestone.xpm
  WE ./redbrick.xpm

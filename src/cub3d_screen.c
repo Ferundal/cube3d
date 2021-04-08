@@ -55,8 +55,27 @@ static ERROR_CODE	write_screen(t_draw_data *data, t_bmp_header *bmp_h)
 		return (ERROR_CANT_CREATE_SCREEN_FILE);
 	write_header(fd, bmp_h);
 	write(fd, data->img.buff, \
-        sizeof(int) * data->par.rez.w * data->par.rez.h);
+		sizeof(int) * data->par.rez.w * data->par.rez.h);
 	close(fd);
+	return (0);
+}
+
+static int	check_header(t_par *par)
+{
+	int				counter;
+	int				max_file_size;
+
+	if (par->rez.h > 32768 || par->rez.w > 32768)
+		return (ERROR_WRONG_RESOLUTION);
+	max_file_size = 54;
+	counter = 0;
+	while (counter < par->rez.h)
+	{
+		max_file_size += par->rez.w;
+		++counter;
+		if (max_file_size < 0)
+			return (ERROR_WRONG_RESOLUTION);
+	}
 	return (0);
 }
 
@@ -69,6 +88,8 @@ ERROR_CODE	screen(t_par *par, t_mlx *mlx)
 	data.mlx = *mlx;
 	data.par = *par;
 	is_error = init_data(&data);
+	if (is_error == 0)
+		is_error = check_header(par);
 	if ((is_error) != 0)
 		return (is_error);
 	data.z_buff = malloc(sizeof(double) * par->rez.w);
@@ -83,7 +104,6 @@ ERROR_CODE	screen(t_par *par, t_mlx *mlx)
 		write_screen(&data, &bmp_header);
 	}
 	if ((data.z_buff == NULL) || (data.img.buff == NULL))
-		catch_error(ERROR_CAN_NOT_ALLOCATE_MEMORY);
-	catch_error(0);
+		return (ERROR_CAN_NOT_ALLOCATE_MEMORY);
 	return (0);
 }
