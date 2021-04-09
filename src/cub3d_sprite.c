@@ -69,7 +69,7 @@ static void	find_sprite_size(t_draw_data *data, t_sprites *temp)
 	temp->draw_end_y = temp->sprite_height / 2 + data->par.rez.h / 2;
 	if (temp->draw_end_y >= data->par.rez.h)
 		temp->draw_end_y = data->par.rez.h - 1;
-	temp->sprite_width = abs((int)(data->par.rez.h / (temp->transform_y)));
+	temp->sprite_width = abs((int)(data->par.rez.w / (temp->transform_y)));
 	temp->draw_start_x = -temp->sprite_width / 2 + temp->sprite_screen_x;
 	if (temp->draw_start_x < 0)
 		temp->draw_start_x = 0;

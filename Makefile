@@ -56,7 +56,7 @@ TURNIN=				${HEADER} ${SRCS}
 
 NORMO=				${TURNIN}
 
-OBJS=				${SRCS:.c=.o} ${HEADER}
+OBJS=				${SRCS:.c=.o}
 
 NAME=				cub3D
 

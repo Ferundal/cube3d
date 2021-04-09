@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "cub3d_draw.h"
 #include <stdlib.h>
 
 ERROR_CODE	cub3d_exit(t_draw_data *data, ERROR_CODE is_error)
