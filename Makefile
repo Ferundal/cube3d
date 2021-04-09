@@ -56,7 +56,7 @@ TURNIN=				${HEADER} ${SRCS}
 
 NORMO=				${TURNIN}
 
-OBJS=				${SRCS:.c=.o}
+OBJS=				${SRCS:.c=.o} ${HEADER}
 
 NAME=				cub3D
 
@@ -74,7 +74,7 @@ all:				libmlxmake ${LIBMLXNEWDEST} libftmake ${NAME}
 					${CC} ${CFLAGS} ${HEADERDIR} -c $< -o ${<:.c=.o}
 
 ifndef COMPILE_BONUS
-${NAME}:			${OBJS} ${LIBFTNAME} ${LIBMLXNAME} ${HEADER}
+${NAME}:			${OBJS} ${LIBFTNAME} ${LIBMLXNAME}
 					${CC} -o ${NAME} ${OBJS} ${LIBFT} ${LIBMLX}
 else
 ${NAME}:			${OBJS}
