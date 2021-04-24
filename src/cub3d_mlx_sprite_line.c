@@ -47,7 +47,7 @@ void	ft_mlx_put_spr_line(t_draw_data *data, t_sprites *temp, t_sprite *spr)
 							(double)curr_text->w / (double)temp->sprite_width);
 		if (temp->tex_x > curr_text->w)
 			temp->tex_x = curr_text->w;
-		if (temp->transform_y > 0 && x > 0 && x < data->par.rez.w && \
+		if (temp->transform_y > 0 && x >= 0 && x < data->par.rez.w && \
 				temp->transform_y < *(data->z_buff + x))
 		{
 			start = data->img.buff + x * (data->img.bits_per_pixel / 8) + \
